@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mvc.Core;
 
 namespace Mvc.Models
 {
@@ -15,8 +16,10 @@ namespace Mvc.Models
         [SerializeField] private List<Pion> listePions = new List<Pion>();
         [SerializeField] private Cube cube;
         [SerializeField] private int id;
-        protected float tempsDepotCaisse = 0.02f;
-        protected float tempsDepotCase = 0.2f;
+        public static float tempsDepotCaisse = 0.02f;
+        public static float tempsDepotCase = 0.2f;
+        public static float tempsAttente = 1;
+        [SerializeField] private List<Material> listeCouleurs = new List<Material>();
 
 
         public string Libelle { get => libelle; set => libelle = value; }
@@ -42,13 +45,14 @@ namespace Mvc.Models
 
         public IEnumerator deplacerLesPionsCase()
         {
-            Vector3 ajoutPosition=new Vector3(0, 0, 0);
+            this.gameObject.GetComponent<Clignote>().enabled = true;
+            Vector3 ajoutPosition = new Vector3(0, 0, 0);
             int idCaseSuivante = id;
             if (listePions.Count == 1)
             {
-                if (id == 6 || id==13)
+                if (id == 6 || id == 13)
                 {
-                    idCaseSuivante = id==6?14:15;
+                    idCaseSuivante = id == 6 ? 14 : 15;
                 }
                 else
                 {
@@ -58,55 +62,62 @@ namespace Mvc.Models
             }
             else
             {
-                
+
                 foreach (var pion in listePions)
                 {
                     pion.deplacerPionCaisse(Table.Caisse);
                     yield return new WaitForSeconds(tempsDepotCaisse);
                 }
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(tempsAttente);
                 bool tourComplet = false;
-                int nbPionsDeplace=0;
+                int nbPionsDeplace = 0;
                 foreach (var pion in listePions)
                 {
                     idCaseSuivante = idCaseSuivante == 13 ? 0 : idCaseSuivante + 1;
-                    tourComplet=idCaseSuivante==id?true:false;
-                    if(tourComplet){
-                        if(id<7 && idCaseSuivante==0){
-                            if (listePions.Count-nbPionsDeplace == 1)
+                    tourComplet = idCaseSuivante == id ? true : false;
+                    if (tourComplet)
+                    {
+                        if (id < 7 && idCaseSuivante == 0)
+                        {
+                            if (listePions.Count - nbPionsDeplace == 1)
                             {
                                 listePions[0].deplacerPionCase(Table.ListeCases[14], ajoutPosition);
                                 break;
                             }
-                            idCaseSuivante=7;
+                            idCaseSuivante = 7;
                         }
-                        else if(id>=7 && idCaseSuivante==7){
-                            if(listePions.Count - nbPionsDeplace ==1){
+                        else if (id >= 7 && idCaseSuivante == 7)
+                        {
+                            if (listePions.Count - nbPionsDeplace == 1)
+                            {
                                 listePions[0].deplacerPionCase(Table.ListeCases[15], ajoutPosition);
                                 break;
                             }
                             idCaseSuivante = 0;
                         }
                     }
-                    pion.deplacerPionCase(Table.ListeCases[idCaseSuivante],ajoutPosition);
-                    nbPionsDeplace+=1;
+                    pion.deplacerPionCase(Table.ListeCases[idCaseSuivante], ajoutPosition);
+                    nbPionsDeplace += 1;
                     yield return new WaitForSeconds(tempsDepotCase);
                 }
                 listePions.Clear();
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(tempsAttente);
             }
         }
 
-        public void deplacerLesPionsGrandeCase(){
+        public void deplacerLesPionsGrandeCase()
+        {
             float z = -3f;
             Vector3 ajoutPosition = new Vector3(Random.Range(-0.2f, 0.2f), 0, z);
             foreach (var pion in listePions)
             {
-                if(this.id<7){
-                    pion.deplacerPionCase(Table.ListeCases[14],ajoutPosition);
-                }
-                else{
+                if (this.id < 7)
+                {
                     pion.deplacerPionCase(Table.ListeCases[15], ajoutPosition);
+                }
+                else
+                {
+                    pion.deplacerPionCase(Table.ListeCases[14], ajoutPosition);
                 }
                 z += 1.5f;
             }

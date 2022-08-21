@@ -19,17 +19,17 @@ namespace Mvc.Models
 
         //[SerializeField] private List<JoueurOn> listeJoueurOn = new List<JoueurOn>();
 
-        [SerializeField] private JoueurConnecte joueurConnecte;// = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
+        [SerializeField] private JoueurOn joueur1;// = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
 
-        [SerializeField] private JoueurNonConnecte joueurNonConnecte;// = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
+        [SerializeField] private JoueurOn joueur2;// = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
 
 
 
         public int Id { get => id; set => id = value; }
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
         public DateTime DateMatch { get => dateMatch; set => dateMatch = value; }
-        protected JoueurConnecte JoueurConnecte { get => joueurConnecte; set => joueurConnecte = value; }
-        protected JoueurNonConnecte JoueurNonConnecte { get => joueurNonConnecte; set => joueurNonConnecte = value; }
+        public JoueurOn Joueur1 { get => joueur1; set => joueur1 = value; }
+        public JoueurOn Joueur2 { get => joueur2; set => joueur2 = value; }
 
         private void Start()
         {
@@ -40,8 +40,12 @@ namespace Mvc.Models
         private void OnEnable()
         {
             typeDuMatch = TypeMatch.EnLigne;
+            //tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
 
         }
+
+
+
         protected override void initialiseJoueurs()
         {
             /*GameObject j1 = GameObject.Find("Joueur1");
@@ -54,6 +58,14 @@ namespace Mvc.Models
             {
                 listeJoueurOn.Add(j2.GetComponent<JoueurOn>());
             }*/
+        }
+        public override void verifierEtatDuMatch(int idCase)
+        {
+
+        }
+        public override void tourJoueur(int numPosition)
+        {
+
         }
 
         public new void insert()
@@ -112,7 +124,7 @@ namespace Mvc.Models
                    //statut = StatutDatabase.Succes;
                });
         }
-    
-    
+
+
     }
 }

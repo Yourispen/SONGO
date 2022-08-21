@@ -6,8 +6,8 @@ public class Script_Controller_Match : MonoBehaviour
 {
     #region Variables
 
-    [Header("temps de dépot des pions et transition des couleurs")]
-    //temps mis après le dépot d'un pion
+    [Header("temps de dï¿½pot des pions et transition des couleurs")]
+    //temps mis aprï¿½s le dï¿½pot d'un pion
     protected float temps_depot_caisse = 0.02f;
     protected float temps_depot_case = 0.2f;
 
@@ -23,7 +23,7 @@ public class Script_Controller_Match : MonoBehaviour
     [SerializeField] protected GameObject caisse;
     [SerializeField] protected Vector3 hauteur = new Vector3(0, 1f, 0);
 
-    //numero de la case de départ
+    //numero de la case de dï¿½part
     public int numero_case_depart;
 
     //temps pour le tactile
@@ -68,7 +68,7 @@ public class Script_Controller_Match : MonoBehaviour
 
     #region Fonctions Coroutines
 
-    //générer les pions pour le match
+    //gï¿½nï¿½rer les pions pour le match
     public IEnumerator generer_pions()
     {
         pions_match.Clear();

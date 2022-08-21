@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mvc.Core;
 
 namespace Mvc.Models
 {
     public class JoueurNonConnecte : JoueurOn
     {
-        [SerializeField] private List<MatchEnLigne> listeMatchEnLigne = new List<MatchEnLigne>();
+        [SerializeField] private Swipe swipe;
 
-        public List<MatchEnLigne> ListeMatchEnLigne { get => listeMatchEnLigne;}
-        public void ajouterMatchEnLigne(MatchEnLigne matchEnLigne)
+        void Start()
         {
-            listeMatchEnLigne.Add(matchEnLigne);
+            this.matchEnLigne = GameObject.Find("matchEnligne").GetComponent<MatchEnLigne>();
         }
     }
 }

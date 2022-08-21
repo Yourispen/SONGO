@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     //le nom du match en cours
     public string match_en_cours;
 
-    //le nombre de fois que le joueur s'est reconnecté
+    //le nombre de fois que le joueur s'est reconnectï¿½
     [SerializeField] private int compteur_de_reconnexion;
 
     #endregion
@@ -112,12 +112,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         else if (PhotonNetwork.IsConnected)
         {
-            Debug.Log("je suis connecté, donc je me déconnecte avant de quitter la scène.");
+            Debug.Log("je suis connectï¿½, donc je me dï¿½connecte avant de quitter la scï¿½ne.");
             PhotonNetwork.Disconnect();
         }
         else
         {
-            Debug.Log("je ne suis pas connecté, donc je quitte la scène.");
+            Debug.Log("je ne suis pas connectï¿½, donc je quitte la scï¿½ne.");
             if (controller_scene.quitter)
             {
                 SceneManager.LoadScene("Online");
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void match_debute()
     {
-        Debug.Log(PhotonNetwork.PlayerListOthers[0].ToString() + " a " + PhotonNetwork.PlayerListOthers[0].ToString().Length + " caractères");
+        Debug.Log(PhotonNetwork.PlayerListOthers[0].ToString() + " a " + PhotonNetwork.PlayerListOthers[0].ToString().Length + " caractï¿½res");
         int nombre_de_lettres = PhotonNetwork.PlayerListOthers[0].ToString().Length - 6;
         PlayerPrefs.SetString("adversaire", PhotonNetwork.PlayerListOthers.GetValue(0).ToString().Substring(5, nombre_de_lettres));
         PhotonNetwork.CurrentRoom.IsVisible = false;
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             nom_joueur = joueur_2.recupere_le_nom();
         else
             nom_joueur = joueur_1.recupere_le_nom();
-        Debug.Log(nom_joueur + " a quitté le match.");
+        Debug.Log(nom_joueur + " a quittï¿½ le match.");
 
         if (!controller_match.match_fini)
         {
@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log(cause);
-        Debug.Log("je me déconnecte");
+        Debug.Log("je me dï¿½connecte");
         if (controller_scene.quitter || !debut_du_match)
             SceneManager.LoadScene("Online");
 
@@ -284,12 +284,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     public override void OnConnected()
     {
-        Debug.Log("Connexion à internet...");
+        Debug.Log("Connexion ï¿½ internet...");
     }
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.MaxResendsBeforeDisconnect = 1;
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " est connecté(e) à photon...");
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " est connectï¿½(e) ï¿½ photon...");
         rejoindre_le_match(match_en_cours);
     }
     public override void OnJoinedRoom()
@@ -303,7 +303,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             controller_scene.detruit_timer();
             controller_match.deconnexion = false;
             PhotonNetwork.MaxResendsBeforeDisconnect = 1;
-            Debug.Log(PhotonNetwork.LocalPlayer.NickName + " s'est reconnecté au Match " + PhotonNetwork.CurrentRoom.Name);
+            Debug.Log(PhotonNetwork.LocalPlayer.NickName + " s'est reconnectï¿½ au Match " + PhotonNetwork.CurrentRoom.Name);
             initialise_GameCenter();
             controller_scene.afficher_message("", false);
         }

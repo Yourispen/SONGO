@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1674291008874713588}
   - component: {fileID: 394255747}
   - component: {fileID: 394255748}
+  - component: {fileID: 3137209413883930061}
+  - component: {fileID: 321063346622586007}
   m_Layer: 0
   m_Name: case_11
   m_TagString: Untagged
@@ -100,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -107,6 +110,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 1838706281}
   id: 10
+  listeCouleurs: []
 --- !u!114 &394255748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +118,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846182315501998960}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -124,6 +128,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &3137209413883930061
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846182315501998960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6069472804124152128, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &321063346622586007
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846182315501998960}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1328252655945439371
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +170,7 @@ GameObject:
   - component: {fileID: 5734482961175058886}
   - component: {fileID: 8978147931201265680}
   - component: {fileID: 2091927326}
+  - component: {fileID: 1476503277}
   m_Layer: 0
   m_Name: Cube_G1
   m_TagString: Untagged
@@ -223,6 +258,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 351544136}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1476503277
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328252655945439371}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3537709356157935800, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &2487359947208148450
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +286,7 @@ GameObject:
   - component: {fileID: 4892273671010028597}
   - component: {fileID: 6104701546903225319}
   - component: {fileID: 587210923}
+  - component: {fileID: 1333234223}
   m_Layer: 0
   m_Name: Cube_3
   m_TagString: Untagged
@@ -322,6 +374,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 1885602969}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1333234223
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487359947208148450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2477511411847689622, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &2942379286946604085
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +402,7 @@ GameObject:
   - component: {fileID: 3855243975434525064}
   - component: {fileID: 2879007245137117561}
   - component: {fileID: 1405968561}
+  - component: {fileID: 133067253}
   m_Layer: 0
   m_Name: Cube_9
   m_TagString: Untagged
@@ -421,6 +490,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 976694404}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &133067253
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942379286946604085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2212009239438826721, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &3262456825168231421
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +519,8 @@ GameObject:
   - component: {fileID: 8034735789152414526}
   - component: {fileID: 1786909688}
   - component: {fileID: 1786909689}
+  - component: {fileID: 4245186664041140068}
+  - component: {fileID: 7928596297940258324}
   m_Layer: 0
   m_Name: case_13
   m_TagString: Untagged
@@ -521,6 +608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -528,6 +616,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 1608115546}
   id: 12
+  listeCouleurs: []
 --- !u!114 &1786909689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +624,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3262456825168231421}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -545,6 +634,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &4245186664041140068
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262456825168231421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4618725599245172478, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &7928596297940258324
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262456825168231421}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3328187252829141504
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +676,7 @@ GameObject:
   - component: {fileID: 2924714084132838432}
   - component: {fileID: 8854132803076455503}
   - component: {fileID: 375388621}
+  - component: {fileID: 480526928}
   m_Layer: 0
   m_Name: Cube_5
   m_TagString: Untagged
@@ -644,6 +764,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 969760587}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &480526928
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3328187252829141504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -153830957423991239, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &3620985329101727596
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +792,8 @@ GameObject:
   - component: {fileID: 1002846176127529785}
   - component: {fileID: 7506881083036236395}
   - component: {fileID: 351544136}
+  - component: {fileID: 7761456543152407231}
+  - component: {fileID: 7200883030387439344}
   m_Layer: 0
   m_Name: G1
   m_TagString: Untagged
@@ -743,6 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 0}
   peutJouer: 0
   numeroCase: 14
@@ -750,6 +889,37 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 2091927326}
   id: 0
+  listeCouleurs: []
+--- !u!64 &7761456543152407231
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620985329101727596}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4685904393764859086, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &7200883030387439344
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620985329101727596}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3807877565078138546
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +932,7 @@ GameObject:
   - component: {fileID: 7937434364547296144}
   - component: {fileID: 1350810324069864766}
   - component: {fileID: 683445108}
+  - component: {fileID: 1156402215}
   m_Layer: 0
   m_Name: Cube_6
   m_TagString: Untagged
@@ -849,6 +1020,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 963697213}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1156402215
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807877565078138546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5741174448488666723, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &3879203176656193839
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +1048,7 @@ GameObject:
   - component: {fileID: 7556864564673537818}
   - component: {fileID: 4002577663930199815}
   - component: {fileID: 587011268}
+  - component: {fileID: 1165372079}
   m_Layer: 0
   m_Name: Cube_12
   m_TagString: Untagged
@@ -948,6 +1136,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 2113644455}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1165372079
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3879203176656193839}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1550514412580984892, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &3925593652238826692
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +1164,8 @@ GameObject:
   - component: {fileID: 6793706740453824038}
   - component: {fileID: 3018094956812075701}
   - component: {fileID: 2047809509}
+  - component: {fileID: 995626940805544082}
+  - component: {fileID: 6997014409979006829}
   m_Layer: 0
   m_Name: G2
   m_TagString: Untagged
@@ -1047,6 +1253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 0}
   peutJouer: 0
   numeroCase: 15
@@ -1054,6 +1261,37 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 0}
   id: 0
+  listeCouleurs: []
+--- !u!64 &995626940805544082
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925593652238826692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3810649256185338360, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &6997014409979006829
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925593652238826692}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4079816808798268334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1304,7 @@ GameObject:
   - component: {fileID: 4209003080244246472}
   - component: {fileID: 2055058306213367557}
   - component: {fileID: 326439102}
+  - component: {fileID: 1241321516}
   m_Layer: 0
   m_Name: Cube_8
   m_TagString: Untagged
@@ -1153,6 +1392,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 676798793}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1241321516
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4079816808798268334}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2228417370725966487, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &4165649293781059802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1420,7 @@ GameObject:
   - component: {fileID: 7807307793719341898}
   - component: {fileID: 3071822909660211931}
   - component: {fileID: 1608115546}
+  - component: {fileID: 1759086565}
   m_Layer: 0
   m_Name: Cube_13
   m_TagString: Untagged
@@ -1252,6 +1508,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 1786909688}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1759086565
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165649293781059802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &4324515571179039577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1536,7 @@ GameObject:
   - component: {fileID: 6250059471062663715}
   - component: {fileID: 3560194637353047921}
   - component: {fileID: 410718607}
+  - component: {fileID: 217542407}
   m_Layer: 0
   m_Name: Cube_1
   m_TagString: Untagged
@@ -1351,6 +1624,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 1215033003}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &217542407
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324515571179039577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3329902420748629119, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &4444662670263537550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,6 +1653,8 @@ GameObject:
   - component: {fileID: 1635793850058438966}
   - component: {fileID: 676798793}
   - component: {fileID: 676798794}
+  - component: {fileID: 3596615345277392380}
+  - component: {fileID: 2652958626412118636}
   m_Layer: 0
   m_Name: case_8
   m_TagString: Untagged
@@ -1451,6 +1742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -1458,6 +1750,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 326439102}
   id: 7
+  listeCouleurs: []
 --- !u!114 &676798794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,7 +1758,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4444662670263537550}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -1475,6 +1768,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &3596615345277392380
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444662670263537550}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7692208170026227473, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &2652958626412118636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444662670263537550}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4823480869398678557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1810,7 @@ GameObject:
   - component: {fileID: 6731994064589123445}
   - component: {fileID: 5756324440353723624}
   - component: {fileID: 811737328}
+  - component: {fileID: 1998010301}
   m_Layer: 0
   m_Name: Cube_2
   m_TagString: Untagged
@@ -1574,6 +1898,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 979139337}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1998010301
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823480869398678557}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8552134717624371188, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &4920533490341406239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1927,8 @@ GameObject:
   - component: {fileID: 2318752218216031229}
   - component: {fileID: 1215033003}
   - component: {fileID: 1215033004}
+  - component: {fileID: 5633603888788270197}
+  - component: {fileID: 4608896786013181108}
   m_Layer: 0
   m_Name: case_1
   m_TagString: Untagged
@@ -1674,6 +2016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -1681,6 +2024,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 410718607}
   id: 0
+  listeCouleurs: []
 --- !u!114 &1215033004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1688,7 +2032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4920533490341406239}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -1698,6 +2042,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &5633603888788270197
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920533490341406239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5670008069083993683, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &4608896786013181108
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920533490341406239}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5201438979661369304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,6 +2085,8 @@ GameObject:
   - component: {fileID: 1625505300287153373}
   - component: {fileID: 979139337}
   - component: {fileID: 979139338}
+  - component: {fileID: 176298732435868348}
+  - component: {fileID: 6229024812332182430}
   m_Layer: 0
   m_Name: case_2
   m_TagString: Untagged
@@ -1798,6 +2174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -1805,6 +2182,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 811737328}
   id: 1
+  listeCouleurs: []
 --- !u!114 &979139338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1812,7 +2190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5201438979661369304}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -1822,6 +2200,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &176298732435868348
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5201438979661369304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7920765882194169711, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &6229024812332182430
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5201438979661369304}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5374285279206587054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +2242,7 @@ GameObject:
   - component: {fileID: 801471475405488858}
   - component: {fileID: 9086412352449633797}
   - component: {fileID: 589129035}
+  - component: {fileID: 1791768131}
   m_Layer: 0
   m_Name: Cube_14
   m_TagString: Untagged
@@ -1921,6 +2330,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 556781256}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1791768131
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374285279206587054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &5421982877058074389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,6 +2358,8 @@ GameObject:
   - component: {fileID: 5355105607896182047}
   - component: {fileID: 3130589936696675052}
   - component: {fileID: 1221857053}
+  - component: {fileID: 4551000842390554936}
+  - component: {fileID: 6162437724426465359}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -2020,6 +2447,8 @@ MonoBehaviour:
   msgSuccess: 
   msgFailed: 
   libelle: 
+  listeCouleurs:
+  - {fileID: 2100000, guid: b38cc8b7122b4394f9b66b70aef5930d, type: 2}
   couleur: {fileID: 0}
   statut: 0
   listeCases:
@@ -2039,7 +2468,40 @@ MonoBehaviour:
   - {fileID: 556781256}
   - {fileID: 351544136}
   - {fileID: 2047809509}
+  caissePrefab: {fileID: 4989040616356081452, guid: 1d82ab8850d992e4987daab73d84e7a3,
+    type: 3}
+  match: {fileID: 0}
   caisse: {fileID: 0}
+--- !u!54 &4551000842390554936
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421982877058074389}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &6162437724426465359
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421982877058074389}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7708390375683503162, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &5609305497199392155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,7 +2512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5085567892599566113}
   m_Layer: 0
-  m_Name: Table
+  m_Name: SongoType1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2064,7 +2526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5609305497199392155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 53.3, y: -20, z: -15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2101,6 +2563,8 @@ GameObject:
   - component: {fileID: 4753932839548384640}
   - component: {fileID: 2106114609}
   - component: {fileID: 2106114610}
+  - component: {fileID: 3968827119286449646}
+  - component: {fileID: 991556945050843674}
   m_Layer: 0
   m_Name: case_10
   m_TagString: Untagged
@@ -2188,6 +2652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -2195,6 +2660,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 1567527082}
   id: 9
+  listeCouleurs: []
 --- !u!114 &2106114610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2202,7 +2668,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5892174493113322143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -2212,6 +2678,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &3968827119286449646
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892174493113322143}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4070414116124691607, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &991556945050843674
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892174493113322143}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5972757616523004636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,6 +2721,8 @@ GameObject:
   - component: {fileID: 33063762235130041}
   - component: {fileID: 976694404}
   - component: {fileID: 976694405}
+  - component: {fileID: 8069108992463132246}
+  - component: {fileID: 4669713294364640471}
   m_Layer: 0
   m_Name: case_9
   m_TagString: Untagged
@@ -2312,6 +2810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -2319,6 +2818,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 1405968561}
   id: 8
+  listeCouleurs: []
 --- !u!114 &976694405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2326,7 +2826,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5972757616523004636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -2336,6 +2836,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &8069108992463132246
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972757616523004636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4558420561051092868, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &4669713294364640471
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972757616523004636}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6119934950044342440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2878,7 @@ GameObject:
   - component: {fileID: 4206485788901003376}
   - component: {fileID: 7671351451646847116}
   - component: {fileID: 1567527082}
+  - component: {fileID: 809167618}
   m_Layer: 0
   m_Name: Cube_10
   m_TagString: Untagged
@@ -2435,6 +2966,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 2106114609}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &809167618
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6119934950044342440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5053925668127403250, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &6179610076200900997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,6 +2994,7 @@ GameObject:
   - component: {fileID: 853956634447892924}
   - component: {fileID: 5012751074004069240}
   - component: {fileID: 1699365517}
+  - component: {fileID: 105955892}
   m_Layer: 0
   m_Name: Cube_G2
   m_TagString: Untagged
@@ -2534,6 +3082,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 2047809509}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &105955892
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179610076200900997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2865104911859505335, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &6384243562602105124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +3111,8 @@ GameObject:
   - component: {fileID: 8797094869341129427}
   - component: {fileID: 326605138}
   - component: {fileID: 326605139}
+  - component: {fileID: 8844776532356118487}
+  - component: {fileID: 5280368380399935935}
   m_Layer: 0
   m_Name: case_7
   m_TagString: Untagged
@@ -2634,6 +3200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -2641,6 +3208,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 279442684}
   id: 6
+  listeCouleurs: []
 --- !u!114 &326605139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2648,7 +3216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6384243562602105124}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -2658,6 +3226,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &8844776532356118487
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384243562602105124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1294465567995979349, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &5280368380399935935
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384243562602105124}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6489607337269709663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,6 +3268,7 @@ GameObject:
   - component: {fileID: 5828502270633546171}
   - component: {fileID: 7037729781000412562}
   - component: {fileID: 279442684}
+  - component: {fileID: 1879238476}
   m_Layer: 0
   m_Name: Cube_7
   m_TagString: Untagged
@@ -2757,6 +3356,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 326605138}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1879238476
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6489607337269709663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7807538432633192378, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &6626306808717096060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2770,6 +3385,8 @@ GameObject:
   - component: {fileID: 8967077653981558204}
   - component: {fileID: 1885602969}
   - component: {fileID: 1885602970}
+  - component: {fileID: 8391311764150975823}
+  - component: {fileID: 9000146534641307151}
   m_Layer: 0
   m_Name: case_3
   m_TagString: Untagged
@@ -2857,6 +3474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -2864,6 +3482,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 587210923}
   id: 2
+  listeCouleurs: []
 --- !u!114 &1885602970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2871,7 +3490,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6626306808717096060}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -2881,6 +3500,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &8391311764150975823
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626306808717096060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5719608534519910673, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &9000146534641307151
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626306808717096060}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6758597738664010939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,6 +3542,7 @@ GameObject:
   - component: {fileID: 3796061116757340129}
   - component: {fileID: 3876522491461149108}
   - component: {fileID: 1838706281}
+  - component: {fileID: 249820923}
   m_Layer: 0
   m_Name: Cube_11
   m_TagString: Untagged
@@ -2980,6 +3630,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 394255747}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &249820923
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758597738664010939}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8678823145569952518, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &7100415662952436535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,6 +3659,8 @@ GameObject:
   - component: {fileID: 3674587158996569680}
   - component: {fileID: 1249380750}
   - component: {fileID: 1249380751}
+  - component: {fileID: 5239463958545195241}
+  - component: {fileID: 1525964838963811891}
   m_Layer: 0
   m_Name: case_4
   m_TagString: Untagged
@@ -3080,6 +3748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -3087,6 +3756,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 1969660955}
   id: 3
+  listeCouleurs: []
 --- !u!114 &1249380751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3094,7 +3764,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7100415662952436535}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -3104,6 +3774,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &5239463958545195241
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100415662952436535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1545119146956014181, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &1525964838963811891
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100415662952436535}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7149705029295505454
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,6 +3816,7 @@ GameObject:
   - component: {fileID: 130945114866927537}
   - component: {fileID: 4035099128351170472}
   - component: {fileID: 1969660955}
+  - component: {fileID: 1467471441}
   m_Layer: 0
   m_Name: Cube_4
   m_TagString: Untagged
@@ -3203,6 +3904,22 @@ MonoBehaviour:
   id: 0
   libelle: 
   cases: {fileID: 1249380750}
+  couleurDepotJoueur1: {fileID: 0}
+  couleurDepotJoueur2: {fileID: 0}
+--- !u!64 &1467471441
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149705029295505454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8385836491182413749, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
 --- !u!1 &7564592789248593594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,6 +3933,8 @@ GameObject:
   - component: {fileID: 3576795469713646795}
   - component: {fileID: 969760587}
   - component: {fileID: 969760588}
+  - component: {fileID: 6657808693277749750}
+  - component: {fileID: 2199585225663180790}
   m_Layer: 0
   m_Name: case_5
   m_TagString: Untagged
@@ -3303,6 +4022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -3310,6 +4030,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 375388621}
   id: 4
+  listeCouleurs: []
 --- !u!114 &969760588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3317,7 +4038,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7564592789248593594}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -3327,6 +4048,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &6657808693277749750
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564592789248593594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8131389013264950356, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &2199585225663180790
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564592789248593594}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7859326735314406840
 GameObject:
   m_ObjectHideFlags: 0
@@ -3340,6 +4091,8 @@ GameObject:
   - component: {fileID: 7158184549084064516}
   - component: {fileID: 963697213}
   - component: {fileID: 963697214}
+  - component: {fileID: 3028474245327214000}
+  - component: {fileID: 8752207703151210511}
   m_Layer: 0
   m_Name: case_6
   m_TagString: Untagged
@@ -3427,6 +4180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -3434,6 +4188,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 683445108}
   id: 5
+  listeCouleurs: []
 --- !u!114 &963697214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3441,7 +4196,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7859326735314406840}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -3451,6 +4206,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   couleur2: {fileID: 2100000, guid: 83d42c6ce19e0c842ae1ed56f56b2f5c, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &3028474245327214000
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859326735314406840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8703961814492967303, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &8752207703151210511
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859326735314406840}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7954408505772049565
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,6 +4249,8 @@ GameObject:
   - component: {fileID: 1329417545820505246}
   - component: {fileID: 2113644455}
   - component: {fileID: 2113644456}
+  - component: {fileID: 4783447712869761941}
+  - component: {fileID: 9097107393901929293}
   m_Layer: 0
   m_Name: case_12
   m_TagString: Untagged
@@ -3551,6 +4338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -3558,6 +4346,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 587011268}
   id: 11
+  listeCouleurs: []
 --- !u!114 &2113644456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3565,7 +4354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7954408505772049565}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -3575,6 +4364,36 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &4783447712869761941
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954408505772049565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4294208892204480382, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &9097107393901929293
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954408505772049565}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8340182620889240714
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,6 +4407,8 @@ GameObject:
   - component: {fileID: 5813495071679085704}
   - component: {fileID: 556781256}
   - component: {fileID: 556781257}
+  - component: {fileID: 2836860137984321571}
+  - component: {fileID: 5503872222794718550}
   m_Layer: 0
   m_Name: case_14
   m_TagString: Untagged
@@ -3675,6 +4496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
+  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
   numeroCase: 0
@@ -3682,6 +4504,7 @@ MonoBehaviour:
   listePions: []
   cube: {fileID: 589129035}
   id: 13
+  listeCouleurs: []
 --- !u!114 &556781257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3689,7 +4512,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8340182620889240714}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249852e475150eb43be460636b402c39, type: 3}
   m_Name: 
@@ -3699,3 +4522,33 @@ MonoBehaviour:
   couleur1: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   couleur2: {fileID: 2100000, guid: 8d14c687376ce074c9b213df68a2eba0, type: 2}
   couleurInitiale: {fileID: 0}
+--- !u!64 &2836860137984321571
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340182620889240714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7446720166314909396, guid: b43aad1ca5223eb479a9a6ead20fe4c8, type: 3}
+--- !u!54 &5503872222794718550
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340182620889240714}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

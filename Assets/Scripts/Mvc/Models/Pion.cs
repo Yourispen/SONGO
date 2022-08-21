@@ -8,20 +8,29 @@ namespace Mvc.Models
     public class Pion : ModelFirebase
     {
         [SerializeField] private Material couleur;
+        [SerializeField] private List<Material> listeCouleurs = new List<Material>();
         public static int nombreDePions = 0;
         [SerializeField] private int id = 0;
         [SerializeField] private Case caseActuelle;
+        [SerializeField] private int typePion;
 
         public int Id { get => id; set => id = value; }
         public Material Couleur { get => couleur; set => couleur = value; }
         public Case CaseActuelle { get => caseActuelle; set => caseActuelle = value; }
+        public int TypePion { get => typePion; set => typePion = value; }
+
+        void Awake()
+        {
+            this.gameObject.GetComponent<Renderer>().material = listeCouleurs[PlayerPrefs.GetInt("couleurPion")];
+            couleur = this.gameObject.GetComponent<Renderer>().material;
+        }
 
         void Start()
         {
             //this.GetComponent<Renderer>().material = couleur;
             nombreDePions++;
             id = nombreDePions;
-            Debug.Log("Je suis un pion");
+            //Debug.Log("Je suis un pion");
         }
         public void deplacerPionCase(int idCase)
         {
@@ -30,7 +39,9 @@ namespace Mvc.Models
 
         public void deplacerPionCase(Case cases, Vector3 ajoutPosition)
         {
-            this.transform.position = cases.transform.position+ajoutPosition;
+            this.transform.position = cases.transform.position + ajoutPosition;
+            caseActuelle = cases;
+            cases.ajouterPion(this);
         }
         public void deplacerPionCaisse(Caisse caisse)
         {

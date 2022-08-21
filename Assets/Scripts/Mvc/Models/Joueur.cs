@@ -11,6 +11,7 @@ namespace Mvc.Models
         [SerializeField] protected int numPosition;
         [SerializeField] protected Tour tour;
 
+
         public Joueur()
         {
             numPosition = 0;
@@ -19,6 +20,6 @@ namespace Mvc.Models
 
         public string Surnom { get => surnom; set => surnom = value; }
         public int NumPosition { get => numPosition; set => numPosition = value; }
-
+        public Tour Tour { get => tour; set => tour = value; }
     }
 }

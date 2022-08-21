@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Database;
 using System;
 using Mvc.Entities;
+using Mvc.Core;
 
 namespace Mvc.Models
 {
@@ -12,19 +13,11 @@ namespace Mvc.Models
 
 
         [SerializeField] private List<Ami> listeAmis = new List<Ami>();
-
-        [SerializeField] private List<MatchEnLigne> listeMatchEnLigne = new List<MatchEnLigne>();
-
         [SerializeField] private EtatConnectionCompte etatConnectionCompte;
 
-        public List<Ami> ListeAmis { get => listeAmis; }
-        public List<MatchEnLigne> ListeMatchEnLigne { get => listeMatchEnLigne; }
-        public EtatConnectionCompte EtatConnectionCompte1 { get => etatConnectionCompte; set => etatConnectionCompte = value; }
 
-        public void ajouterMatchEnLigne(MatchEnLigne matchEnLigne)
-        {
-            listeMatchEnLigne.Add(matchEnLigne);
-        }
+        public List<Ami> ListeAmis { get => listeAmis; }
+        public EtatConnectionCompte EtatConnectionCompte1 { get => etatConnectionCompte; set => etatConnectionCompte = value; }
 
         public void ajouterAmi(Ami ami)
         {
@@ -34,6 +27,11 @@ namespace Mvc.Models
         private void OnEnable()
         {
             typeJoueur = TypeJoueur.JoueurConnecte;
+        }
+
+        void Start()
+        {
+            //this.matchEnLigne=GameObject.Find("matchEnligne").GetComponent<MatchEnLigne>();
         }
 
         public void insertSql()

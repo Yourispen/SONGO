@@ -43,6 +43,9 @@ namespace Mvc.Controllers
                 Debug.Log("Connexion Facebook");
                 PlayerPrefs.SetInt("idConnexionCompte", 1);
                 PlayerPrefs.SetInt("etatConnexionCompte", 1);
+                PlayerPrefs.SetInt("typePion", 0);
+                PlayerPrefs.SetInt("couleurPion", 0);
+                PlayerPrefs.SetInt("couleurTable", 0);
                 Fonctions.debutChargement();
                 connexionCompte.connexionFacebook();
             }
@@ -56,6 +59,9 @@ namespace Mvc.Controllers
             PlayerPrefs.SetInt("idConnexionCompte", 0);
             PlayerPrefs.SetInt("idNiveau", 1);
             PlayerPrefs.SetInt("etatConnexionCompte", 1);
+            PlayerPrefs.SetInt("typePion", 0);
+            PlayerPrefs.SetInt("couleurPion", 0);
+            PlayerPrefs.SetInt("couleurTable", 0);
             Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
         }
     }

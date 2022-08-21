@@ -6,6 +6,8 @@ using Firebase.Database;
 using Newtonsoft.Json;
 using Mvc.Entities;
 using Mvc.Core;
+using Photon.Pun;
+using Photon.Realtime;
 
 
 namespace Mvc.Models
@@ -22,9 +24,31 @@ namespace Mvc.Models
         [SerializeField] protected Niveau niveau;
         [SerializeField] private SongoJoueurOnline songoJoueurOnline;
         [SerializeField] private StatutDatabase statutDatabase;
+        [SerializeField] protected MatchEnLigne matchEnLigne;
+        [SerializeField] private GameObject swipePrefab;
+        //[SerializeField] private Swipe swipe;
+        [SerializeField] private PhotonView photonView;
+
+        //public Swipe Swipe { get => swipe; set => swipe = value; }
+
+
         void OnEnable()
         {
             statutDatabase = StatutDatabase.Debut;
+        }
+        void Start()
+        {
+            /*
+            if (photonView.IsMine)
+            {
+                typeJoueur = TypeJoueur.JoueurConnecte;
+            }
+            else
+            {
+                typeJoueur = TypeJoueur.JoueurNonConnecte;
+                this.gameObject.GetComponent<Swipe>().enabled = false;
+            }*/
+
         }
 
         public new string table()
@@ -34,6 +58,11 @@ namespace Mvc.Models
 
         public JoueurOn()
         {
+
+        }
+        private void addMatchEnLigne()
+        {
+
         }
 
         public JoueurOn(string surnom, DateTime dateInscription, DateTime heureInscription, string email, ConnexionCompte connexionCompte, Niveau niveau)
@@ -54,6 +83,7 @@ namespace Mvc.Models
         public StatutJoueur StatutJoueur { get => statutJoueur; set => statutJoueur = value; }
         public Niveau Niveau { get => niveau; set => niveau = value; }
         public ConnexionCompte ConnexionCompte { get => connexionCompte; set => connexionCompte = value; }
+        public MatchEnLigne MatchEnLigne { get => matchEnLigne; set => matchEnLigne = value; }
 
         public void copyJoueurOn(JoueurOn joueurOn)
         {

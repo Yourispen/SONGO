@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &773299195938390122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773299195938390120}
+  - component: {fileID: 773299195938390123}
+  m_Layer: 0
+  m_Name: matchHorsLigne
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &773299195938390120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773299195938390122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.099888, y: -5.704525, z: 2.239338}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &773299195938390123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773299195938390122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a84684c5a0544e458d30ced067e9459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  msgSuccess: 
+  msgFailed: 
+  resultatDuMatch: 0
+  etatDuMatch: 0
+  typeDuMatch: 0
+  songoMatchPrefab: {fileID: 5609305497199392155, guid: fe767fb3b39581a4d857cb23fc64b404,
+    type: 3}
+  tableMatch: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  pionPrefab: {fileID: 0}
+  typePionPrefab:
+  - {fileID: 3197813730773946459, guid: ea05f8cb6fab78a45b8bc5fe209c8c77, type: 3}
+  - {fileID: 194671586371282031, guid: 1cc9a5cd67ba1964f9a8d555384cd28b, type: 3}
+  listePions: []
+  id: 0
+  scoreMatch: 
+  joueurOffPrefab: {fileID: 1357687978496876740, guid: 7f9c8dd8e1be68a43b8877b56f1ce7d4,
+    type: 3}
+  joueur1: {fileID: 0}
+  joueur2: {fileID: 0}

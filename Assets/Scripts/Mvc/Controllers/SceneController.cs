@@ -25,7 +25,7 @@ namespace Mvc.Controllers
         void Awake()
         {
             //PlayerPrefs.SetInt("etatConnexionCompte", 1);
-            //Debug.Log(PlayerPrefs.GetInt("etatConnexionCompte"));return;
+            //PlayerPrefs.DeleteAll();return;
             connexionInternet = Fonctions.instancierObjet(connexionInternetPrefab).GetComponent<ConnexionInternet>();
 
             if (SceneManager.GetActiveScene().name == "SceneMenuPrincipal")

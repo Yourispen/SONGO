@@ -2,6 +2,6 @@ namespace Mvc.Models
 {
     public enum TypeJoueur
     {
-        Ami, JoueurConnecte
+        Ami, JoueurConnecte,JoueurNonConnecte
     }
 }
