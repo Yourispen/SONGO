@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "308091119474",
+    "firebase_url": "https://gestion-songo-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gestion-songo",
+    "storage_bucket": "gestion-songo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308091119474:android:1bb25c334a558249749feb",
+        "android_client_info": {
+          "package_name": "com.RRGames.Songo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308091119474-isvekccnpic7sgqa5ge5kfh83j9ovnll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.RRGames.Songo",
+            "certificate_hash": "619142f59015598abcd6bd2004872155edabd838"
+          }
+        },
+        {
+          "client_id": "308091119474-soo4g14qv01t5mqd97ci2g972ia4r7cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAcmYtZQAHgH744qQ7ch4fjzaHR0xvfqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308091119474-soo4g14qv01t5mqd97ci2g972ia4r7cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

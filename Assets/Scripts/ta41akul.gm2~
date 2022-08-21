@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Deplacement : MonoBehaviour
+{
+	Text texte_actuel;
+	string texte_saisi;
+	float temps_actuel, temps_depart;
+
+	void Awake()
+	{
+		texte_actuel = GetComponent<Text>();
+		texte_saisi = texte_actuel.text;
+		texte_actuel.text = "";
+
+		// TODO: add optional delay when to start
+		StartCoroutine("PlayText");
+	}
+    private void Start()
+    {
+		temps_depart = Time.time;
+	}
+
+    private void Update()
+    {
+		temps_actuel = Time.time;
+		if (temps_actuel >= temps_depart + 5f)
+		{
+			texte_actuel.text = "";
+			print(temps_depart);
+			StartCoroutine("PlayText");
+			temps_depart = temps_actuel;
+		}
+    }
+
+    IEnumerator PlayText()
+	{
+		foreach (char c in texte_saisi)
+		{
+			texte_actuel.text += c;
+			yield return new WaitForSeconds(0.125f);
+		}
+	}
+
+}

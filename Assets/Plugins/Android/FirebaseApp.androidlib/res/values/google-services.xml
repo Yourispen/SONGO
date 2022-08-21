@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://gestion-songo-default-rtdb.europe-west1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">308091119474</string>
+  <string name="google_storage_bucket" translatable="false">gestion-songo.appspot.com</string>
+  <string name="project_id" translatable="false">gestion-songo</string>
+  <string name="google_api_key" translatable="false">AIzaSyCAcmYtZQAHgH744qQ7ch4fjzaHR0xvfqw</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCAcmYtZQAHgH744qQ7ch4fjzaHR0xvfqw</string>
+  <string name="google_app_id" translatable="false">1:308091119474:android:1bb25c334a558249749feb</string>
+  <string name="default_android_client_id" translatable="false">308091119474-isvekccnpic7sgqa5ge5kfh83j9ovnll.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">308091119474-soo4g14qv01t5mqd97ci2g972ia4r7cd.apps.googleusercontent.com</string>
+</resources>

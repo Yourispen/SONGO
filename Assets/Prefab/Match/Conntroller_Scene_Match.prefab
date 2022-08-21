@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4082298802146954650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4082298802146954651}
+  - component: {fileID: 4082298802146954652}
+  m_Layer: 0
+  m_Name: Conntroller_Scene_Match
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4082298802146954651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082298802146954650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -57.391296, y: 16.99049, z: 9.637421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4082298802146954652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082298802146954650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b197b85e58374346b8ddf901da9bce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonPause: {fileID: 0}
+  MenuPause: {fileID: 0}
+  en_pause: 0
+  Counter_Pieces_P1: {fileID: 0}
+  Counter_Pieces_P2: {fileID: 0}
+  Text_Compteur_P1: {fileID: 0}
+  Text_Compteur_P2: {fileID: 0}
+  Tour_P1: {fileID: 0}
+  Tour_P2: {fileID: 0}
+  Profil_P1: {fileID: 0}
+  Profil_P2: {fileID: 0}
+  Name_P2: {fileID: 0}
+  Name_P1: {fileID: 0}
+  Fin_Match: {fileID: 0}
+  Background_Victoire: {fileID: 0}
+  Text_Victoire: {fileID: 0}
+  Text_Victoire_Mini: {fileID: 0}
+  joueur_1: {fileID: 0}
+  joueur_2: {fileID: 0}
+  Score_P1: {fileID: 0}
+  Score_P2: {fileID: 0}
+  vrai: 0
+  camera_P1: {fileID: 0}
+  camera_P2: {fileID: 0}
+  controlleur_match: {fileID: 0}
+  numero_joueur: 0
