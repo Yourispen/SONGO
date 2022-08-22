@@ -20,6 +20,7 @@ namespace Mvc.Controllers
         [SerializeField] private ConnexionCompteController connexionCompteController;
         [SerializeField] private string textSaisiSurnom;
         [SerializeField] private string nomScene;
+        [SerializeField] private MatchEnLigneController matchEnLigneController;
 
 
         void Awake()
@@ -55,6 +56,10 @@ namespace Mvc.Controllers
                     Fonctions.finChargement();
                 }
                 //PlayerPrefs.DeleteAll();
+            }
+            else if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            {
+                
             }
         }
         void Start()

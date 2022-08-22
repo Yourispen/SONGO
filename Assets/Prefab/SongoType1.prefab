@@ -102,10 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 1838706281}
@@ -608,10 +606,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 1608115546}
@@ -881,14 +877,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
-  couleurMouvement: {fileID: 0}
+  couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 14
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 2091927326}
-  id: 0
+  id: 14
   listeCouleurs: []
 --- !u!64 &7761456543152407231
 MeshCollider:
@@ -1253,14 +1247,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
-  couleurMouvement: {fileID: 0}
+  couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 15
   table: {fileID: 1221857053}
   listePions: []
-  cube: {fileID: 0}
-  id: 0
+  cube: {fileID: 1699365517}
+  id: 15
   listeCouleurs: []
 --- !u!64 &995626940805544082
 MeshCollider:
@@ -1742,10 +1734,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 326439102}
@@ -2016,10 +2006,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 410718607}
@@ -2174,10 +2162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 811737328}
@@ -2652,10 +2638,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 1567527082}
@@ -2810,10 +2794,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 1405968561}
@@ -3200,10 +3182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 279442684}
@@ -3474,10 +3454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 587210923}
@@ -3748,10 +3726,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 1969660955}
@@ -4022,10 +3998,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 375388621}
@@ -4180,10 +4154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 683445108}
@@ -4338,10 +4310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 587011268}
@@ -4496,10 +4466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   libelle: 
   couleurInitiale: {fileID: 0}
-  couleurMouvementJoueur: {fileID: 0}
   couleurMouvement: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970, type: 2}
   peutJouer: 0
-  numeroCase: 0
   table: {fileID: 1221857053}
   listePions: []
   cube: {fileID: 589129035}

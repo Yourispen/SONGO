@@ -14,7 +14,7 @@ namespace Mvc.Models
 {
     public class JoueurOn : Joueur
     {
-        [SerializeField] protected string id;
+        
         [SerializeField] protected DateTime dateInscription;
         [SerializeField] protected DateTime heureInscription;
         [SerializeField] protected string email;
@@ -24,7 +24,7 @@ namespace Mvc.Models
         [SerializeField] protected Niveau niveau;
         [SerializeField] private SongoJoueurOnline songoJoueurOnline;
         [SerializeField] private StatutDatabase statutDatabase;
-        [SerializeField] protected MatchEnLigne matchEnLigne;
+        //[SerializeField] protected MatchEnLigne matchEnLigne;
         [SerializeField] private GameObject swipePrefab;
         //[SerializeField] private Swipe swipe;
         [SerializeField] private PhotonView photonView;
@@ -75,7 +75,6 @@ namespace Mvc.Models
             Niveau = niveau;
         }
 
-        public string Id { get => id; set => id = value; }
         public DateTime DateInscription { get => dateInscription; set => dateInscription = value; }
         public DateTime HeureInscription { get => heureInscription; set => heureInscription = value; }
         public string Email { get => email; set => email = value; }
@@ -83,7 +82,6 @@ namespace Mvc.Models
         public StatutJoueur StatutJoueur { get => statutJoueur; set => statutJoueur = value; }
         public Niveau Niveau { get => niveau; set => niveau = value; }
         public ConnexionCompte ConnexionCompte { get => connexionCompte; set => connexionCompte = value; }
-        public MatchEnLigne MatchEnLigne { get => matchEnLigne; set => matchEnLigne = value; }
 
         public void copyJoueurOn(JoueurOn joueurOn)
         {
@@ -99,6 +97,14 @@ namespace Mvc.Models
                 statutDatabase = StatutDatabase.Debut;
                 recupData();
             }
+        }
+        public override void victoireJoueur()
+        {
+
+        }
+        public override void defaiteJoueur()
+        {
+
         }
         public void recupereJoueur(string id)
         {

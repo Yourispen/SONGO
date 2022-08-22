@@ -47,11 +47,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   msgSuccess: 
   msgFailed: 
+  id: 
   surnom: 
   numPosition: 0
   tour: 2
+  match: {fileID: 0}
+  couleurToucheJoueur1: {fileID: 2100000, guid: 82b9e03dc0b0ee7478de6bf40acf203a,
+    type: 2}
+  couleurToucheJoueur2: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970,
+    type: 2}
+  couleurTouche: {fileID: 0}
+  swipe: {fileID: 0}
   nombreVictoire: 0
-  matchHorsLigne: {fileID: 0}
 --- !u!114 &1357687978496876742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,3 +75,8 @@ MonoBehaviour:
   stopPosition: {x: 0, y: 0}
   tempsActuel: 0
   tempsDepart: 0
+  joueur: {fileID: 0}
+  dragDistance: 70
+  objetTouche: {fileID: 0}
+  caseTouche: {fileID: 0}
+  toucheJouer: 0

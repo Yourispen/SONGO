@@ -8,6 +8,7 @@ namespace Mvc.Models
     public abstract class Match : ModelFirebase
     {
         public const int NOMBREMAXJOUEUR = 2;
+        [SerializeField] protected string id;
         [SerializeField] protected ResultatMatch resultatDuMatch;
         [SerializeField] protected EtatMatch etatDuMatch;
         [SerializeField] protected TypeMatch typeDuMatch;
@@ -17,6 +18,10 @@ namespace Mvc.Models
         [SerializeField] protected GameObject pionPrefab;
         [SerializeField] protected List<GameObject> typePionPrefab = new List<GameObject>();
         [SerializeField] protected List<Pion> listePions = new List<Pion>();
+        [SerializeField] protected Joueur joueur1;// = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
+
+        [SerializeField] protected Joueur joueur2;// = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
+        [SerializeField] protected bool matchRejoue;
 
 
         protected Match()
@@ -28,6 +33,9 @@ namespace Mvc.Models
         public EtatMatch EtatDuMatch { get => etatDuMatch; set => etatDuMatch = value; }
         public TypeMatch TypeDuMatch { get => typeDuMatch; set => typeDuMatch = value; }
         public Table TableMatch { get => tableMatch; set => tableMatch = value; }
+        public Joueur Joueur1 { get => joueur1; set => joueur1 = value; }
+        public Joueur Joueur2 { get => joueur2; set => joueur2 = value; }
+        public string Id { get => id; set => id = value; }
 
         protected abstract void initialiseJoueurs();
         public IEnumerator instancierLesPions()
@@ -50,13 +58,25 @@ namespace Mvc.Models
                 {
                     listePions[i].transform.position = tableMatch.ListeCases[j].transform.position;
                     tableMatch.ListeCases[j].ajouterPion(listePions[i]);
+                    listePions[i].gameObject.GetComponent<Rigidbody>().isKinematic = false;
                     i += 1;
                 }
                 yield return new WaitForSeconds(Case.tempsAttente);
             }
+            if (!matchRejoue)
+            {
+                joueur1.premierAJouer();
+                joueur2.deuxiemeAJouer();
+            }
+            etatDuMatch = EtatMatch.EnCours;
+
         }
-        public abstract void verifierEtatDuMatch(int idCase);
+        public abstract void verifierEtatDuMatch(Case caseArrivee);
         public abstract void tourJoueur(int numPosition);
-       
+        public abstract void jouerTable(Case caseDepart);
+        public abstract void rejouerCoup();
+        public abstract void finDuMatch();
+        public abstract void rejouerMatch();
+
     }
 }

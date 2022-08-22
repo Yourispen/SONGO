@@ -21,6 +21,7 @@ namespace Mvc.Models
 
         void Awake()
         {
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             this.gameObject.GetComponent<Renderer>().material = listeCouleurs[PlayerPrefs.GetInt("couleurPion")];
             couleur = this.gameObject.GetComponent<Renderer>().material;
         }
@@ -30,22 +31,18 @@ namespace Mvc.Models
             //this.GetComponent<Renderer>().material = couleur;
             nombreDePions++;
             id = nombreDePions;
-            //Debug.Log("Je suis un pion");
-        }
-        public void deplacerPionCase(int idCase)
-        {
-            //this.gameObject.transform.position=
         }
 
         public void deplacerPionCase(Case cases, Vector3 ajoutPosition)
         {
             this.transform.position = cases.transform.position + ajoutPosition;
-            caseActuelle = cases;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             cases.ajouterPion(this);
         }
         public void deplacerPionCaisse(Caisse caisse)
         {
-            this.transform.position = caisse.transform.position + new Vector3(Random.Range(-1.9f, 1.9f), -0.5f, Random.Range(-1.9f, 1.9f));
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            this.transform.position = caisse.transform.position + new Vector3(Random.Range(-1.9f, 1.9f), 5f, Random.Range(-1.9f, 1.9f));
         }
 
     }

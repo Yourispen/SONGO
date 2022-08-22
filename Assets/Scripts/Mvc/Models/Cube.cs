@@ -15,6 +15,8 @@ namespace Mvc.Models
         public int Id { get => id; set => id = value; }
         public string Libelle { get => libelle; set => libelle = value; }
         public Case Cases { get => cases; set => cases = value; }
+        public Material CouleurDepotJoueur1 { get => couleurDepotJoueur1; set => couleurDepotJoueur1 = value; }
+        public Material CouleurDepotJoueur2 { get => couleurDepotJoueur2; set => couleurDepotJoueur2 = value; }
 
         void Start()
         {

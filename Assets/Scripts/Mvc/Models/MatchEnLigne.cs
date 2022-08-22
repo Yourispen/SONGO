@@ -11,7 +11,7 @@ namespace Mvc.Models
 {
     public class MatchEnLigne : Match
     {
-        [SerializeField] private int id;
+        
         [SerializeField] private string numeroMatch;
         [SerializeField] DateTime dateMatch;
 
@@ -19,17 +19,9 @@ namespace Mvc.Models
 
         //[SerializeField] private List<JoueurOn> listeJoueurOn = new List<JoueurOn>();
 
-        [SerializeField] private JoueurOn joueur1;// = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
 
-        [SerializeField] private JoueurOn joueur2;// = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
-
-
-
-        public int Id { get => id; set => id = value; }
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
         public DateTime DateMatch { get => dateMatch; set => dateMatch = value; }
-        public JoueurOn Joueur1 { get => joueur1; set => joueur1 = value; }
-        public JoueurOn Joueur2 { get => joueur2; set => joueur2 = value; }
 
         private void Start()
         {
@@ -39,6 +31,7 @@ namespace Mvc.Models
         }
         private void OnEnable()
         {
+            matchRejoue = false;
             typeDuMatch = TypeMatch.EnLigne;
             //tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
 
@@ -59,11 +52,27 @@ namespace Mvc.Models
                 listeJoueurOn.Add(j2.GetComponent<JoueurOn>());
             }*/
         }
-        public override void verifierEtatDuMatch(int idCase)
+        public override void verifierEtatDuMatch(Case caseArrivee)
         {
 
         }
         public override void tourJoueur(int numPosition)
+        {
+
+        }
+        public override void jouerTable(Case caseDepart)
+        {
+
+        }
+        public override void rejouerCoup()
+        {
+
+        }
+        public override void finDuMatch()
+        {
+
+        }
+        public override void rejouerMatch()
         {
 
         }

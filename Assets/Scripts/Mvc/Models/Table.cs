@@ -33,7 +33,7 @@ namespace Mvc.Models
 
         void Awake()
         {
-            idCaseJoue=-1;
+            idCaseJoue = -1;
             this.gameObject.GetComponent<Renderer>().material = listeCouleurs[PlayerPrefs.GetInt("couleurTable")];
             couleur = this.gameObject.GetComponent<Renderer>().material;
         }
@@ -47,27 +47,28 @@ namespace Mvc.Models
         // Start is called before the first frame update
         void Start()
         {
-            //this.GetComponent<Renderer>().material = couleur;
             StartCoroutine(match.instancierLesPions());
         }
 
-        public void parcourirLaTable(int idCase)
+        public void parcourirLaTable(Case caseDepart)
         {
+            int idCase = caseDepart.Id;
+
             if (listeCases[idCase].ListePions.Count == 0)
             {
-
+                jeuInterdit();
             }
             else if ((idCase == 6 || idCase == 13) && listeCases[idCase].ListePions.Count < 2 && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
-
+                jeuInterdit();
             }
             else if (((idCase < 6 && listeCases[idCase].ListePions.Count - 6 + idCase > 0) || (idCase < 13 && listeCases[idCase].ListePions.Count - 13 + idCase > 0)) && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
-
+                jeuInterdit();
             }
             else if ((idCase == 6 || idCase == 13) && listeCases[idCase].ListePions.Count == 1 && sommeDesCasesJoueur(idCase) > 1)
             {
-
+                jeuInterdit();
             }
             else if (!peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
@@ -76,37 +77,65 @@ namespace Mvc.Models
             else
             {
                 idCaseJoue = idCase;
-                listeCases[idCase].deplacerLesPionsCase();
+                StartCoroutine(listeCases[idCase].deplacerLesPionsCase());
             }
         }
-        public IEnumerator mangerLesPions(int idCaseDepart, int idCaseArrivee)
+        public void jeuInterdit()
         {
+            match.rejouerCoup();
+        }
+        public IEnumerator mangerLesPions(Case caseDepart, Case caseArrivee)
+        {
+            int idCaseDepart = caseDepart.Id;
+            int idCaseArrivee = caseArrivee.Id;
+            if (caseArrivee.ListePions.Count <= 1 || caseArrivee.ListePions.Count > 4 || idCaseArrivee == 14 || idCaseArrivee == 15)
+            {
+                caseDepart.gameObject.GetComponent<Clignote>().enabled = false;
+                match.verifierEtatDuMatch(caseDepart);
+                yield break;
+            }
+
             //c'est la case qui transmet l'id de la derniere case et son id.
             if ((idCaseDepart < 7 && idCaseArrivee >= 7) || (idCaseDepart >= 7 && idCaseArrivee < 7))
             {
                 if (idCaseArrivee == 0 || idCaseArrivee == 7)
                 {
-
+                    match.verifierEtatDuMatch(caseDepart);
                 }
                 else if ((idCaseArrivee == 6 || idCaseArrivee == 13) && peutMangerToutesCasesAdversaire(idCaseDepart))
                 {
-
+                    match.verifierEtatDuMatch(caseDepart);
                 }
                 else
                 {
                     int idCaseActuelle = idCaseArrivee;
-                    while (idCaseActuelle != 0 && idCaseActuelle != 6)
+                    while ((idCaseActuelle != -1 && idCaseDepart >= 7) || (idCaseActuelle != 6 && idCaseDepart < 7))
                     {
-                        if (1 < listeCases[idCaseActuelle].ListePions.Count && listeCases[idCaseActuelle].ListePions.Count < 5)
+                        if (listeCases[idCaseActuelle].ListePions.Count <= 1 || listeCases[idCaseActuelle].ListePions.Count > 4)
                         {
                             break;
                         }
                         listeCases[idCaseActuelle].deplacerLesPionsGrandeCase();
+                        idCaseActuelle -= 1;
                         yield return new WaitForSeconds(Case.tempsDepotCase);
                     }
                     yield return new WaitForSeconds(Case.tempsAttente);
                 }
-                listeCases[idCaseDepart].gameObject.GetComponent<Clignote>().enabled = false;
+                caseDepart.gameObject.GetComponent<Clignote>().enabled = false;
+
+                if (sommeDesCasesAdversaire(idCaseDepart) == 0)
+                {
+                    match.finDuMatch();
+                }
+                else
+                {
+                    match.verifierEtatDuMatch(caseDepart);
+                }
+            }
+            else
+            {
+                caseDepart.gameObject.GetComponent<Clignote>().enabled = false;
+                match.verifierEtatDuMatch(caseDepart);
             }
         }
         private int sommeDesCasesAdversaire(int idCase)

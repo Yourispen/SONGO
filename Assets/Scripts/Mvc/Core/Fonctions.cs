@@ -138,5 +138,7 @@ namespace Mvc.Core
             sceneController.msgScene.SetActive(true);
 
         }
+
+
     }
 }

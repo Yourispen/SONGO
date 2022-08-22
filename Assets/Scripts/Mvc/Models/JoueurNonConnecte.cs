@@ -7,11 +7,10 @@ namespace Mvc.Models
 {
     public class JoueurNonConnecte : JoueurOn
     {
-        [SerializeField] private Swipe swipe;
 
         void Start()
         {
-            this.matchEnLigne = GameObject.Find("matchEnligne").GetComponent<MatchEnLigne>();
+            this.match = ((Match)GameObject.Find("matchEnligne").GetComponent<MatchEnLigne>());
         }
     }
 }
