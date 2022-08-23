@@ -31,15 +31,15 @@ namespace Mvc.Core
 
         void Update()
         {
-            /* if (Joueur.Tour == Tour.Aucun)
-                return; */
+            if (joueur.Match.EtatDuMatch == EtatMatch.Debut || joueur.Match.PauseMenu.EnPause)
+                return;
             if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Began)
                 {
                     tempsDepart = Time.timeSinceLevelLoad;
-                    compteurPion=0;
+                    compteurPion = 0;
 
                     Ray ray = Camera.main.ScreenPointToRay(touch.position);
                     if (Physics.Raycast(ray, out hit))
@@ -62,7 +62,7 @@ namespace Mvc.Core
                     if (tempsActuel >= tempsDepart + 0.3f)
                     {
                         //Debug.Log("Maintient");
-                        caseTouche.compterLesPionsCase(compteurPion);
+                        StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, joueur.gameObject.name.CompareTo("joueur1") == 0 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
                         compteurPion += 1;
                     }
                 }
@@ -72,7 +72,12 @@ namespace Mvc.Core
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    caseTouche.changerCouleurCase(caseTouche.CouleurInitiale);
+                    Fonctions.changerTexte(joueur.Match.OutilsJoueur.TextPlaqueCompteur1);
+                    Fonctions.changerTexte(joueur.Match.OutilsJoueur.TextPlaqueCompteur2);
+                    if (toucheJouer)
+                    {
+                        caseTouche.changerCouleurCase(caseTouche.CouleurInitiale);
+                    }
                     stopPosition = touch.position;
                     if (Mathf.Abs(stopPosition.x - startPosition.x) > dragDistance || Mathf.Abs(stopPosition.y - startPosition.y) > dragDistance)
                     {

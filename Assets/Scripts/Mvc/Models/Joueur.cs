@@ -16,6 +16,7 @@ namespace Mvc.Models
         [SerializeField] protected Material couleurToucheJoueur2;
         [SerializeField] protected Material couleurTouche;
         [SerializeField] protected Swipe swipe;
+        [SerializeField] protected int nombreVictoire;
 
 
         public Joueur()
@@ -33,6 +34,7 @@ namespace Mvc.Models
         public Material CouleurToucheJoueur1 { get => couleurToucheJoueur1; set => couleurToucheJoueur1 = value; }
         public Material CouleurToucheJoueur2 { get => couleurToucheJoueur2; set => couleurToucheJoueur2 = value; }
         public Material CouleurTouche { get => couleurTouche; set => couleurTouche = value; }
+        public int NombreVictoire { get => nombreVictoire; set => nombreVictoire = value; }
 
         public void jouerMatch(Case caseDepart)
         {
@@ -45,6 +47,7 @@ namespace Mvc.Models
         {
             numPosition = 1;
             tour = Tour.MonTour;
+            swipe.enabled = true;
             return numPosition;
         }
         public int deuxiemeAJouer()
@@ -54,5 +57,6 @@ namespace Mvc.Models
             swipe.enabled = false;
             return numPosition;
         }
+        public abstract void abandonJoueur();
     }
 }

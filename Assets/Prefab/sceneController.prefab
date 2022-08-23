@@ -44,9 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfe5b25237510b49abe65073ed14b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargement: {fileID: 0}
+  msgScene: {fileID: 0}
   connexionCompteControllerPrefab: {fileID: 6632449822036415250, guid: ff5ca2a0a4f99384c87b5b7400e01acf,
     type: 3}
   connexionInternetPrefab: {fileID: 3225472826630208343, guid: 6134421d43fa2c14aa982ce301cbd31c,
     type: 3}
   connexionInternet: {fileID: 0}
   connexionCompteController: {fileID: 0}
+  textSaisiSurnom: 
+  nomScene: 
+  matchHorsLigneControllerPrefab: {fileID: 2079508789253619455, guid: 554937f9a28e3db4b970610a9ed92df4,
+    type: 3}
+  matchHorsLigneController: {fileID: 0}

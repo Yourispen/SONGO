@@ -1171,6 +1171,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: connexionCompteController
       objectReference: {fileID: 0}
+    - target: {fileID: 6632449822036415250, guid: ff5ca2a0a4f99384c87b5b7400e01acf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff5ca2a0a4f99384c87b5b7400e01acf, type: 3}
 --- !u!1 &403779250
@@ -1395,7 +1400,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 350, y: 150}
+  m_SizeDelta: {x: 330, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420915520
 MonoBehaviour:
@@ -1685,7 +1690,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bf0b8eef524f1c74783d11e4b5a4b3c6, type: 3}
-    m_FontSize: 100
+    m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2790,7 +2795,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bf0b8eef524f1c74783d11e4b5a4b3c6, type: 3}
-    m_FontSize: 100
+    m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3942,7 +3947,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 500, y: 150}
+  m_SizeDelta: {x: 450, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1972174286
 MonoBehaviour:
@@ -4858,6 +4863,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Mvc.Controllers.SceneController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034212693065727112, guid: 8b36a2df68dbf6a489934150286f8a1f,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034212693065727112, guid: 8b36a2df68dbf6a489934150286f8a1f,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 9034212693065727113, guid: 8b36a2df68dbf6a489934150286f8a1f,
         type: 3}

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Mvc.Models;
 using Mvc.Controllers;
 using System;
+using UnityEngine.UI;
 
 namespace Mvc.Core
 {
@@ -138,7 +139,14 @@ namespace Mvc.Core
             sceneController.msgScene.SetActive(true);
 
         }
-
+        public static void changerTexte(Text texteDepart, string texteArrivee = "")
+        {
+            texteDepart.text = texteArrivee;
+        }
+        public static void changerTexte(TMPro.TMP_Text texteDepart, string texteArrivee = "")
+        {
+            texteDepart.text = texteArrivee;
+        }
 
     }
 }

@@ -128,11 +128,12 @@ namespace Mvc.Models
             listePions.Clear();
         }
 
-        public void compterLesPionsCase(int pionCompte)
+        public IEnumerator compterLesPionsCase(int pionCompte, TMPro.TMP_Text textPlaqueCompteur)
         {
             if (pionCompte <= listePions.Count)
             {
-                print(pionCompte);
+                Fonctions.changerTexte(textPlaqueCompteur, pionCompte.ToString());
+                yield return new WaitForSeconds(tempsDepotCase);
             }
         }
         public void changerCouleurCase(Material couleur)

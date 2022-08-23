@@ -2,6 +2,7 @@ using Mvc.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Mvc.Models
 {
@@ -15,13 +16,16 @@ namespace Mvc.Models
         [SerializeField] protected GameObject songoMatchPrefab;
         [SerializeField] protected Table tableMatch;
         [SerializeField] protected PauseMenu pauseMenu;
-        [SerializeField] protected GameObject pionPrefab;
+        [SerializeField] protected FinMatchMenu finMatchMenu;
         [SerializeField] protected List<GameObject> typePionPrefab = new List<GameObject>();
         [SerializeField] protected List<Pion> listePions = new List<Pion>();
         [SerializeField] protected Joueur joueur1;// = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
 
         [SerializeField] protected Joueur joueur2;// = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
         [SerializeField] protected bool matchRejoue;
+        [SerializeField] protected ScoreMatch scoreMatch;
+        [SerializeField] protected OutilsJoueur outilsJoueur;
+        [SerializeField] protected TourJoueur tourJ;
 
 
         protected Match()
@@ -36,6 +40,12 @@ namespace Mvc.Models
         public Joueur Joueur1 { get => joueur1; set => joueur1 = value; }
         public Joueur Joueur2 { get => joueur2; set => joueur2 = value; }
         public string Id { get => id; set => id = value; }
+        public PauseMenu PauseMenu { get => pauseMenu; set => pauseMenu = value; }
+        public FinMatchMenu FinMatchMenu { get => finMatchMenu; set => finMatchMenu = value; }
+        public List<GameObject> TypePionPrefab { get => typePionPrefab; set => typePionPrefab = value; }
+        public ScoreMatch ScoreMatch { get => scoreMatch; set => scoreMatch = value; }
+        public OutilsJoueur OutilsJoueur { get => outilsJoueur; set => outilsJoueur = value; }
+        public TourJoueur TourJ { get => tourJ; set => tourJ = value; }
 
         protected abstract void initialiseJoueurs();
         public IEnumerator instancierLesPions()
@@ -51,6 +61,7 @@ namespace Mvc.Models
         }
         public IEnumerator partagerLesPions()
         {
+            tableMatch.reinitialiseCases();
             int i = 0;
             while (i < 70)
             {
@@ -63,12 +74,41 @@ namespace Mvc.Models
                 }
                 yield return new WaitForSeconds(Case.tempsAttente);
             }
-            if (!matchRejoue)
+            if (matchRejoue)
+            {
+                if (joueur1.NumPosition == 1)
+                {
+                    joueur1.premierAJouer();
+                    joueur2.deuxiemeAJouer();
+                    outilsJoueur.activerCompteurJoueur(1);
+                    tourJ.activerTourjoueur(1);
+                }
+                else if (joueur2.NumPosition == 1)
+                {
+                    joueur2.premierAJouer();
+                    joueur1.deuxiemeAJouer();
+                    outilsJoueur.activerCompteurJoueur(2);
+                    tourJ.activerTourjoueur(2);
+                }
+            }
+            else
             {
                 joueur1.premierAJouer();
                 joueur2.deuxiemeAJouer();
+                outilsJoueur.activerCompteurJoueur(1);
+                tourJ.activerTourjoueur(1);
             }
+            scoreMatch.afficherScoreMatch();
             etatDuMatch = EtatMatch.EnCours;
+            pauseMenu.EnPause = false;
+            /*if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            {
+
+            }
+            else if (SceneManager.GetActiveScene().name == "SceneMatchEnLigne")
+            {
+
+            }*/
 
         }
         public abstract void verifierEtatDuMatch(Case caseArrivee);
@@ -77,6 +117,8 @@ namespace Mvc.Models
         public abstract void rejouerCoup();
         public abstract void finDuMatch();
         public abstract void rejouerMatch();
+        public abstract void abandonMatch();
+
 
     }
 }

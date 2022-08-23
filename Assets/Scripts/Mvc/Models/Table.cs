@@ -62,7 +62,7 @@ namespace Mvc.Models
             {
                 jeuInterdit();
             }
-            else if (((idCase < 6 && listeCases[idCase].ListePions.Count - 6 + idCase > 0) || (idCase < 13 && listeCases[idCase].ListePions.Count - 13 + idCase > 0)) && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
+            else if (((idCase < 6 && listeCases[idCase].ListePions.Count - 6 + idCase <= 0) || (idCase < 13 && listeCases[idCase].ListePions.Count - 13 + idCase <= 0)) && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
                 jeuInterdit();
             }
@@ -72,7 +72,7 @@ namespace Mvc.Models
             }
             else if (!peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
-
+                match.finDuMatch();
             }
             else
             {
@@ -117,7 +117,7 @@ namespace Mvc.Models
                         }
                         listeCases[idCaseActuelle].deplacerLesPionsGrandeCase();
                         idCaseActuelle -= 1;
-                        yield return new WaitForSeconds(Case.tempsDepotCase);
+                        yield return new WaitForSeconds(0.5f);
                     }
                     yield return new WaitForSeconds(Case.tempsAttente);
                 }
@@ -221,6 +221,14 @@ namespace Mvc.Models
                             (1 < listeCases[0].ListePions.Count && listeCases[0].ListePions.Count < 5));
             }
             return resultat;
+        }
+
+        public void reinitialiseCases()
+        {
+            foreach (var cases in listeCases)
+            {
+                cases.ListePions.Clear();
+            }
         }
 
     }

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   msgSuccess: 
   msgFailed: 
+  id: 0
   resultatDuMatch: 0
   etatDuMatch: 0
   typeDuMatch: 0
@@ -58,9 +59,9 @@ MonoBehaviour:
   - {fileID: 3197813730773946459, guid: ea05f8cb6fab78a45b8bc5fe209c8c77, type: 3}
   - {fileID: 194671586371282031, guid: 1cc9a5cd67ba1964f9a8d555384cd28b, type: 3}
   listePions: []
-  id: 0
+  joueur1: {fileID: 0}
+  joueur2: {fileID: 0}
+  matchRejoue: 0
   scoreMatch: 
   joueurOffPrefab: {fileID: 1357687978496876740, guid: 7f9c8dd8e1be68a43b8877b56f1ce7d4,
     type: 3}
-  joueur1: {fileID: 0}
-  joueur2: {fileID: 0}

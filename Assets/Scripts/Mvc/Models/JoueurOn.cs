@@ -106,6 +106,10 @@ namespace Mvc.Models
         {
 
         }
+        public override void abandonJoueur()
+        {
+
+        }
         public void recupereJoueur(string id)
         {
             statutDatabase = StatutDatabase.Debut;

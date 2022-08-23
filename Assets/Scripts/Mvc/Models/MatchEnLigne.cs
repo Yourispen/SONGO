@@ -11,7 +11,7 @@ namespace Mvc.Models
 {
     public class MatchEnLigne : Match
     {
-        
+
         [SerializeField] private string numeroMatch;
         [SerializeField] DateTime dateMatch;
 
@@ -34,7 +34,8 @@ namespace Mvc.Models
             matchRejoue = false;
             typeDuMatch = TypeMatch.EnLigne;
             //tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
-
+            pauseMenu = Fonctions.instancierObjet(GameObject.Find("PauseMenu")).GetComponentInChildren<PauseMenu>();
+            pauseMenu.Match = ((Match)this);
         }
 
 
@@ -73,6 +74,10 @@ namespace Mvc.Models
 
         }
         public override void rejouerMatch()
+        {
+
+        }
+        public override void abandonMatch()
         {
 
         }

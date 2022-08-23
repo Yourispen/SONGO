@@ -11,43 +11,43 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScenePlay.unity
     guid: 13292bcb3b563024eab4257aa3a381f2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneShop.unity
     guid: 3f35a378c5874644db6cd5fb2e7197c3
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneSetting.unity
     guid: ebd4f0d3cd57c9045a119c2ee9061ee1
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Rules.unity
     guid: 23bb5904eb86a144ca528161d1534039
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 571bc91874cb41a44b00c8dccb6e3b5a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneOffline.unity
     guid: 703dcb739774eef4c88deb4c84852eb4
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneOnline.unity
     guid: ddae84f6549aa4840b7e96dbe8530437
-  - enabled: 0
-    path: Assets/Scenes/1vs1.unity
+  - enabled: 1
+    path: Assets/Scenes/SceneMatch1vs1.unity
     guid: de3ef281a74a6814bba33355d253f5a8
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/1vsIA.unity
     guid: 7ce327ad933ac584a8ee29880470a094
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Match.unity
     guid: ce74f7ffd0e65d046a64ef97e7a31ae0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneTutorial.unity
     guid: dcbef3ff5aacc7f4f80a96a9ee183725
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneTable.unity
     guid: 295391292e52de2449f7fd59f3fa278f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Pieces.unity
     guid: 05292530ca75eb24d95edd5f05f99733
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Results.unity
     guid: 3ff493fdd06f328489cf896f7d7a41ae
   m_configObjects:

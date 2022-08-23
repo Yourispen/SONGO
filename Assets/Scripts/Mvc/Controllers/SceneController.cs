@@ -20,7 +20,9 @@ namespace Mvc.Controllers
         [SerializeField] private ConnexionCompteController connexionCompteController;
         [SerializeField] private string textSaisiSurnom;
         [SerializeField] private string nomScene;
-        [SerializeField] private MatchEnLigneController matchEnLigneController;
+        [SerializeField] private GameObject matchHorsLigneControllerPrefab;
+        [SerializeField] private MatchHorsLigneController matchHorsLigneController;
+
 
 
         void Awake()
@@ -47,6 +49,7 @@ namespace Mvc.Controllers
                     if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
                     {
                         Fonctions.afficherMsgScene(FacebookAuth.msgConnexion, "succes");
+                        PlayerPrefs.SetInt("etatConnexionCompte", 1);
                     }
 
                 }
@@ -59,7 +62,7 @@ namespace Mvc.Controllers
             }
             else if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
             {
-                
+
             }
         }
         void Start()
@@ -102,7 +105,7 @@ namespace Mvc.Controllers
         public void boutonPlay()
         {
             nomScene = "ScenePlay";
-            //Fonctions.changerDeScene(nomScene);
+            Fonctions.changerDeScene(nomScene);
         }
         public void boutonShop()
         {
@@ -122,6 +125,15 @@ namespace Mvc.Controllers
             Fonctions.fermerApplication();
         }
         public void boutonCredits()
+        {
+
+        }
+        public void bouton1vs1()
+        {
+            nomScene = "SceneMatch1vs1";
+            Fonctions.changerDeScene(nomScene);
+        }
+        public void bouton1vsIA()
         {
 
         }
@@ -148,7 +160,16 @@ namespace Mvc.Controllers
             {
                 nomScene = "SceneMenuPrincipal";
             }
+            else if (SceneManager.GetActiveScene().name == "SceneOffline")
+            {
+                nomScene = "ScenePlay";
+            }
             Fonctions.changerDeScene(nomScene);
+        }
+        public void commencerMatch1vs1()
+        {
+            matchHorsLigneController = Fonctions.instancierObjet(matchHorsLigneControllerPrefab).GetComponent<MatchHorsLigneController>();
+            matchHorsLigneController.SceneController = this;
         }
 
     }

@@ -6,9 +6,6 @@ namespace Mvc.Models
 {
     public class JoueurOff : Joueur
     {
-        [SerializeField] private int nombreVictoire;
-        public int NombreVictoire { get => nombreVictoire; set => nombreVictoire = value; }
-
         void Start()
         {
             this.nombreVictoire = 0;
@@ -24,7 +21,10 @@ namespace Mvc.Models
         public override void defaiteJoueur()
         {
             swipe.enabled = false;
-            nombreVictoire += 1;
+        }
+        public override void abandonJoueur()
+        {
+
         }
     }
 }
