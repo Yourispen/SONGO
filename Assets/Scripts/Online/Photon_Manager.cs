@@ -39,7 +39,7 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("état du réseau : "+PhotonNetwork.NetworkClientState);
+        //Debug.Log("ï¿½tat du rï¿½seau : "+PhotonNetwork.NetworkClientState);
     }
 
     public void bouton_match()
@@ -48,11 +48,11 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
         {
             if (est_connecte)
             {
-                //si le joueur est connecté à internet
+                //si le joueur est connectï¿½ ï¿½ internet
                 controller_scene.Chargement.SetActive(true);
                 controller_scene.Menu.SetActive(false);
 
-                //va à la scène Match
+                //va ï¿½ la scï¿½ne Match
                 PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("pseudo");
                 PhotonNetwork.ConnectUsingSettings();
             }
@@ -66,7 +66,7 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.JoinLobby();
         }
-        Debug.Log("Vérifie s'il y a des matchs disponibles");
+        Debug.Log("Vï¿½rifie s'il y a des matchs disponibles");
 
     }
     public void rejoindre_le_match(string _nom_du_match)
@@ -110,12 +110,12 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
     public override void OnConnected()
     {
         //base.OnConnected();
-        Debug.Log("Connexion à internet...");
+        Debug.Log("Connexion ï¿½ internet...");
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         //base.OnCreateRoomFailed(returnCode, message);
-        Debug.Log("vous n'avez pas pu créer le match");
+        Debug.Log("vous n'avez pas pu crï¿½er le match");
         SceneManager.LoadScene("Online");
     }
 
@@ -129,7 +129,7 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         //base.OnConnectedToMaster();
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName+" est connecté(e) à photon...");
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName+" est connectï¿½(e) ï¿½ photon...");
 
         lister_les_matchs();
     }
@@ -138,12 +138,12 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
     {
         //base.OnCreatedRoom();
         numero_joueur = 1;
-        Debug.Log("Match : "+PhotonNetwork.CurrentRoom.Name+" est crée");
+        Debug.Log("Match : "+PhotonNetwork.CurrentRoom.Name+" est crï¿½e");
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 10000;
+        PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 5000;
         PhotonNetwork.MaxResendsBeforeDisconnect = 1;
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a rejoint le Match "+ PhotonNetwork.CurrentRoom.Name);
         if (PhotonNetwork.IsMasterClient)

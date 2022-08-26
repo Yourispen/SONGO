@@ -7,14 +7,13 @@ using UnityEngine.Networking;
 
 public class ConnexionInternet : MonoBehaviour
 {
-    [SerializeField] public static bool connect;
+    [SerializeField] public static bool connect = true;
     [SerializeField] private bool testConnexion;
 
-    public static string msgReconnecte="Connexion internet restaurée";
-    public static string msgNonConnecte="Vérifier votre connexion internet";
+    public static string msgReconnecte = "Connexion internet restaurée";
+    public static string msgNonConnecte = "Vérifier votre connexion internet";
     void OnEnable()
     {
-        connect = true;
         testConnexion = true;
     }
     void Update()

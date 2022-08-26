@@ -62,6 +62,9 @@ namespace Mvc.Controllers
             PlayerPrefs.SetInt("typePion", 0);
             PlayerPrefs.SetInt("couleurPion", 0);
             PlayerPrefs.SetInt("couleurTable", 0);
+            //
+            //PlayerPrefs.SetString("id", "z6hhsbMJRyaPRGSaDTHpNQ8QiKj2");
+            //
             Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
         }
     }

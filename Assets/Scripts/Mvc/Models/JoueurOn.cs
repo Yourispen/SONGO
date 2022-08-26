@@ -6,6 +6,7 @@ using Firebase.Database;
 using Newtonsoft.Json;
 using Mvc.Entities;
 using Mvc.Core;
+using Mvc.Controllers;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -14,7 +15,7 @@ namespace Mvc.Models
 {
     public class JoueurOn : Joueur
     {
-        
+
         [SerializeField] protected DateTime dateInscription;
         [SerializeField] protected DateTime heureInscription;
         [SerializeField] protected string email;
@@ -22,33 +23,61 @@ namespace Mvc.Models
         [SerializeField] protected StatutJoueur statutJoueur;
         [SerializeField] protected ConnexionCompte connexionCompte;
         [SerializeField] protected Niveau niveau;
-        [SerializeField] private SongoJoueurOnline songoJoueurOnline;
-        [SerializeField] private StatutDatabase statutDatabase;
-        //[SerializeField] protected MatchEnLigne matchEnLigne;
-        [SerializeField] private GameObject swipePrefab;
-        //[SerializeField] private Swipe swipe;
+        [SerializeField] protected SongoJoueurOnline songoJoueurOnline;
+        [SerializeField] protected StatutDatabase statutDatabase;
+        [SerializeField] protected JoueurOnController joueurOnController;
         [SerializeField] private PhotonView photonView;
 
         //public Swipe Swipe { get => swipe; set => swipe = value; }
 
+        void Start()
+        {
+            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                msgSuccess = this.name + " récupéré avec succes ";
+                msgFailed = "Echec de la récupération du " + this.name;
+                int num = PlayerPrefs.GetInt("numPositionMatchEnCours");
+                if (photonView.IsMine && num == 1)
+                {
+                    gameObject.name = "joueur1";
+                    Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    match.Joueur1 = ((JoueurOn)this);
+                    PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[0].NickName);
 
+                }
+                else if (!photonView.IsMine && num == 1)
+                {
+                    gameObject.name = "joueur2";
+                    Debug.Log("Id Joueur2 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnLigne")).GetComponent<MatchEnLigne>());
+                    match.Joueur2 = ((JoueurOn)this);
+                    joueurOnController = Fonctions.instancierObjet(GameObject.Find("joueurOnController")).GetComponent<JoueurOnController>();
+                    PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[1].NickName);
+                    recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
+                }
+                else if (photonView.IsMine && num == 2)
+                {
+                    gameObject.name = "joueur2";
+                    Debug.Log("Id Joueur2 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    //match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnligne")).GetComponent<MatchEnLigne>());
+                    match.Joueur2 = ((JoueurOn)this);
+                    PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[1].NickName);
+                }
+                else if (!photonView.IsMine && num == 2)
+                {
+                    gameObject.name = "joueur1";
+                    Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnLigne")).GetComponent<MatchEnLigne>());
+                    match.Joueur1 = ((JoueurOn)this);
+                    joueurOnController = Fonctions.instancierObjet(GameObject.Find("joueurOnController")).GetComponent<JoueurOnController>();
+                    PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[0].NickName);
+                    recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
+                }
+            }
+        }
         void OnEnable()
         {
             statutDatabase = StatutDatabase.Debut;
-        }
-        void Start()
-        {
-            /*
-            if (photonView.IsMine)
-            {
-                typeJoueur = TypeJoueur.JoueurConnecte;
-            }
-            else
-            {
-                typeJoueur = TypeJoueur.JoueurNonConnecte;
-                this.gameObject.GetComponent<Swipe>().enabled = false;
-            }*/
-
         }
 
         public new string table()
@@ -82,6 +111,7 @@ namespace Mvc.Models
         public StatutJoueur StatutJoueur { get => statutJoueur; set => statutJoueur = value; }
         public Niveau Niveau { get => niveau; set => niveau = value; }
         public ConnexionCompte ConnexionCompte { get => connexionCompte; set => connexionCompte = value; }
+        public JoueurOnController JoueurOnController { get => joueurOnController; set => joueurOnController = value; }
 
         public void copyJoueurOn(JoueurOn joueurOn)
         {
@@ -114,7 +144,7 @@ namespace Mvc.Models
         {
             statutDatabase = StatutDatabase.Debut;
             DatabaseReference refe = FirebaseDatabase.DefaultInstance.RootReference;
-            Query requete = refe.Child(this.table()).Child(PlayerPrefs.GetString("id")).OrderByChild("email");
+            Query requete = refe.Child(this.table()).Child(id).OrderByChild("email");
             requete.GetValueAsync().ContinueWith(task =>
                {
                    if (task.IsCompleted)
@@ -127,22 +157,13 @@ namespace Mvc.Models
                            dataResult = snapshot.GetRawJsonValue();
                            Debug.Log(dataResult);
                            songoJoueurOnline = JsonConvert.DeserializeObject<SongoJoueurOnline>(dataResult);
-
+                           Debug.Log("surnom de l'adversaire : " + songoJoueurOnline.Surnom);
                        }
                        else
                        {
                            Debug.Log("Ce joueur n'existe pas");
-                           /* refe = null;
-                            msgSuccess = "Le Joueur a été créé avec succes ";
-                            msgFailed = "Echec de la création du Joueur";
-                           /// this.insert();*/
-                           /// 
                        }
                        statutDatabase = StatutDatabase.Succes;
-                       //Fonctions.showDictionary(data);
-                       //Debug.Log("OK");
-                       //Debug.Log(data.Count);
-
                    }
                    else
                    {
@@ -174,32 +195,22 @@ namespace Mvc.Models
                 }
             });
         }
-
-        private void recupData()
+        public void recupData()
         {
-            //si je suis dans la scene MenuPrincipal
-            Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
-            if (songoJoueurOnline != null)
+            if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
-                Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
-                DateInscription = DateTime.ParseExact(songoJoueurOnline.DateInscription, "yyyy'-'MM'-'dd", null);//songoJoueurOnline.DateInscription
-                heureInscription = DateTime.ParseExact(songoJoueurOnline.HeureInscription, "HH:mm", null);
-                surnom = songoJoueurOnline.Surnom;
-                ConnexionCompte connexionCompte = new ConnexionCompte();
-                connexionCompte.TypeConnexionCompte = songoJoueurOnline.IdConnexionCompte == 1 ? TypeConnexionCompte.Facebook : TypeConnexionCompte.Google;
-                ConnexionCompte = connexionCompte;
-                Niveau niveau = new Niveau();
-                niveau.Id = songoJoueurOnline.IdNiveau;
-                Niveau = niveau;
-                songoJoueurOnline = null;
-                PlayerPrefs.SetString("surnom", Surnom);
-                PlayerPrefs.SetString("dateInscription", dateInscription.ToString("yyyy'-'MM'-'dd"));
-                PlayerPrefs.SetString("heureInscription", dateInscription.ToString("HH:mm"));
-                PlayerPrefs.SetInt("idConnexionCompte", ((int)connexionCompte.TypeConnexionCompte));
-                PlayerPrefs.SetInt("idNiveau", Niveau.Id);
-                Fonctions.afficherMsgScene(FacebookAuth.msgConnexion, "succes");
+                Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextPlaqueNom2, songoJoueurOnline.Surnom);
+                Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.PlaqueNom2.gameObject);
             }
-            Fonctions.finChargement();
+            else if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+            {
+                Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextPlaqueNom1, songoJoueurOnline.Surnom);
+                Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.PlaqueNom1.gameObject);
+            }
+            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
+            Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente);
+            //Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
+            //Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
 
         }
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35926299}
   m_Layer: 5
-  m_Name: Tour_P2 (1)
+  m_Name: Tour2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ RectTransform:
   m_GameObject: {fileID: 35926298}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.43289846, y: 0.43289846, z: 0.43289846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 360359703}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 267848680}
   - component: {fileID: 267848679}
   m_Layer: 5
-  m_Name: Score_P1 (1)
+  m_Name: TextScoreMatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ RectTransform:
   m_GameObject: {fileID: 267848677}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.43289852, y: 0.43289852, z: 0.43289852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704095742}
@@ -279,7 +279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -324.6738, y: -177.48837}
+  m_AnchoredPosition: {x: -750, y: -410}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &267848681
@@ -338,8 +338,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 360359705}
   - component: {fileID: 360359704}
   m_Layer: 5
-  m_Name: Background_Tour_P2
+  m_Name: BackgroundTour2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 383748623}
   - component: {fileID: 383748622}
   m_Layer: 5
-  m_Name: Background_Tour_P1
+  m_Name: BackgroundTour1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,7 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478158705}
   m_Layer: 5
-  m_Name: Registration_P2
+  m_Name: Enregistrement2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -771,7 +771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: -420}
+  m_AnchoredPosition: {x: 700, y: -415}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &520733697
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 572040321}
   - component: {fileID: 572040320}
   m_Layer: 5
-  m_Name: Name_P2
+  m_Name: NomJoueur2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,9 +970,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Controlller_Scene_1vs1, Assembly-CSharp
-        m_MethodName: saisir_nom_joueur_2
+      - m_Target: {fileID: 1950173381}
+        m_TargetAssemblyTypeName: Mvc.Models.Enregistrement, Assembly-CSharp
+        m_MethodName: saisirNomJoueur2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 724128810}
   - component: {fileID: 8223116358145618571}
   m_Layer: 5
-  m_Name: Title_P1
+  m_Name: TitreEnregistrement1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player 1
+  m_text: Joueur 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25cc2a94d93ddd24da814a5dfa650d91, type: 2}
   m_sharedMaterial: {fileID: 4645334932231308218, guid: 25cc2a94d93ddd24da814a5dfa650d91,
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 1041799420}
   - component: {fileID: 1041799419}
   m_Layer: 5
-  m_Name: Text_Tour_P1
+  m_Name: TextTour1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1914,9 +1914,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Controlller_Scene_1vs1, Assembly-CSharp
-        m_MethodName: bouton_start
+      - m_Target: {fileID: 1950173381}
+        m_TargetAssemblyTypeName: Mvc.Models.Enregistrement, Assembly-CSharp
+        m_MethodName: boutonEntrer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2015,7 +2015,7 @@ GameObject:
   - component: {fileID: 1144883807}
   - component: {fileID: 1144883806}
   m_Layer: 5
-  m_Name: Text_Tour_P2
+  m_Name: TextTour2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2376,7 +2376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448992215}
   m_Layer: 5
-  m_Name: Tour_P1 (1)
+  m_Name: Tour1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2391,7 +2391,7 @@ RectTransform:
   m_GameObject: {fileID: 1448992214}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.43289846, y: 0.43289846, z: 0.43289846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 383748621}
@@ -2630,7 +2630,7 @@ GameObject:
   - component: {fileID: 1621501888}
   - component: {fileID: 2333679085566137932}
   m_Layer: 5
-  m_Name: Title_P2
+  m_Name: TitreEnregistrement2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2684,7 +2684,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player 2
+  m_text: Joueur 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25cc2a94d93ddd24da814a5dfa650d91, type: 2}
   m_sharedMaterial: {fileID: 4645334932231308218, guid: 25cc2a94d93ddd24da814a5dfa650d91,
@@ -2777,6 +2777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1704095742}
+  - component: {fileID: 1704095743}
   m_Layer: 5
   m_Name: ScoreMatch
   m_TagString: Untagged
@@ -2798,13 +2799,27 @@ RectTransform:
   m_Children:
   - {fileID: 267848678}
   m_Father: {fileID: 132496142886294502}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1704095743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704095741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b14f60f3f0acdd4b8eafae9435882a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textScoreMatch: {fileID: 267848680}
+  match: {fileID: 0}
 --- !u!1 &1803466224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2841,7 +2856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 425}
+  m_AnchoredPosition: {x: 700, y: 415}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1803466227
@@ -2892,7 +2907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1809185234}
   m_Layer: 5
-  m_Name: Registration_P1
+  m_Name: Enregistrement1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3085,7 +3100,7 @@ GameObject:
   - component: {fileID: 1865541290}
   - component: {fileID: 1865541289}
   m_Layer: 5
-  m_Name: Name_P1
+  m_Name: NomJoueur1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3230,9 +3245,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Controlller_Scene_1vs1, Assembly-CSharp
-        m_MethodName: saisir_nom_joueur_1
+      - m_Target: {fileID: 1950173381}
+        m_TargetAssemblyTypeName: Mvc.Models.Enregistrement, Assembly-CSharp
+        m_MethodName: saisirNomJoueur1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3270,7 +3285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1872579620}
   m_Layer: 5
-  m_Name: PlaqueCompteurPion1
+  m_Name: PlaqueCompteurPion2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3360,6 +3375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1968343783}
+  - component: {fileID: 1968343784}
   m_Layer: 5
   m_Name: TourJoueur
   m_TagString: Untagged
@@ -3382,13 +3398,32 @@ RectTransform:
   - {fileID: 1448992215}
   - {fileID: 35926299}
   m_Father: {fileID: 132496142886294502}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1968343784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968343782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d25c343ee04cf646b02c94ef662490a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tour1: {fileID: 1448992214}
+  backgroundTour1: {fileID: 383748622}
+  textTour1: {fileID: 1041799420}
+  tour2: {fileID: 35926298}
+  backgroundTour2: {fileID: 360359704}
+  textTour2: {fileID: 1144883807}
+  match: {fileID: 0}
 --- !u!1 &1985741195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,6 +3585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118666527}
+  - component: {fileID: 2118666528}
   m_Layer: 5
   m_Name: OutilsJoueur
   m_TagString: Untagged
@@ -3572,13 +3608,38 @@ RectTransform:
   - {fileID: 581348863}
   - {fileID: 1523658373}
   m_Father: {fileID: 132496142886294502}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2118666528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118666526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8e7e07a4c1a7d44ae602a4114ab628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outilsJoueur1: {fileID: 581348862}
+  plaqueNom1: {fileID: 520733696}
+  textPlaqueNom1: {fileID: 72860427}
+  plaqueCompteur1: {fileID: 1470198390}
+  backgroundCompteurPion1: {fileID: 1231982496}
+  textPlaqueCompteur1: {fileID: 1596497323}
+  outilsJoueur2: {fileID: 1523658372}
+  plaqueNom2: {fileID: 1803466226}
+  textPlaqueNom2: {fileID: 1985741198}
+  plaqueCompteur2: {fileID: 1872579619}
+  backgroundCompteurPion2: {fileID: 1100873733}
+  textPlaqueCompteur2: {fileID: 685161767}
+  match: {fileID: 0}
 --- !u!1 &2133306216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4377,13 +4438,14 @@ GameObject:
   - component: {fileID: 42695581948815262}
   - component: {fileID: 42695581948815260}
   - component: {fileID: 42695581948815263}
+  - component: {fileID: 1950173381}
   m_Layer: 5
-  m_Name: Registrations
+  m_Name: Enregistrement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &42695581948815262
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4447,6 +4509,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1950173381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42695581948815249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2246751826eac114bb3569d9f0d6b136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomJoueur1: 
+  nomJoueur2: 
+  match: {fileID: 0}
+  sceneController: {fileID: 0}
+  nomScene: 
 --- !u!1 &42695581962539159
 GameObject:
   m_ObjectHideFlags: 0
@@ -4975,12 +5054,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 132496142732879849}
-  - {fileID: 8808318189726755773}
   - {fileID: 545834293828283523}
   - {fileID: 1704095742}
   - {fileID: 1968343783}
   - {fileID: 2118666527}
+  - {fileID: 8808318189726755773}
   - {fileID: 42695581948815262}
+  - {fileID: 987891948534074773}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5601,7 +5681,7 @@ RectTransform:
   - {fileID: 42695580893712911}
   - {fileID: 132496142712011210}
   m_Father: {fileID: 132496142886294502}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6477,9 +6557,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Controlller_Scene_1vs1, Assembly-CSharp
-        m_MethodName: bouton_back
+      - m_Target: {fileID: 1950173381}
+        m_TargetAssemblyTypeName: Mvc.Models.Enregistrement, Assembly-CSharp
+        m_MethodName: boutonRetour
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6657,7 +6737,7 @@ RectTransform:
   m_Children:
   - {fileID: 2949932081095136814}
   m_Father: {fileID: 132496142886294502}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6912,3 +6992,148 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texte_saisi: 
   affichage_multiple: 1
+--- !u!1001 &42695582458222902
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 132496142886294502}
+    m_Modifications:
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873622555505390808, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_Name
+      value: msgScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873622555505390808, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c7f1cf82df45d9d48a293764360617ed, type: 3}
+--- !u!224 &987891948534074773 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 42695582458222902}
+  m_PrefabAsset: {fileID: 0}

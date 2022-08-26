@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Facebook.Unity;
 using Firebase.Auth;
 using System;
@@ -22,16 +21,28 @@ namespace Mvc.Controllers
         [SerializeField] private string nomScene;
         [SerializeField] private GameObject matchHorsLigneControllerPrefab;
         [SerializeField] private MatchHorsLigneController matchHorsLigneController;
+        [SerializeField] private GameObject matchEnLigneControllerPrefab;
+        [SerializeField] private MatchEnLigneController matchEnLigneController;
+        [SerializeField] private GameObject joueurOnControllerPrefab;
+        [SerializeField] private JoueurOnController joueurOnController;
+        [SerializeField] PhotonManager photonManager;
 
-
+        public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
+        public MatchHorsLigneController MatchHorsLigneController { get => matchHorsLigneController; set => matchHorsLigneController = value; }
+        public ConnexionCompteController ConnexionCompteController { get => connexionCompteController; set => connexionCompteController = value; }
+        public ConnexionInternet ConnexionInternet { get => connexionInternet; set => connexionInternet = value; }
+        public PhotonManager PhotonManager { get => photonManager; set => photonManager = value; }
+        public JoueurOnController JoueurOnController { get => joueurOnController; set => joueurOnController = value; }
 
         void Awake()
         {
             //PlayerPrefs.SetInt("etatConnexionCompte", 1);
-            //PlayerPrefs.DeleteAll();return;
+            //PlayerPrefs.DeleteAll();
+            //PlayerPrefs.SetString("id", "z6hhsbMJRyaPRGSaDTHpNQ8QiKj2");
+            //PlayerPrefs.SetString("surnom","Glenneriss"); return;
             connexionInternet = Fonctions.instancierObjet(connexionInternetPrefab).GetComponent<ConnexionInternet>();
 
-            if (SceneManager.GetActiveScene().name == "SceneMenuPrincipal")
+            if (Fonctions.sceneActuelle("SceneMenuPrincipal"))
             {
                 if (PlayerPrefs.HasKey("etatConnexionCompte"))
                 {
@@ -60,9 +71,17 @@ namespace Mvc.Controllers
                 }
                 //PlayerPrefs.DeleteAll();
             }
-            else if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            else if (Fonctions.sceneActuelle("SceneMatch1vs1"))
             {
 
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                /*matchEnLigneController = Fonctions.instancierObjet(matchEnLigneControllerPrefab).GetComponentInChildren<MatchEnLigneController>();
+                matchEnLigneController.SceneController=this;
+                joueurOnController = Fonctions.instancierObjet(joueurOnControllerPrefab).GetComponentInChildren<JoueurOnController>();
+                joueurOnController.SceneController=this;*/
+                photonManager.instancierUnJoueur();
             }
         }
         void Start()
@@ -146,7 +165,7 @@ namespace Mvc.Controllers
         {
             if (ConnexionInternet.connect)
             {
-                nomScene = "SceneOnline";
+                nomScene = "SceneLobbyMatchEnLigne";
                 Fonctions.changerDeScene(nomScene);
             }
             else
@@ -156,11 +175,11 @@ namespace Mvc.Controllers
         }
         public void boutonRetourScene()
         {
-            if (SceneManager.GetActiveScene().name == "ScenePlay")
+            if (Fonctions.sceneActuelle("ScenePlay"))
             {
                 nomScene = "SceneMenuPrincipal";
             }
-            else if (SceneManager.GetActiveScene().name == "SceneOffline")
+            else if (Fonctions.sceneActuelle("SceneOffline"))
             {
                 nomScene = "ScenePlay";
             }

@@ -11,10 +11,25 @@ namespace Mvc.Controllers
     {
         [SerializeField] private GameObject joueurConnectePrefab;
         [SerializeField] private JoueurConnecte joueurConnecte;
+        [SerializeField] private GameObject joueurOnPrefab;
+        [SerializeField] private JoueurOn joueurOn;
+        [SerializeField] private SceneController sceneController;
+
+
+        public SceneController SceneController { get => sceneController; set => sceneController = value; }
+        public JoueurOn JoueurOn { get => joueurOn; set => joueurOn = value; }
+        public JoueurConnecte JoueurConnecte { get => joueurConnecte; set => joueurConnecte = value; }
 
         private void OnEnable()
         {
-            joueurConnecte = Fonctions.instancierObjet(joueurConnectePrefab).GetComponent<JoueurConnecte>();
+            if (Fonctions.sceneActuelle("SceneMenuPrincipal"))
+            {
+                joueurConnecte = Fonctions.instancierObjet(joueurConnectePrefab).GetComponent<JoueurConnecte>();
+            }
+            /*else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                sceneController.PhotonManager.instancierUnJoueur();
+            }*/
         }
 
         public void lister(bool single = false)

@@ -143,17 +143,17 @@ namespace Mvc.Models
             int somme = 0;
             if (idCase < 7)
             {
-                somme = listeCases[7].ListePions.Count + listeCases[8].ListePions.Count +
-                           listeCases[9].ListePions.Count + listeCases[10].ListePions.Count +
-                           listeCases[11].ListePions.Count + listeCases[12].ListePions.Count +
-                           listeCases[13].ListePions.Count;
+                for (int i = 7; i < 14; i++)
+                {
+                    somme += listeCases[i].ListePions.Count;
+                }
             }
             else
             {
-                somme = listeCases[0].ListePions.Count + listeCases[1].ListePions.Count +
-                            listeCases[2].ListePions.Count + listeCases[3].ListePions.Count +
-                            listeCases[4].ListePions.Count + listeCases[5].ListePions.Count +
-                            listeCases[6].ListePions.Count;
+                for (int i = 0; i < 7; i++)
+                {
+                    somme += listeCases[i].ListePions.Count;
+                }
             }
             return somme;
         }
@@ -162,65 +162,79 @@ namespace Mvc.Models
             int somme = 0;
             if (idCase >= 7)
             {
-                somme = listeCases[7].ListePions.Count + listeCases[8].ListePions.Count +
-                           listeCases[9].ListePions.Count + listeCases[10].ListePions.Count +
-                           listeCases[11].ListePions.Count + listeCases[12].ListePions.Count +
-                           listeCases[13].ListePions.Count;
+                for (int i = 7; i < 14; i++)
+                {
+                    somme += listeCases[i].ListePions.Count;
+                }
+
             }
             else
             {
-                somme = listeCases[0].ListePions.Count + listeCases[1].ListePions.Count +
-                            listeCases[2].ListePions.Count + listeCases[3].ListePions.Count +
-                            listeCases[4].ListePions.Count + listeCases[5].ListePions.Count +
-                            listeCases[6].ListePions.Count;
+                for (int i = 0; i < 7; i++)
+                {
+                    somme += listeCases[i].ListePions.Count;
+                }
+
             }
             return somme;
         }
         private bool peutTransmettrePion(int idCase)
         {
-            bool resultat;
+            int nbPion = 1;
             if (idCase < 7)
             {
-                resultat = (listeCases[6].ListePions.Count > 1 || listeCases[5].ListePions.Count > 1 ||
-                                   listeCases[4].ListePions.Count > 2 || listeCases[3].ListePions.Count > 3 ||
-                                   listeCases[2].ListePions.Count > 4 || listeCases[1].ListePions.Count > 5 ||
-                                   listeCases[0].ListePions.Count > 6);
+                if (listeCases[6].ListePions.Count > nbPion)
+                    return true;
+                for (int i = 5; i >= 0; i--)
+                {
+                    if (listeCases[i].ListePions.Count > nbPion)
+                    {
+                        return true;
+                    }
+                    nbPion += 1;
+                }
+
             }
             else
             {
-                resultat = (listeCases[13].ListePions.Count > 1 || listeCases[12].ListePions.Count > 1 ||
-                                listeCases[11].ListePions.Count > 2 || listeCases[10].ListePions.Count > 3 ||
-                                listeCases[9].ListePions.Count > 4 || listeCases[8].ListePions.Count > 5 ||
-                                listeCases[7].ListePions.Count > 6);
+                if (listeCases[13].ListePions.Count > nbPion)
+                    return true;
+                for (int i = 12; i >= 7; i--)
+                {
+                    if (listeCases[i].ListePions.Count > nbPion)
+                    {
+                        return true;
+                    }
+                    nbPion += 1;
+                }
 
             }
-            return resultat;
+            return false;
         }
 
         private bool peutMangerToutesCasesAdversaire(int idCase)
         {
-            bool resultat;
             if (idCase < 7)
             {
-                resultat = ((1 < listeCases[13].ListePions.Count && listeCases[13].ListePions.Count < 5) &&
-                            (1 < listeCases[12].ListePions.Count && listeCases[12].ListePions.Count < 5) &&
-                            (1 < listeCases[11].ListePions.Count && listeCases[11].ListePions.Count < 5) &&
-                            (1 < listeCases[10].ListePions.Count && listeCases[10].ListePions.Count < 5) &&
-                            (1 < listeCases[9].ListePions.Count && listeCases[9].ListePions.Count < 5) &&
-                            (1 < listeCases[8].ListePions.Count && listeCases[8].ListePions.Count < 5) &&
-                            (1 < listeCases[7].ListePions.Count && listeCases[7].ListePions.Count < 5));
+                for (int i = 13; i >= 7; i--)
+                {
+                    if (listeCases[i].ListePions.Count <= 1 || listeCases[i].ListePions.Count > 4)
+                    {
+                        return false;
+                    }
+                }
             }
             else
             {
-                resultat = ((1 < listeCases[6].ListePions.Count && listeCases[6].ListePions.Count < 5) &&
-                            (1 < listeCases[5].ListePions.Count && listeCases[5].ListePions.Count < 5) &&
-                            (1 < listeCases[4].ListePions.Count && listeCases[4].ListePions.Count < 5) &&
-                            (1 < listeCases[3].ListePions.Count && listeCases[3].ListePions.Count < 5) &&
-                            (1 < listeCases[2].ListePions.Count && listeCases[2].ListePions.Count < 5) &&
-                            (1 < listeCases[1].ListePions.Count && listeCases[1].ListePions.Count < 5) &&
-                            (1 < listeCases[0].ListePions.Count && listeCases[0].ListePions.Count < 5));
+                for (int i = 6; i >= 0; i--)
+                {
+                    if (listeCases[i].ListePions.Count <= 1 || listeCases[i].ListePions.Count > 4)
+                    {
+                        return false;
+                    }
+                }
             }
-            return resultat;
+            return true;
         }
 
         public void reinitialiseCases()

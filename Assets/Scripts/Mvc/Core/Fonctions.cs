@@ -13,7 +13,7 @@ namespace Mvc.Core
     {
         public static void faireVibrer()
         {
-            Handheld.Vibrate();
+            //Handheld.Vibrate();
         }
 
         public static void nonVeille()
@@ -127,6 +127,7 @@ namespace Mvc.Core
             //FF2828
             SceneController sceneController = GameObject.Find("sceneController").GetComponent<SceneController>();
             Message message = sceneController.msgScene.GetComponent<Message>();
+            sceneController.msgScene.SetActive(false);
             message.attribuerMsg(msg);
             if (typeMsg.CompareTo("erreur") == 0)
             {
@@ -141,6 +142,7 @@ namespace Mvc.Core
         }
         public static void changerTexte(Text texteDepart, string texteArrivee = "")
         {
+            texteDepart.text = "";
             texteDepart.text = texteArrivee;
         }
         public static void changerTexte(TMPro.TMP_Text texteDepart, string texteArrivee = "")
@@ -148,5 +150,9 @@ namespace Mvc.Core
             texteDepart.text = texteArrivee;
         }
 
+        public static bool sceneActuelle(string nomScene)
+        {
+            return SceneManager.GetActiveScene().name.CompareTo(nomScene) == 0;
+        }
     }
 }

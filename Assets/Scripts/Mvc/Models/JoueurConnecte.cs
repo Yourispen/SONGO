@@ -49,5 +49,33 @@ namespace Mvc.Models
             //StartCoroutine(request(form));
         }
 
+        private new void recupData()
+        {
+            //si je suis dans la scene MenuPrincipal
+            Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
+            if (songoJoueurOnline != null)
+            {
+                Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
+                DateInscription = DateTime.ParseExact(songoJoueurOnline.DateInscription, "yyyy'-'MM'-'dd", null);//songoJoueurOnline.DateInscription
+                heureInscription = DateTime.ParseExact(songoJoueurOnline.HeureInscription, "HH:mm", null);
+                surnom = songoJoueurOnline.Surnom;
+                ConnexionCompte connexionCompte = new ConnexionCompte();
+                connexionCompte.TypeConnexionCompte = songoJoueurOnline.IdConnexionCompte == 1 ? TypeConnexionCompte.Facebook : TypeConnexionCompte.Google;
+                ConnexionCompte = connexionCompte;
+                Niveau niveau = new Niveau();
+                niveau.Id = songoJoueurOnline.IdNiveau;
+                Niveau = niveau;
+                songoJoueurOnline = null;
+                PlayerPrefs.SetString("surnom", Surnom);
+                PlayerPrefs.SetString("dateInscription", dateInscription.ToString("yyyy'-'MM'-'dd"));
+                PlayerPrefs.SetString("heureInscription", dateInscription.ToString("HH:mm"));
+                PlayerPrefs.SetInt("idConnexionCompte", ((int)connexionCompte.TypeConnexionCompte));
+                PlayerPrefs.SetInt("idNiveau", Niveau.Id);
+                Fonctions.afficherMsgScene(FacebookAuth.msgConnexion, "succes");
+            }
+            Fonctions.finChargement();
+
+        }
+
     }
 }

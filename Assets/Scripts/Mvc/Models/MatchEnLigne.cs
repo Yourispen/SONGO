@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mvc.Core;
+using Mvc.Controllers;
 using Mvc.Entities;
 using System;
 using Firebase.Database;
@@ -13,7 +14,11 @@ namespace Mvc.Models
     {
 
         [SerializeField] private string numeroMatch;
-        [SerializeField] DateTime dateMatch;
+        [SerializeField] private DateTime dateMatch;
+        [SerializeField] private MatchEnLigneController matchEnLigneController;
+
+
+        //[SerializeField] private SongoMatchEnLigne songoMatchEnLigne;
 
         //[SerializeField] protected MatchEnLigne matchEnLigne = GameObject.Find("MatchEnLigne").GetComponent<MatchEnLigne>();
 
@@ -22,7 +27,12 @@ namespace Mvc.Models
 
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
         public DateTime DateMatch { get => dateMatch; set => dateMatch = value; }
+        public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
 
+        void Awake()
+        {
+            //matchEnLigneController = this;
+        }
         private void Start()
         {
             //joueurConnecte = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
@@ -34,8 +44,8 @@ namespace Mvc.Models
             matchRejoue = false;
             typeDuMatch = TypeMatch.EnLigne;
             //tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
-            pauseMenu = Fonctions.instancierObjet(GameObject.Find("PauseMenu")).GetComponentInChildren<PauseMenu>();
-            pauseMenu.Match = ((Match)this);
+            //pauseMenu = Fonctions.instancierObjet(GameObject.Find("PauseMenu")).GetComponentInChildren<PauseMenu>();
+            //pauseMenu.Match = ((Match)this);
         }
 
 

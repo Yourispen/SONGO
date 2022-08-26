@@ -12,10 +12,15 @@ namespace Mvc.Controllers
     {
         [SerializeField] private GameObject matchEnlignePrefab;
         [SerializeField] private MatchEnLigne matchEnligne;
+        [SerializeField] private SceneController sceneController;
 
-        private void OnEnable()
+        public MatchEnLigne MatchEnligne { get => matchEnligne; set => matchEnligne = value; }
+        public SceneController SceneController { get => sceneController; set => sceneController = value; }
+
+        private void Awake()
         {
-            matchEnligne = Fonctions.instancierObjet(matchEnlignePrefab).GetComponent<MatchEnLigne>();
+            /*matchEnligne = Fonctions.instancierObjet(matchEnlignePrefab).GetComponent<MatchEnLigne>();
+            matchEnligne.MatchEnLigneController = this;*/
         }
         public void lister(bool single = false)
         {

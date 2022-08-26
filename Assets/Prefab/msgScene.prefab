@@ -230,4 +230,4 @@ MonoBehaviour:
   colorSucces: {r: 0.21176471, g: 0.60784316, b: 0.34509805, a: 1}
   textMsgScene: {fileID: 6754812890468545865}
   imageBackground: {fileID: 4771909525124913859}
-  tempsAffichage: 5
+  tempsAffichage: 3

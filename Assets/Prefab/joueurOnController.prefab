@@ -47,3 +47,7 @@ MonoBehaviour:
   joueurConnectePrefab: {fileID: 8869367116223938401, guid: 3626681e90212b442a97eca8866f47b5,
     type: 3}
   joueurConnecte: {fileID: 0}
+  joueurOnPrefab: {fileID: 2191621040329126407, guid: 60b4abe4f1789e84d97172f49ea7c8d5,
+    type: 3}
+  joueurOn: {fileID: 0}
+  sceneController: {fileID: 0}

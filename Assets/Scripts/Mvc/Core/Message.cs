@@ -12,7 +12,7 @@ namespace Mvc.Core
         public static string msgScene = "";
         public GameObject textMsgScene;
         public Image imageBackground;
-        [SerializeField] private float tempsAffichage = 5;
+        [SerializeField] private float tempsAffichage = 3;
         //Name_P1.GetComponent<TMPro.TMP_Text>().text
         void OnEnable()
         {
