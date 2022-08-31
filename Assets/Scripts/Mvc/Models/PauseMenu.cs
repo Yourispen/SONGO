@@ -44,8 +44,12 @@ namespace Mvc.Models
             }
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
-                if (!ConnexionInternet.connect)
+                if (!PhotonNetwork.IsConnected)
+                {
+                    Fonctions.afficherMsgScene("", "primary", 0);
+                    ((MatchEnLigne)match).abandonMatch(PlayerPrefs.GetInt("numPositionMatchEnCours"));
                     return;
+                }
                 //photonView.RPC("RPC_jouer", RpcTarget.AllBuffered, case_de_depart);
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
@@ -60,55 +64,47 @@ namespace Mvc.Models
         public void BoutonContinuer()
         {
             enPause = false;
-            if (match.Joueur1.Tour == Tour.MonTour)
+            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
             {
-                match.TourJ.activerTourjoueur(1);
-                match.OutilsJoueur.activerCompteurJoueur(1);
+                if (match.Joueur1.Tour == Tour.MonTour)
+                {
+                    match.TourJ.activerTourjoueur(1);
+                    match.OutilsJoueur.activerCompteurJoueur(1);
+
+                }
+                else
+                {
+                    match.TourJ.activerTourjoueur(2);
+                    match.OutilsJoueur.activerCompteurJoueur(2);
+                }
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                if (PlayerPrefs.GetInt("tourMatchEnCours") == 1)
+                {
+                    if (PhotonNetwork.IsConnected)
+                    {
+                        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                            match.TourJ.activerTourjoueur(1);
+                    }
+                    match.OutilsJoueur.activerCompteurJoueur(1);
+
+                }
+                else
+                {
+                    if (PhotonNetwork.IsConnected)
+                    {
+                        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                            match.TourJ.activerTourjoueur(2);
+                    }
+                    match.OutilsJoueur.activerCompteurJoueur(2);
+                }
 
             }
-            else
-            {
-                match.TourJ.activerTourjoueur(2);
-                match.OutilsJoueur.activerCompteurJoueur(2);
-            }
-
-            /*  else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
-             {
-                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
-                 {
-                     match.TourJ.activerTourjoueur(1);
-                     match.OutilsJoueur.activerCompteurJoueur(1);
-                     if (match.Joueur1.Tour == Tour.MonTour)
-                     {
-                         match.TourJ.activerTourjoueur(1);
-                         match.OutilsJoueur.activerCompteurJoueur(1);
-
-                     }
-                     else
-                     {
-                         match.TourJ.activerTourjoueur(2);
-                         match.OutilsJoueur.activerCompteurJoueur(2);
-                     }
-                 }
-                 else
-                 {
-                     match.TourJ.activerTourjoueur(2);
-                     match.OutilsJoueur.activerCompteurJoueur(2);
-                     if (match.Joueur1.Tour == Tour.MonTour)
-                     {
-                         match.TourJ.activerTourjoueur(1);
-                         match.OutilsJoueur.activerCompteurJoueur(1);
-
-                     }
-                     else
-                     {
-                         match.TourJ.activerTourjoueur(2);
-                         match.OutilsJoueur.activerCompteurJoueur(2);
-                     }
-                 }
-             } */
-            Fonctions.activerObjet(boutonPausePrefab);
+            if (match.EtatDuMatch != EtatMatch.Fin)
+                Fonctions.activerObjet(boutonPausePrefab);
             Fonctions.desactiverObjet(menuPausePrefab);
+
         }
         public void BoutonQuitter()
         {

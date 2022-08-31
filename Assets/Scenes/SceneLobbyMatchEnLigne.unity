@@ -1527,6 +1527,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2729906767696906833, guid: 5b77ee937303a014cb03c3655740a45c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729906767696906833, guid: 5b77ee937303a014cb03c3655740a45c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2936503793042088031, guid: 5b77ee937303a014cb03c3655740a45c,
         type: 3}
       propertyPath: photonManager
@@ -1641,6 +1651,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CanvasMenuLobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301495047038762008, guid: 5b77ee937303a014cb03c3655740a45c,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045517450499959338, guid: 5b77ee937303a014cb03c3655740a45c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8712939024723291541, guid: 5b77ee937303a014cb03c3655740a45c,
         type: 3}

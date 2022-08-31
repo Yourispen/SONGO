@@ -36,56 +36,137 @@ namespace Mvc.Models
                 msgSuccess = this.name + " récupéré avec succes ";
                 msgFailed = "Echec de la récupération du " + this.name;
                 int num = PlayerPrefs.GetInt("numPositionMatchEnCours");
+                Debug.Log("Reconnexion : " + PhotonManager.reconnect);
                 if (photonView.IsMine && num == 1)
                 {
                     gameObject.name = "joueur1";
-                    Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
                     match.Joueur1 = ((JoueurOn)this);
-                    PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[0].NickName);
+                    Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    if (!PhotonManager.reconnect)
+                    {
+                        PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[0].NickName);
+                        Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur2.gameObject);
+                    }
+                    else
+                    {
+                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 1 : 2;
+                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 1)
+                        {
+                            tour = Tour.MonTour;
+                            swipe.enabled = true;
+                        }
+                        else
+                        {
+                            tour = Tour.SonTour;
+                            swipe.enabled = false;
+                        }
+                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
+
+                    }
                     surnom = PlayerPrefs.GetString("surnom");
                     email = PlayerPrefs.GetString("email");
-                    Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur2.gameObject);
 
                 }
                 else if (!photonView.IsMine && num == 1)
                 {
                     gameObject.name = "joueur2";
-                    Debug.Log("Id Joueur2 : " + PhotonNetwork.PlayerList.ToStringFull());
                     match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnLigne")).GetComponent<MatchEnLigne>());
                     match.Joueur2 = ((JoueurOn)this);
                     joueurOnController = Fonctions.instancierObjet(GameObject.Find("joueurOnController")).GetComponent<JoueurOnController>();
-                    PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[1].NickName);
-                    recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
-                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(1, PlayerPrefs.GetString("idVainqueur"), PlayerPrefs.GetString("idAdversaire"));
-                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(2, PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"));
+                    Debug.Log("Id Joueur2 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    if (!PhotonManager.reconnect)
+                    {
+                        PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[1].NickName);
+                        recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
+                        ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(1, PlayerPrefs.GetString("idVainqueur"), PlayerPrefs.GetString("idAdversaire"));
+                        ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(2, PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"));
+                    }
+                    else
+                    {
+                        Fonctions.afficherMsgScene("", "primaire", 0);
+                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 2 : 1;
+                        surnom = PlayerPrefs.GetString("surnomAdversaire");
+                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 2)
+                        {
+                            tour = Tour.MonTour;
+                            swipe.enabled = true;
+                        }
+                        else
+                        {
+                            tour = Tour.SonTour;
+                            swipe.enabled = false;
+                        }
+                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
+                    }
+                    PhotonManager.reconnect = false;
                 }
                 else if (photonView.IsMine && num == 2)
                 {
                     gameObject.name = "joueur2";
-                    Debug.Log("Id Joueur2 : " + PhotonNetwork.PlayerList.ToStringFull());
-                    //match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnligne")).GetComponent<MatchEnLigne>());
                     match.Joueur2 = ((JoueurOn)this);
-                    PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[1].NickName);
+                    Debug.Log("Id Joueur2 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    if (!PhotonManager.reconnect)
+                    {
+                        //match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnligne")).GetComponent<MatchEnLigne>());
+                        PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[1].NickName);
+                        Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur1.gameObject);
+                        Vector3 positionTemp = match.OutilsJoueur.PlaqueNom1.rectTransform.position;
+                        match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position;
+                        match.OutilsJoueur.PlaqueNom2.rectTransform.position = positionTemp;
+                    }
+                    else
+                    {
+                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 2 : 1;
+                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 2)
+                        {
+                            tour = Tour.MonTour;
+                            swipe.enabled = true;
+                        }
+                        else
+                        {
+                            tour = Tour.SonTour;
+                            swipe.enabled = false;
+                        }
+                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
+                    }
                     surnom = PlayerPrefs.GetString("surnom");
                     email = PlayerPrefs.GetString("email");
-                    Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur1.gameObject);
-                    Vector3 positionTemp = match.OutilsJoueur.PlaqueNom1.rectTransform.position;
-                    match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position;
-                    match.OutilsJoueur.PlaqueNom2.rectTransform.position = positionTemp;
                 }
                 else if (!photonView.IsMine && num == 2)
                 {
                     gameObject.name = "joueur1";
-                    Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
                     match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnLigne")).GetComponent<MatchEnLigne>());
                     match.Joueur1 = ((JoueurOn)this);
                     joueurOnController = Fonctions.instancierObjet(GameObject.Find("joueurOnController")).GetComponent<JoueurOnController>();
-                    PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[0].NickName);
-                    recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
-                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(2, PlayerPrefs.GetString("idVainqueur"), PlayerPrefs.GetString("idAdversaire"));
-                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(1, PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"));
+                    Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
+                    if (!PhotonManager.reconnect)
+                    {
+                        PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[0].NickName);
+                        recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
+                        ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(2, PlayerPrefs.GetString("idVainqueur"), PlayerPrefs.GetString("idAdversaire"));
+                        ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(1, PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"));
+                    }
+                    else
+                    {
+                        Fonctions.afficherMsgScene("", "primaire", 0);
+                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 1 : 2;
+                        surnom = PlayerPrefs.GetString("surnomAdversaire");
+                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 1)
+                        {
+                            tour = Tour.MonTour;
+                            swipe.enabled = true;
+                        }
+                        else
+                        {
+                            tour = Tour.SonTour;
+                            swipe.enabled = false;
+                        }
+                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
+                    }
+                    PhotonManager.reconnect = false;
                 }
             }
+
         }
         void OnEnable()
         {
@@ -165,21 +246,7 @@ namespace Mvc.Models
         public void abandonJoueur(int numPosition)
         {
             ((MatchEnLigne)match).Abandon = true;
-            if (numPosition == 1)
-            {
-                match.Joueur1.Tour = Tour.MonTour;
-                match.Joueur1.Swipe.enabled = true;
-                match.Joueur2.Tour = Tour.SonTour;
-                match.Joueur2.Swipe.enabled = false;
-            }
-            else
-            {
-                match.Joueur2.Tour = Tour.MonTour;
-                match.Joueur2.Swipe.enabled = true;
-                match.Joueur1.Tour = Tour.SonTour;
-                match.Joueur1.Swipe.enabled = false;
-            }
-            match.abandonMatch();
+            ((MatchEnLigne)match).abandonMatch(numPosition);
         }
         public void recupereJoueur(string id)
         {

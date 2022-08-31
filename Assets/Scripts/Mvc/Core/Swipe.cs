@@ -33,7 +33,18 @@ namespace Mvc.Core
         void Update()
         {
             if (joueur.Match.EtatDuMatch == EtatMatch.Debut || joueur.Match.PauseMenu.EnPause)
-                return;
+            {
+                if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                {
+                    if(PhotonNetwork.IsConnected){
+                        if(PhotonNetwork.CurrentRoom.PlayerCount<2)
+                            return;
+                    }
+                    else{
+                        return;
+                    }
+                }
+            }
             {
                 if (Input.touchCount == 1)
                 {
@@ -97,14 +108,9 @@ namespace Mvc.Core
                                     //Debug.Log("Swipe à droite");
                                     if (toucheJouer)
                                     {
-                                        if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
+                                        if (Fonctions.sceneActuelle("SceneMatch1vs1"))
                                         {
-                                            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
-                                            {
-                                                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
-                                                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, caseTouche.Id);
-                                            }
-                                            else
+                                            if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
                                             {
                                                 joueur.jouerMatch(caseTouche);
                                             }
@@ -116,14 +122,25 @@ namespace Mvc.Core
                                     //Debug.Log("Swipe à gauche");
                                     if (toucheJouer)
                                     {
-                                        if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur1") == 0 && caseTouche.Id < 7)
+                                        if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
                                         {
-                                            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                                            //if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+                                            if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
+                                            {
+                                                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+                                                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, caseTouche.Id);
+                                            }
+                                            else if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur1") == 0 && caseTouche.Id < 7)
                                             {
                                                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                                                     ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, caseTouche.Id);
                                             }
-                                            else
+
+
+                                        }
+                                        else if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+                                        {
+                                            if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur1") == 0 && caseTouche.Id < 7)
                                             {
                                                 joueur.jouerMatch(caseTouche);
                                             }

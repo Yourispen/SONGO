@@ -122,12 +122,13 @@ namespace Mvc.Core
             GameObject.Find("sceneController").GetComponent<SceneController>().chargement.SetActive(false);
         }
 
-        public static void afficherMsgScene(string msg, string typeMsg)
+        public static void afficherMsgScene(string msg, string typeMsg, float delai = 3)
         {
             //FF2828
             SceneController sceneController = GameObject.Find("sceneController").GetComponent<SceneController>();
             Message message = sceneController.msgScene.GetComponent<Message>();
             sceneController.msgScene.SetActive(false);
+            message.TempsAffichage = delai;
             message.attribuerMsg(msg);
             if (typeMsg.CompareTo("erreur") == 0)
             {
@@ -136,6 +137,10 @@ namespace Mvc.Core
             else if (typeMsg.CompareTo("succes") == 0)
             {
                 message.imageSucces();
+            }
+            else if (typeMsg.CompareTo("primaire") == 0)
+            {
+                message.imagePrimaire();
             }
             sceneController.msgScene.SetActive(true);
 

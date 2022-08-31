@@ -68,9 +68,14 @@ namespace Mvc.Models
             Fonctions.desactiverObjet(enregistrement.gameObject);
             outilsJoueur.afficherNomsJoueurs(joueur1.Surnom, joueur2.Surnom);
         }
-        
-        
-        
+
+        public override void abandonMatch()
+        {
+            joueur1.Tour = joueur1.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
+            joueur2.Tour = joueur2.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
+            finDuMatch();
+        }
+
         public override void finDuMatch()
         {
             pauseMenu.EnPause = true;
@@ -96,7 +101,7 @@ namespace Mvc.Models
             scoreMatch.afficherScoreMatch();
             etatDuMatch = EtatMatch.Fin;
         }
-        
+
 
     }
 }

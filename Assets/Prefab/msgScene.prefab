@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorError: {r: 0.8509804, g: 0, b: 0.1882353, a: 1}
   colorSucces: {r: 0.21176471, g: 0.60784316, b: 0.34509805, a: 1}
+  colorPrimaire: {r: 0.12941177, g: 0.42745098, b: 0.75686276, a: 1}
   textMsgScene: {fileID: 6754812890468545865}
   imageBackground: {fileID: 4771909525124913859}
   tempsAffichage: 3

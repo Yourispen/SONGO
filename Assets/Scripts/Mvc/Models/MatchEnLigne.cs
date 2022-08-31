@@ -21,6 +21,7 @@ namespace Mvc.Models
         [SerializeField] private GameObject cameraP1;
         [SerializeField] private GameObject cameraP2;
         [SerializeField] private bool abandon;
+        [SerializeField] private bool joueurDeconnecte;
 
 
         //[SerializeField] private SongoMatchEnLigne songoMatchEnLigne;
@@ -34,6 +35,7 @@ namespace Mvc.Models
         public DateTime DateMatch { get => dateMatch; set => dateMatch = value; }
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
         public bool Abandon { get => abandon; set => abandon = value; }
+        public bool JoueurDeconnecte { get => joueurDeconnecte; set => joueurDeconnecte = value; }
 
         void Awake()
         {
@@ -52,6 +54,7 @@ namespace Mvc.Models
             //joueurConnecte = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
             //JoueurNonConnecte joueurNonConnecte = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
             abandon = false;
+            joueurDeconnecte = false;
         }
         private void OnEnable()
         {
@@ -70,6 +73,38 @@ namespace Mvc.Models
                 statutDatabase = StatutDatabase.Debut;
                 afficheScore();
             }
+            if (etatDuMatch == EtatMatch.EnCours)
+            {
+                if (!joueurDeconnecte)
+                    return;
+                joueurDeconnecte = false;
+                tourJ.desactiverToursjoueurs();
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    if (joueur1 == null)
+                    {
+                        Fonctions.afficherMsgScene("Connexion impossible,\nen attente de reconnexion.", "erreur", 30);
+                    }
+                    else if (joueur2 == null)
+                    {
+                        Fonctions.afficherMsgScene(PlayerPrefs.GetString("surnomAdversaire") + " se reconnecte.\nVeuillez ne pas quitter le match.", "erreur", 30);
+                    }
+
+                }
+                else if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+                {
+                    if (joueur2 == null)
+                    {
+                        Fonctions.afficherMsgScene("Connexion impossible,\nen attente de reconnexion.", "erreur", 30);
+
+                    }
+                    else if (joueur1 == null)
+                    {
+                        Fonctions.afficherMsgScene(PlayerPrefs.GetString("surnomAdversaire") + " se reconnecte.\nVeuillez ne pas quitter le match.", "erreur", 30);
+
+                    }
+                }
+            }
         }
 
         public override void debuterMatch()
@@ -87,20 +122,24 @@ namespace Mvc.Models
             joueur1.CouleurTouche = joueur1.CouleurToucheJoueur1;
             joueur2.NumPosition = 2;
             joueur2.CouleurTouche = joueur2.CouleurToucheJoueur2;
+            PlayerPrefs.SetInt("premierAjouer", 1);
+            PlayerPrefs.SetInt("tourMatchEnCours", 1);
         }
 
         public override void finDuMatch()
         {
+            Debug.Log("Resultat du match : " + resultatDuMatch);
             pauseMenu.EnPause = true;
+            etatDuMatch = EtatMatch.Fin;
             Fonctions.desactiverObjet(pauseMenu.BoutonPausePrefab);
             outilsJoueur.desactiverCompteursJoueurs();
             tourJ.desactiverToursjoueurs();
             Fonctions.activerObjet(finMatchMenu.MenuFinMatch);
-            if (joueur1.Tour == Tour.MonTour)
+            if (resultatDuMatch == ResultatMatch.V1)
             {
-                joueur1.victoireJoueur();
-                joueur2.defaiteJoueur();
-                resultatDuMatch = ResultatMatch.V1;
+                if (joueur1 != null)
+                    joueur1.victoireJoueur();
+
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
                     finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurVictoire;
@@ -112,7 +151,7 @@ namespace Mvc.Models
                         string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
-                    matchEnLigneController.ajouter();
+                    //matchEnLigneController.ajouter();
                 }
                 else
                 {
@@ -127,13 +166,14 @@ namespace Mvc.Models
                     }
 
                 }
+
+
             }
-            else if (joueur2.Tour == Tour.MonTour)
+            else if (resultatDuMatch == ResultatMatch.V2)
             {
-                joueur2.victoireJoueur();
-                joueur1.defaiteJoueur();
-                resultatDuMatch = ResultatMatch.V2;
-                Fonctions.changerTexte(finMatchMenu.TextVictoire, "Victoire de " + joueur2.Surnom + " !!!");
+                if (joueur2 != null)
+                    joueur2.victoireJoueur();
+
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
                 {
                     finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurVictoire;
@@ -145,7 +185,7 @@ namespace Mvc.Models
                         string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
-                    matchEnLigneController.ajouter();
+                    //matchEnLigneController.ajouter();
                 }
                 else
                 {
@@ -161,16 +201,35 @@ namespace Mvc.Models
 
                 }
 
+
             }
             //abandon = false;
             scoreMatch.afficherScoreMatch();
-            etatDuMatch = EtatMatch.Fin;
         }
 
-        public new void abandonMatch()
+        public override void abandonMatch()
         {
-            abandon = true;
-            base.abandonMatch();
+            if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+            {
+                resultatDuMatch = ResultatMatch.V2;
+            }
+            else
+            {
+                resultatDuMatch = ResultatMatch.V1;
+            }
+            finDuMatch();
+        }
+        public void abandonMatch(int numPosition)
+        {
+            if (numPosition == 1)
+            {
+                resultatDuMatch = ResultatMatch.V2;
+            }
+            else
+            {
+                resultatDuMatch = ResultatMatch.V1;
+            }
+            finDuMatch();
         }
 
         public new void insert()

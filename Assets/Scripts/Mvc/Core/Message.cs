@@ -9,10 +9,14 @@ namespace Mvc.Core
     {
         public Color colorError;
         public Color colorSucces;
+        public Color colorPrimaire;
         public static string msgScene = "";
         public GameObject textMsgScene;
         public Image imageBackground;
         [SerializeField] private float tempsAffichage = 3;
+
+        public float TempsAffichage { get => tempsAffichage; set => tempsAffichage = value; }
+
         //Name_P1.GetComponent<TMPro.TMP_Text>().text
         void OnEnable()
         {
@@ -33,6 +37,10 @@ namespace Mvc.Core
         public void imageSucces()
         {
             imageBackground.color = colorSucces;
+        }
+        public void imagePrimaire()
+        {
+            imageBackground.color = colorPrimaire;
         }
         public void attribuerMsg(string msg)
         {
