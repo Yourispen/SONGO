@@ -34,6 +34,13 @@ namespace Mvc.Models
             {
                 StartCoroutine(changeCouleurCase(couleurDepotJoueur2));
             }
+            if (other.gameObject.name.Contains("pion"))
+            {
+                if (other.gameObject.GetComponent<Pion>().CaseActuelle.Id != cases.Id)
+                {
+                    other.gameObject.transform.position = other.gameObject.GetComponent<Pion>().CaseActuelle.gameObject.transform.position;
+                }
+            }
         }
         public IEnumerator changeCouleurCase(Material couleur)
         {

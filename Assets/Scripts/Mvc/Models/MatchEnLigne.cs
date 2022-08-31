@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Mvc.Core;
 using Mvc.Controllers;
 using Mvc.Entities;
@@ -16,6 +17,10 @@ namespace Mvc.Models
         [SerializeField] private string numeroMatch;
         [SerializeField] private DateTime dateMatch;
         [SerializeField] private MatchEnLigneController matchEnLigneController;
+        [SerializeField] protected StatutDatabase statutDatabase;
+        [SerializeField] private GameObject cameraP1;
+        [SerializeField] private GameObject cameraP2;
+        [SerializeField] private bool abandon;
 
 
         //[SerializeField] private SongoMatchEnLigne songoMatchEnLigne;
@@ -28,74 +33,149 @@ namespace Mvc.Models
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
         public DateTime DateMatch { get => dateMatch; set => dateMatch = value; }
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
+        public bool Abandon { get => abandon; set => abandon = value; }
 
         void Awake()
         {
-            //matchEnLigneController = this;
+            if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+            {
+                Fonctions.activerObjet(cameraP1);
+            }
+            else
+            {
+                Fonctions.activerObjet(cameraP2);
+                //Fonctions.desactiverObjet(cameraP1);
+            }
         }
         private void Start()
         {
             //joueurConnecte = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
             //JoueurNonConnecte joueurNonConnecte = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
-
+            abandon = false;
         }
         private void OnEnable()
         {
             matchRejoue = false;
             typeDuMatch = TypeMatch.EnLigne;
+            statutDatabase = StatutDatabase.Debut;
             //tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
             //pauseMenu = Fonctions.instancierObjet(GameObject.Find("PauseMenu")).GetComponentInChildren<PauseMenu>();
             //pauseMenu.Match = ((Match)this);
         }
 
-
-
-        protected override void initialiseJoueurs()
+        void Update()
         {
-            /*GameObject j1 = GameObject.Find("Joueur1");
-            GameObject j2 = GameObject.Find("Joueur2");
-            if (j1 != null)
+            if (statutDatabase == StatutDatabase.Succes)
             {
-                listeJoueurOn.Add(j1.GetComponent<JoueurOn>());
+                statutDatabase = StatutDatabase.Debut;
+                afficheScore();
             }
-            if (j2 != null)
-            {
-                listeJoueurOn.Add(j2.GetComponent<JoueurOn>());
-            }*/
         }
-        public override void verifierEtatDuMatch(Case caseArrivee)
-        {
 
-        }
-        public override void tourJoueur(int numPosition)
+        public override void debuterMatch()
         {
-
+            matchRejoue = false;
+            initialiseJoueurs();
+            tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
+            tableMatch.Match = ((Match)this);
+            Fonctions.desactiverObjet(matchEnLigneController.SceneController.PhotonManager.AttenteMenu.gameObject);
         }
-        public override void jouerTable(Case caseDepart)
+
+        public override void initialiseJoueurs()
         {
-
+            joueur1.NumPosition = 1;
+            joueur1.CouleurTouche = joueur1.CouleurToucheJoueur1;
+            joueur2.NumPosition = 2;
+            joueur2.CouleurTouche = joueur2.CouleurToucheJoueur2;
         }
-        public override void rejouerCoup()
-        {
 
-        }
         public override void finDuMatch()
         {
+            pauseMenu.EnPause = true;
+            Fonctions.desactiverObjet(pauseMenu.BoutonPausePrefab);
+            outilsJoueur.desactiverCompteursJoueurs();
+            tourJ.desactiverToursjoueurs();
+            Fonctions.activerObjet(finMatchMenu.MenuFinMatch);
+            if (joueur1.Tour == Tour.MonTour)
+            {
+                joueur1.victoireJoueur();
+                joueur2.defaiteJoueur();
+                resultatDuMatch = ResultatMatch.V1;
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurVictoire;
+                    Fonctions.changerTexte(finMatchMenu.TextVictoire, "Félicitations, vous avez gagné !!!");
+                    if (abandon)
+                    {
+                        Fonctions.activerObjet(finMatchMenu.BackgroundVictoireMini);
+                        finMatchMenu.TextVictoireMini.colorGradientPreset = finMatchMenu.CouleurMatchNul;
+                        string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
+                        Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
+                    }
+                    matchEnLigneController.ajouter();
+                }
+                else
+                {
+                    finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurDefaite;
+                    Fonctions.changerTexte(finMatchMenu.TextVictoire, "Désolé, vous avez perdu !!!");
+                    if (abandon)
+                    {
+                        Fonctions.activerObjet(finMatchMenu.BackgroundVictoireMini);
+                        finMatchMenu.TextVictoireMini.colorGradientPreset = finMatchMenu.CouleurMatchNul;
+                        string msg = " Vous avez abandonné.";
+                        Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
+                    }
 
+                }
+            }
+            else if (joueur2.Tour == Tour.MonTour)
+            {
+                joueur2.victoireJoueur();
+                joueur1.defaiteJoueur();
+                resultatDuMatch = ResultatMatch.V2;
+                Fonctions.changerTexte(finMatchMenu.TextVictoire, "Victoire de " + joueur2.Surnom + " !!!");
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+                {
+                    finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurVictoire;
+                    Fonctions.changerTexte(finMatchMenu.TextVictoire, "Félicitations, vous avez gagné !!!");
+                    if (abandon)
+                    {
+                        Fonctions.activerObjet(finMatchMenu.BackgroundVictoireMini);
+                        finMatchMenu.TextVictoireMini.colorGradientPreset = finMatchMenu.CouleurMatchNul;
+                        string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
+                        Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
+                    }
+                    matchEnLigneController.ajouter();
+                }
+                else
+                {
+                    finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurDefaite;
+                    Fonctions.changerTexte(finMatchMenu.TextVictoire, "Désolé, vous avez perdu !!!");
+                    if (abandon)
+                    {
+                        Fonctions.activerObjet(finMatchMenu.BackgroundVictoireMini);
+                        finMatchMenu.TextVictoireMini.colorGradientPreset = finMatchMenu.CouleurMatchNul;
+                        string msg = " Vous avez abandonné.";
+                        Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
+                    }
+
+                }
+
+            }
+            //abandon = false;
+            scoreMatch.afficherScoreMatch();
+            etatDuMatch = EtatMatch.Fin;
         }
-        public override void rejouerMatch()
-        {
 
-        }
-        public override void abandonMatch()
+        public new void abandonMatch()
         {
-
+            abandon = true;
+            base.abandonMatch();
         }
 
         public new void insert()
         {
             refe = FirebaseDatabase.DefaultInstance.RootReference;
-            //DatabaseReference rootRef = FirebaseDatabase.DefaultInstance;
             String key = refe.Push().Key.ToString();
             Debug.Log("Id Match : " + key);
             SongoMatchEnLigne songoMatchEnLigne = new SongoMatchEnLigne(PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"), DateTime.Now.ToString("yyyy'-'MM'-'dd"));
@@ -115,9 +195,11 @@ namespace Mvc.Models
             });
         }
 
-        public void recupereScore(Query requete)
+        public void recupereMatch(int joueur, string idJoueur, string idAversaire)
         {
             Dictionary<string, Dictionary<string, string>> data;
+            DatabaseReference refe = FirebaseDatabase.DefaultInstance.RootReference;
+            Query requete = refe.Child(table()).OrderByChild("idVainqueur").EqualTo(idJoueur);
             requete.GetValueAsync().ContinueWith(task =>
                {
                    if (task.IsCompleted)
@@ -130,6 +212,7 @@ namespace Mvc.Models
                            dataResult = snapshot.GetRawJsonValue();
                            data = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(dataResult);
                            Debug.Log(dataResult);
+
                        }
                        else
                        {
@@ -137,8 +220,23 @@ namespace Mvc.Models
                        }
                        //Fonctions.showDictionary(data);
                        Debug.Log(data.Count);
-                       //Utilisateur user = JsonUtility.FromJson<Utilisateur>(snapshot.GetRawJsonValue());
-                       //Debug.Log(user.Email);
+                       int cpt = 0;
+                       foreach (var value in data.Values)
+                       {
+                           if (value["idAdversaire"].CompareTo(idAversaire) == 0)
+                           {
+                               cpt += 1;
+                           }
+                       }
+                       if (joueur == 1)
+                       {
+                           joueur1.NombreVictoire = cpt;
+                       }
+                       else
+                       {
+                           joueur2.NombreVictoire = cpt;
+                       }
+                       statutDatabase = StatutDatabase.Succes;
 
                    }
                    else
@@ -147,6 +245,11 @@ namespace Mvc.Models
                    }
                    //statut = StatutDatabase.Succes;
                });
+        }
+
+        public void afficheScore()
+        {
+            scoreMatch.afficherScoreMatch();
         }
 
 

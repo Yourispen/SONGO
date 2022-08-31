@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mvc.Models;
+using Photon.Pun;
 
 namespace Mvc.Core
 {
@@ -33,98 +34,135 @@ namespace Mvc.Core
         {
             if (joueur.Match.EtatDuMatch == EtatMatch.Debut || joueur.Match.PauseMenu.EnPause)
                 return;
-            if (Input.touchCount == 1)
             {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
+                if (Input.touchCount == 1)
                 {
-                    tempsDepart = Time.timeSinceLevelLoad;
-                    compteurPion = 0;
-
-                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    if (Physics.Raycast(ray, out hit))
+                    Touch touch = Input.GetTouch(0);
+                    if (touch.phase == TouchPhase.Began)
                     {
-                        objetTouche = hit.collider.gameObject;
-                        if (objetTouche.name.CompareTo("Table") != 0 && objetTouche.name.CompareTo("Sol") != 0)
+                        tempsDepart = Time.timeSinceLevelLoad;
+                        compteurPion = 0;
+
+                        Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                        if (Physics.Raycast(ray, out hit))
                         {
-                            toucheJouer = true;
-                            caseTouche = objetTouche.GetComponentInParent<Case>();
-                            caseTouche.changerCouleurCase(joueur.CouleurTouche);
+                            objetTouche = hit.collider.gameObject;
+                            if (objetTouche.name.CompareTo("Table") != 0 && objetTouche.name.CompareTo("Sol") != 0)
+                            {
+                                toucheJouer = true;
+                                caseTouche = objetTouche.GetComponentInParent<Case>();
+                                caseTouche.changerCouleurCase(joueur.CouleurTouche);
+                            }
+                        }
+
+                        startPosition = touch.position;
+                        stopPosition = touch.position;
+                    }
+                    else if (touch.phase == TouchPhase.Stationary)
+                    {
+                        tempsActuel = Time.timeSinceLevelLoad;
+                        if (tempsActuel >= tempsDepart + 0.3f)
+                        {
+                            //Debug.Log("Maintient");
+                            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                            {
+                                StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, PlayerPrefs.GetInt("numPositionMatchEnCours") == 1 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
+                            }
+                            else
+                            {
+                                StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, joueur.gameObject.name.CompareTo("joueur1") == 0 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
+                            }
+                            compteurPion += 1;
                         }
                     }
-
-                    startPosition = touch.position;
-                    stopPosition = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Stationary)
-                {
-                    tempsActuel = Time.timeSinceLevelLoad;
-                    if (tempsActuel >= tempsDepart + 0.3f)
+                    else if (touch.phase == TouchPhase.Moved)
                     {
-                        //Debug.Log("Maintient");
-                        StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, joueur.gameObject.name.CompareTo("joueur1") == 0 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
-                        compteurPion += 1;
+                        stopPosition = touch.position;
                     }
-                }
-                else if (touch.phase == TouchPhase.Moved)
-                {
-                    stopPosition = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    Fonctions.changerTexte(joueur.Match.OutilsJoueur.TextPlaqueCompteur1);
-                    Fonctions.changerTexte(joueur.Match.OutilsJoueur.TextPlaqueCompteur2);
-                    if (toucheJouer)
+                    else if (touch.phase == TouchPhase.Ended)
                     {
-                        caseTouche.changerCouleurCase(caseTouche.CouleurInitiale);
-                    }
-                    stopPosition = touch.position;
-                    if (Mathf.Abs(stopPosition.x - startPosition.x) > dragDistance || Mathf.Abs(stopPosition.y - startPosition.y) > dragDistance)
-                    {
-                        if (Mathf.Abs(stopPosition.x - startPosition.x) > Mathf.Abs(stopPosition.y - startPosition.y))
+                        Fonctions.changerTexte(joueur.Match.OutilsJoueur.TextPlaqueCompteur1);
+                        Fonctions.changerTexte(joueur.Match.OutilsJoueur.TextPlaqueCompteur2);
+                        if (toucheJouer)
                         {
-                            if (stopPosition.x > startPosition.x)
+                            caseTouche.changerCouleurCase(caseTouche.CouleurInitiale);
+                        }
+                        stopPosition = touch.position;
+                        if (Mathf.Abs(stopPosition.x - startPosition.x) > dragDistance || Mathf.Abs(stopPosition.y - startPosition.y) > dragDistance)
+                        {
+                            if (Mathf.Abs(stopPosition.x - startPosition.x) > Mathf.Abs(stopPosition.y - startPosition.y))
                             {
-                                //Debug.Log("Swipe à droite");
-                                if (toucheJouer)
+                                if (stopPosition.x > startPosition.x)
                                 {
-                                    if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
+                                    //Debug.Log("Swipe à droite");
+                                    if (toucheJouer)
                                     {
-                                        joueur.jouerMatch(caseTouche);
+                                        if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
+                                        {
+                                            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                                            {
+                                                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+                                                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, caseTouche.Id);
+                                            }
+                                            else
+                                            {
+                                                joueur.jouerMatch(caseTouche);
+                                            }
+                                        }
                                     }
+                                }
+                                else
+                                {
+                                    //Debug.Log("Swipe à gauche");
+                                    if (toucheJouer)
+                                    {
+                                        if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur1") == 0 && caseTouche.Id < 7)
+                                        {
+                                            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                                            {
+                                                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                                                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, caseTouche.Id);
+                                            }
+                                            else
+                                            {
+                                                joueur.jouerMatch(caseTouche);
+                                            }
+                                        }
+                                    }
+
                                 }
                             }
                             else
                             {
-                                //Debug.Log("Swipe à gauche");
-                                if (toucheJouer)
+                                if (stopPosition.y > startPosition.y)
                                 {
-                                    if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur1") == 0 && caseTouche.Id < 7)
-                                    {
-                                        joueur.jouerMatch(caseTouche);
-                                    }
+                                    //Debug.Log("Swipe en haut");
                                 }
-
+                                else
+                                {
+                                    //Debug.Log("Swipe en bas");
+                                }
                             }
                         }
                         else
                         {
-                            if (stopPosition.y > startPosition.y)
-                            {
-                                //Debug.Log("Swipe en haut");
-                            }
-                            else
-                            {
-                                //Debug.Log("Swipe en bas");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //Debug.Log("Tap");
+                            //Debug.Log("Tap");
 
+                        }
+                        toucheJouer = false;
                     }
-                    toucheJouer = false;
+                }
+
+                if (Input.GetKeyDown("q"))
+                {
+                    Debug.Log("J'ai joué");
+                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 0);
+                }
+                if (Input.GetKeyDown("w"))
+                {
+                    Debug.Log("J'ai joué");
+                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 7);
+                    //photonView.RPC("RPC_jouer", RpcTarget.AllBuffered, case_de_depart);
                 }
             }
         }

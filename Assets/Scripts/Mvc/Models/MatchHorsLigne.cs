@@ -16,6 +16,10 @@ namespace Mvc.Models
 
         void OnEnable()
         {
+            debuterMatch();
+        }
+        public override void debuterMatch()
+        {
             matchRejoue = false;
             nbJoueur = 0;
             tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
@@ -38,7 +42,6 @@ namespace Mvc.Models
 
             enregistrement = Fonctions.instancierObjet(GameObject.Find("Enregistrement")).GetComponentInChildren<Enregistrement>();
             enregistrement.Match = ((Match)this);
-
         }
 
         private void Start()
@@ -47,7 +50,7 @@ namespace Mvc.Models
             initialiseJoueurs();
         }
 
-        protected override void initialiseJoueurs()
+        public override void initialiseJoueurs()
         {
             joueur1 = ((Joueur)Fonctions.instancierObjet(joueurOffPrefab).GetComponent<JoueurOff>());
             joueur1.Match = ((Match)this);
@@ -65,73 +68,9 @@ namespace Mvc.Models
             Fonctions.desactiverObjet(enregistrement.gameObject);
             outilsJoueur.afficherNomsJoueurs(joueur1.Surnom, joueur2.Surnom);
         }
-        public override void tourJoueur(int idCaseDepart)
-        {
-            if (idCaseDepart >= 7)
-            {
-                joueur1.Tour = Tour.MonTour;
-                joueur1.Swipe.enabled = true;
-                joueur2.Tour = Tour.SonTour;
-                outilsJoueur.activerCompteurJoueur(1);
-                tourJ.activerTourjoueur(1);
-            }
-            else
-            {
-                joueur2.Tour = Tour.MonTour;
-                joueur2.Swipe.enabled = true;
-                joueur1.Tour = Tour.SonTour;
-                outilsJoueur.activerCompteurJoueur(2);
-                tourJ.activerTourjoueur(2);
-            }
-        }
-        public override void verifierEtatDuMatch(Case caseDepart)
-        {
-            if (tableMatch.ListeCases[14].ListePions.Count > 35)
-            {
-                etatDuMatch = EtatMatch.Fin;
-                finDuMatch();
-            }
-            else if (tableMatch.ListeCases[15].ListePions.Count > 35)
-            {
-                etatDuMatch = EtatMatch.Fin;
-                finDuMatch();
-            }
-            else if (tableMatch.ListeCases[14].ListePions.Count == 35 && tableMatch.ListeCases[15].ListePions.Count == 35)
-            {
-                pauseMenu.EnPause = false;
-                Fonctions.desactiverObjet(pauseMenu.BoutonPausePrefab);
-                Fonctions.activerObjet(finMatchMenu.MenuFinMatch);
-                Fonctions.changerTexte(finMatchMenu.TextVictoire, "Match Nul !!!");
-                etatDuMatch = EtatMatch.Fin;
-            }
-            else
-            {
-                tourJoueur(caseDepart.Id);
-
-            }
-        }
-        public override void jouerTable(Case caseDepart)
-        {
-            if (etatDuMatch == EtatMatch.Debut || etatDuMatch == EtatMatch.Fin || caseDepart.Id == 14 || caseDepart.Id == 15)
-            {
-                rejouerCoup();
-            }
-            else
-            {
-                tableMatch.parcourirLaTable(caseDepart);
-            }
-        }
-        public override void rejouerCoup()
-        {
-            if (joueur1.Tour == Tour.MonTour)
-            {
-                joueur1.Swipe.enabled = true;
-            }
-            else if (joueur2.Tour == Tour.MonTour)
-            {
-                joueur2.Swipe.enabled = true;
-            }
-        }
+        
+        
+        
         public override void finDuMatch()
         {
             pauseMenu.EnPause = true;
@@ -157,21 +96,7 @@ namespace Mvc.Models
             scoreMatch.afficherScoreMatch();
             etatDuMatch = EtatMatch.Fin;
         }
-        public override void rejouerMatch()
-        {
-            matchRejoue = true;
-            Fonctions.activerObjet(pauseMenu.BoutonPausePrefab);
-            Fonctions.desactiverObjet(finMatchMenu.MenuFinMatch);
-            joueur1.NumPosition = joueur1.NumPosition == 1 ? 2 : 1;
-            joueur2.NumPosition = joueur2.NumPosition == 1 ? 2 : 1;
-            StartCoroutine(partagerLesPions());
-        }
+        
 
-        public override void abandonMatch()
-        {
-            joueur1.Tour = joueur1.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
-            joueur2.Tour = joueur2.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
-            finDuMatch();
-        }
     }
 }

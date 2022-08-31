@@ -520,6 +520,121 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1456045170}
+    - target: {fileID: 2068280285648105056, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105056, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105056, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105056, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.topLeft.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.topLeft.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.topLeft.r
+      value: 0.22167921
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.topRight.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.topRight.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.topRight.r
+      value: 0.11779833
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.bottomLeft.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.bottomLeft.g
+      value: 0.74655265
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.bottomLeft.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.g
+      value: 0.74322253
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280285648105057, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.r
+      value: 0.9339623
+      objectReference: {fileID: 0}
     - target: {fileID: 2068280285679109433, guid: e1461ec4649a2f14990c84d38f91e1a4,
         type: 3}
       propertyPath: m_Name
@@ -650,6 +765,27 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1456045170}
+    - target: {fileID: 2068280286678265877, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bfcbd2cfaff29c4449996b3cba1a7dda,
+        type: 3}
+    - target: {fileID: 2068280286678265877, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280286678265877, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068280286678265877, guid: e1461ec4649a2f14990c84d38f91e1a4,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2068280286768320393, guid: e1461ec4649a2f14990c84d38f91e1a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

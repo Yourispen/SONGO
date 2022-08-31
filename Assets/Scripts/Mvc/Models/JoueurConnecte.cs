@@ -34,6 +34,15 @@ namespace Mvc.Models
             //this.matchEnLigne=GameObject.Find("matchEnligne").GetComponent<MatchEnLigne>();
         }
 
+        void Update()
+        {
+            if (statutDatabase == StatutDatabase.Succes)
+            {
+                statutDatabase = StatutDatabase.Debut;
+                recupData();
+            }
+        }
+
         public void insertSql()
         {
             //Debug.Log(PlayerPrefs.GetString("surnom"));

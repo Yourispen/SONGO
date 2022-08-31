@@ -56,18 +56,22 @@ namespace Mvc.Models
 
             if (listeCases[idCase].ListePions.Count == 0)
             {
+                Debug.Log("Interdit 1");
                 jeuInterdit();
             }
             else if ((idCase == 6 || idCase == 13) && listeCases[idCase].ListePions.Count < 2 && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
+                Debug.Log("Interdit 2");
                 jeuInterdit();
             }
-            else if (((idCase < 6 && listeCases[idCase].ListePions.Count - 6 + idCase <= 0) || (idCase < 13 && listeCases[idCase].ListePions.Count - 13 + idCase <= 0)) && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
+            else if (((idCase < 6 && listeCases[idCase].ListePions.Count - 6 + idCase <= 0) || (idCase > 6 && idCase < 13 && listeCases[idCase].ListePions.Count - 13 + idCase <= 0)) && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
+                Debug.Log("Interdit 3");
                 jeuInterdit();
             }
             else if ((idCase == 6 || idCase == 13) && listeCases[idCase].ListePions.Count == 1 && sommeDesCasesJoueur(idCase) > 1)
             {
+                Debug.Log("Interdit 4");
                 jeuInterdit();
             }
             else if (!peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mvc.Core;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -17,6 +16,9 @@ namespace Mvc.Models
         [SerializeField] private GameObject backgroundVictoireMini;
         [SerializeField] private TMPro.TMP_Text textVictoire;
         [SerializeField] private TMPro.TMP_Text textVictoireMini;
+        [SerializeField] private TMP_ColorGradient couleurDefaite;
+        [SerializeField] private TMP_ColorGradient couleurVictoire;
+        [SerializeField] private TMP_ColorGradient couleurMatchNul;
 
 
         public Match Match { get => match; set => match = value; }
@@ -26,13 +28,22 @@ namespace Mvc.Models
         public GameObject MenuFinMatch { get => menuFinMatch; set => menuFinMatch = value; }
         public GameObject BackgroundVictoire { get => backgroundVictoire; set => backgroundVictoire = value; }
         public GameObject BackgroundVictoireMini { get => backgroundVictoireMini; set => backgroundVictoireMini = value; }
+        public TMP_ColorGradient CouleurDefaite { get => couleurDefaite; set => couleurDefaite = value; }
+        public TMP_ColorGradient CouleurVictoire { get => couleurVictoire; set => couleurVictoire = value; }
+        public TMP_ColorGradient CouleurMatchNul { get => couleurMatchNul; set => couleurMatchNul = value; }
 
         //Name_P1.GetComponent<TMPro.TMP_Text>().text
         public void boutonQuitter()
         {
-            if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
             {
                 Fonctions.changerDeScene("SceneOffline");
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.QuitterMatch = true;
+                PhotonManager.connectePhoton = false;
+                ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.quitterLobby();
             }
         }
         public void boutonRejouer()
@@ -48,13 +59,79 @@ namespace Mvc.Models
         {
             match.PauseMenu.EnPause = false;
             Fonctions.activerObjet(backgroundVictoireMini);
-            Fonctions.changerTexte(textVictoireMini, textVictoire.text);
-            Fonctions.desactiverObjet(backgroundVictoire);
-            if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            if (match.Joueur1 != null)
             {
-                match.Joueur1.Tour = Tour.MonTour;
+                match.Joueur1.Tour = Tour.SonTour;
+                match.Joueur1.Swipe.enabled = false;
+            }
+            if (match.Joueur2 != null)
+            {
                 match.Joueur2.Tour = Tour.SonTour;
+                match.Joueur2.Swipe.enabled = false;
+            }
+            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+            {
+                Fonctions.changerTexte(textVictoireMini, textVictoire.text);
+                Fonctions.desactiverObjet(backgroundVictoire);
+                match.Joueur1.Tour = Tour.MonTour;
+                match.Joueur1.Swipe.enabled = true;
                 match.OutilsJoueur.activerCompteurJoueur(1);
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                string texte;
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    if (match.Joueur1 != null)
+                    {
+                        match.Joueur1.Tour = Tour.MonTour;
+                        match.Joueur1.Swipe.enabled = true;
+                    }
+                    if (match.ResultatDuMatch == ResultatMatch.V1)
+                    {
+                        texte = "Vous avez gagné !!!";
+                        textVictoireMini.colorGradientPreset = couleurVictoire;
+                    }
+                    else if (match.ResultatDuMatch == ResultatMatch.V2)
+                    {
+                        texte = "Vous avez perdu !!!";
+                        textVictoireMini.colorGradientPreset = couleurDefaite;
+                    }
+                    else
+                    {
+                        texte = "Match nul !!!";
+                        textVictoireMini.colorGradientPreset = couleurMatchNul;
+                    }
+                    match.OutilsJoueur.activerCompteurJoueur(1);
+
+                }
+                else
+                {
+                    if (match.Joueur1 != null)
+                    {
+                        match.Joueur2.Tour = Tour.MonTour;
+                        match.Joueur2.Swipe.enabled = true;
+                    }
+                    if (match.ResultatDuMatch == ResultatMatch.V1)
+                    {
+                        texte = "Vous avez perdu !!!";
+                        textVictoireMini.colorGradientPreset = couleurDefaite;
+                    }
+                    else if (match.ResultatDuMatch == ResultatMatch.V2)
+                    {
+                        texte = "Vous avez gagné !!!";
+                        textVictoireMini.colorGradientPreset = couleurVictoire;
+                    }
+                    else
+                    {
+                        texte = "Match nul !!!";
+                        textVictoireMini.colorGradientPreset = couleurMatchNul;
+                    }
+                    match.OutilsJoueur.activerCompteurJoueur(1);
+
+                }
+                Fonctions.changerTexte(textVictoireMini, texte);
+                Fonctions.desactiverObjet(backgroundVictoire);
             }
 
         }

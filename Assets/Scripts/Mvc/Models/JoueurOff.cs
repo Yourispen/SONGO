@@ -13,18 +13,6 @@ namespace Mvc.Models
             swipe.Joueur = ((Joueur)this);
             //matchHorsLigne = GameObject.Find("MatchHorsLigne").GetComponent<MatchHorsLigne>();
         }
-        public override void victoireJoueur()
-        {
-            nombreVictoire += 1;
-            swipe.enabled = true;
-        }
-        public override void defaiteJoueur()
-        {
-            swipe.enabled = false;
-        }
-        public override void abandonJoueur()
-        {
-
-        }
+        
     }
 }

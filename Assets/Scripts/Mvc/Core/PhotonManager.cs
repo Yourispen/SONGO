@@ -25,6 +25,10 @@ namespace Mvc.Core
         [SerializeField] private bool quitterMatch = false;
         [SerializeField] private GameObject joueurOnPrefab;
         [SerializeField] private GameObject joueurOn;
+        [SerializeField] private string nomSceneRetour = "ScenePlay";
+        [SerializeField] private string nomSceneMatch = "SceneMatchEnLigne";
+        [SerializeField] private bool reconnect;
+
 
 
 
@@ -34,6 +38,7 @@ namespace Mvc.Core
         public LobbyMenu LobbyMenu { get => lobbyMenu; set => lobbyMenu = value; }
         public bool QuitterMatch { get => quitterMatch; set => quitterMatch = value; }
         public AttenteMenu AttenteMenu { get => attenteMenu; set => attenteMenu = value; }
+        public bool Reconnect { get => reconnect; set => reconnect = value; }
 
         private void Awake()
         {
@@ -44,6 +49,7 @@ namespace Mvc.Core
 
                 initialiseJoueur();
             }
+            reconnect = false;
         }
         // Start is called before the first frame update
         void Start()
@@ -77,6 +83,7 @@ namespace Mvc.Core
                     PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("id");
                     PhotonNetwork.GameVersion = versionJeu;
                     PhotonNetwork.ConnectUsingSettings();
+
                 }
             }
             else
@@ -95,30 +102,44 @@ namespace Mvc.Core
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a quitté le photon...");
             if (quitterMatch)
             {
-                string nomScene = "ScenePlay";
-                Fonctions.changerDeScene(nomScene);
+                Fonctions.changerDeScene(nomSceneRetour);
             }
         }
         public override void OnConnectedToMaster()
         {
             connectePhoton = true;
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " est connecé(e) à photon...");
-            Fonctions.activerObjet(lobbyMenu.CreerMatch);
-            Fonctions.activerObjet(lobbyMenu.RejoindreMatch);
+            if (Fonctions.sceneActuelle("SceneLobbyMatchEnLigne"))
+            {
+                Fonctions.activerObjet(lobbyMenu.CreerMatch);
+                Fonctions.activerObjet(lobbyMenu.RejoindreMatch);
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                if (reconnect)
+                {
+                    PhotonNetwork.ReconnectAndRejoin();
+                }
+            }
         }
 
         public void quitterLobby()
         {
             if (!PhotonNetwork.IsConnected)
             {
+                Fonctions.changerDeScene(nomSceneRetour);
                 return;
             }
-            if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+
+            if (PhotonNetwork.InRoom)
             {
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-                Debug.Log("Match Ouvert : " + PhotonNetwork.CurrentRoom.IsOpen);
-                //PhotonNetwork.CurrentRoom.remove;
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                    Debug.Log("Match Ouvert : " + PhotonNetwork.CurrentRoom.IsOpen);
+                }
             }
+            //PhotonNetwork.CurrentRoom.remove;
 
             Debug.Log("Connecte au Lobby : " + PhotonNetwork.InLobby);
             if (PhotonNetwork.InLobby)
@@ -200,7 +221,7 @@ namespace Mvc.Core
             Debug.Log("vous n'avez pas pu rejoindre le match");
             if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
-                Fonctions.changerDeScene("ScenePlay");
+                Fonctions.changerDeScene(nomSceneRetour);
             }
             else
             {
@@ -211,7 +232,7 @@ namespace Mvc.Core
 
         public void creerMatch(string codeMatch)
         {
-            RoomOptions options = new RoomOptions { MaxPlayers = maxJoueurs, PlayerTtl = 10000, EmptyRoomTtl = 60000 };
+            RoomOptions options = new RoomOptions { MaxPlayers = maxJoueurs, PlayerTtl = 0, EmptyRoomTtl = 30000 };
             PhotonNetwork.CreateRoom(codeMatch, options, null);
         }
 
@@ -234,7 +255,7 @@ namespace Mvc.Core
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.Log("Je suis Master Client");
-                PhotonNetwork.LoadLevel("SceneMatchEnLigne");
+                PhotonNetwork.LoadLevel(nomSceneMatch);
             }
             //instancierUnJoueur();
         }
@@ -255,6 +276,20 @@ namespace Mvc.Core
         public int nbJoueursDansLeMatch()
         {
             return PhotonNetwork.CurrentRoom.PlayerCount;
+        }
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+
+        }
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        { 
+
+        }
+
+        public void seReconnecter()
+        {
+            reconnect = true;
+            initialiseJoueur();
         }
     }
 }

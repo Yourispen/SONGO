@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mvc.Core;
+using Photon.Pun;
 
 namespace Mvc.Models
 {
@@ -17,6 +18,8 @@ namespace Mvc.Models
         [SerializeField] protected Material couleurTouche;
         [SerializeField] protected Swipe swipe;
         [SerializeField] protected int nombreVictoire;
+        [SerializeField] protected PhotonView photonView;
+
 
 
         public Joueur()
@@ -35,14 +38,22 @@ namespace Mvc.Models
         public Material CouleurToucheJoueur2 { get => couleurToucheJoueur2; set => couleurToucheJoueur2 = value; }
         public Material CouleurTouche { get => couleurTouche; set => couleurTouche = value; }
         public int NombreVictoire { get => nombreVictoire; set => nombreVictoire = value; }
+        public PhotonView PhotonView { get => photonView; set => photonView = value; }
 
         public void jouerMatch(Case caseDepart)
         {
             swipe.enabled = false;
             match.jouerTable(caseDepart);
         }
-        public abstract void victoireJoueur();
-        public abstract void defaiteJoueur();
+        public void victoireJoueur()
+        {
+            nombreVictoire += 1;
+            swipe.enabled = true;
+        }
+        public void defaiteJoueur()
+        {
+            swipe.enabled = false;
+        }
         public int premierAJouer()
         {
             numPosition = 1;
@@ -57,6 +68,5 @@ namespace Mvc.Models
             swipe.enabled = false;
             return numPosition;
         }
-        public abstract void abandonJoueur();
     }
 }

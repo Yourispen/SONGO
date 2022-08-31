@@ -26,7 +26,6 @@ namespace Mvc.Models
         [SerializeField] protected SongoJoueurOnline songoJoueurOnline;
         [SerializeField] protected StatutDatabase statutDatabase;
         [SerializeField] protected JoueurOnController joueurOnController;
-        [SerializeField] private PhotonView photonView;
 
         //public Swipe Swipe { get => swipe; set => swipe = value; }
 
@@ -43,6 +42,9 @@ namespace Mvc.Models
                     Debug.Log("Id Joueur1 : " + PhotonNetwork.PlayerList.ToStringFull());
                     match.Joueur1 = ((JoueurOn)this);
                     PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[0].NickName);
+                    surnom = PlayerPrefs.GetString("surnom");
+                    email = PlayerPrefs.GetString("email");
+                    Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur2.gameObject);
 
                 }
                 else if (!photonView.IsMine && num == 1)
@@ -54,6 +56,8 @@ namespace Mvc.Models
                     joueurOnController = Fonctions.instancierObjet(GameObject.Find("joueurOnController")).GetComponent<JoueurOnController>();
                     PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[1].NickName);
                     recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
+                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(1, PlayerPrefs.GetString("idVainqueur"), PlayerPrefs.GetString("idAdversaire"));
+                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(2, PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"));
                 }
                 else if (photonView.IsMine && num == 2)
                 {
@@ -62,6 +66,12 @@ namespace Mvc.Models
                     //match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnligne")).GetComponent<MatchEnLigne>());
                     match.Joueur2 = ((JoueurOn)this);
                     PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[1].NickName);
+                    surnom = PlayerPrefs.GetString("surnom");
+                    email = PlayerPrefs.GetString("email");
+                    Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur1.gameObject);
+                    Vector3 positionTemp = match.OutilsJoueur.PlaqueNom1.rectTransform.position;
+                    match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position;
+                    match.OutilsJoueur.PlaqueNom2.rectTransform.position = positionTemp;
                 }
                 else if (!photonView.IsMine && num == 2)
                 {
@@ -72,6 +82,8 @@ namespace Mvc.Models
                     joueurOnController = Fonctions.instancierObjet(GameObject.Find("joueurOnController")).GetComponent<JoueurOnController>();
                     PlayerPrefs.SetString("idAdversaire", PhotonNetwork.PlayerList[0].NickName);
                     recupereJoueur(PlayerPrefs.GetString("idAdversaire"));
+                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(2, PlayerPrefs.GetString("idVainqueur"), PlayerPrefs.GetString("idAdversaire"));
+                    ((MatchEnLigne)match).MatchEnLigneController.recupererLesMatchGagneUnJoueur(1, PlayerPrefs.GetString("idAdversaire"), PlayerPrefs.GetString("idVainqueur"));
                 }
             }
         }
@@ -113,32 +125,61 @@ namespace Mvc.Models
         public ConnexionCompte ConnexionCompte { get => connexionCompte; set => connexionCompte = value; }
         public JoueurOnController JoueurOnController { get => joueurOnController; set => joueurOnController = value; }
 
-        public void copyJoueurOn(JoueurOn joueurOn)
+        public void copyJoueurOn()
         {
-            this.surnom = joueurOn.Surnom;
-            this.email = joueurOn.Email;
-            this.dateInscription = joueurOn.DateInscription;
-            this.heureInscription = joueurOn.HeureInscription;
+            surnom = songoJoueurOnline.Surnom;
+            email = songoJoueurOnline.Email;
+            dateInscription = DateTime.ParseExact(songoJoueurOnline.DateInscription, "yyyy'-'MM'-'dd", null);
+            heureInscription = DateTime.ParseExact(songoJoueurOnline.HeureInscription, "HH:mm", null);
+            surnom = songoJoueurOnline.Surnom;
+            ConnexionCompte connexionCompte = new ConnexionCompte();
+            connexionCompte.TypeConnexionCompte = songoJoueurOnline.IdConnexionCompte == 1 ? TypeConnexionCompte.Facebook : TypeConnexionCompte.Google;
+            ConnexionCompte = connexionCompte;
+            Niveau niveau = new Niveau();
+            niveau.Id = songoJoueurOnline.IdNiveau;
+            Niveau = niveau;
+            songoJoueurOnline = null;
         }
         void Update()
         {
             if (statutDatabase == StatutDatabase.Succes)
             {
                 statutDatabase = StatutDatabase.Debut;
-                recupData();
+                StartCoroutine(recupData());
             }
         }
-        public override void victoireJoueur()
-        {
 
+        public new void jouerMatch(Case caseDepart)
+        {
+            swipe.enabled = false;
+            match.jouerTable(caseDepart);
         }
-        public override void defaiteJoueur()
+        [PunRPC]
+        public void jouerMatch(int idCaseDepart)
         {
-
+            swipe.enabled = false;
+            match.jouerTable(match.TableMatch.ListeCases[idCaseDepart]);
         }
-        public override void abandonJoueur()
-        {
 
+        [PunRPC]
+        public void abandonJoueur(int numPosition)
+        {
+            ((MatchEnLigne)match).Abandon = true;
+            if (numPosition == 1)
+            {
+                match.Joueur1.Tour = Tour.MonTour;
+                match.Joueur1.Swipe.enabled = true;
+                match.Joueur2.Tour = Tour.SonTour;
+                match.Joueur2.Swipe.enabled = false;
+            }
+            else
+            {
+                match.Joueur2.Tour = Tour.MonTour;
+                match.Joueur2.Swipe.enabled = true;
+                match.Joueur1.Tour = Tour.SonTour;
+                match.Joueur1.Swipe.enabled = false;
+            }
+            match.abandonMatch();
         }
         public void recupereJoueur(string id)
         {
@@ -195,22 +236,35 @@ namespace Mvc.Models
                 }
             });
         }
-        public void recupData()
+        public IEnumerator recupData()
         {
             if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
                 Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextPlaqueNom2, songoJoueurOnline.Surnom);
+                Fonctions.changerTexte(match.OutilsJoueur.TextPlaqueNom2, songoJoueurOnline.Surnom);
+                Fonctions.changerTexte(match.OutilsJoueur.TextPlaqueNom1, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.PlaqueNom2.gameObject);
+
             }
             else if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
             {
                 Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextPlaqueNom1, songoJoueurOnline.Surnom);
+                Fonctions.changerTexte(match.OutilsJoueur.TextPlaqueNom1, songoJoueurOnline.Surnom);
+                Fonctions.changerTexte(match.OutilsJoueur.TextPlaqueNom2, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.PlaqueNom1.gameObject);
             }
+            PlayerPrefs.SetString("surnomAdversaire", songoJoueurOnline.Surnom);
+            copyJoueurOn();
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
             Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente);
-            //Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
+            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
             //Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
+            //((MatchEnLigne)match).MatchEnLigneController.recupererScoreDuMatch();
+            yield return new WaitForSeconds(3);
+            match.ScoreMatch.afficherScoreMatch();
+            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.AttenteJoueur);
+            ((MatchEnLigne)match).debuterMatch();
+
 
         }
 

@@ -39,15 +39,29 @@ namespace Mvc.Models
 
         public void activerCompteurJoueur(int joueur)
         {
-            if (joueur == 1)
+            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
             {
-                Fonctions.activerObjet(plaqueCompteur1);
-                Fonctions.desactiverObjet(plaqueCompteur2);
+                if (joueur == 1)
+                {
+                    Fonctions.activerObjet(plaqueCompteur1);
+                    Fonctions.desactiverObjet(plaqueCompteur2);
+                }
+                else if (joueur == 2)
+                {
+                    Fonctions.activerObjet(plaqueCompteur2);
+                    Fonctions.desactiverObjet(plaqueCompteur1);
+                }
             }
-            else if (joueur == 2)
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
-                Fonctions.activerObjet(plaqueCompteur2);
-                Fonctions.desactiverObjet(plaqueCompteur1);
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    Fonctions.activerObjet(plaqueCompteur1);
+                }
+                else
+                {
+                    Fonctions.activerObjet(plaqueCompteur2);
+                }
             }
         }
         public void desactiverCompteursJoueurs()

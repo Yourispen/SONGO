@@ -147,6 +147,7 @@ namespace Mvc.Core
         }
         public static void changerTexte(TMPro.TMP_Text texteDepart, string texteArrivee = "")
         {
+            texteDepart.text = "";
             texteDepart.text = texteArrivee;
         }
 

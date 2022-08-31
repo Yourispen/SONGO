@@ -111,7 +111,7 @@ namespace Mvc.Models
         public void deplacerLesPionsGrandeCase()
         {
             float z = -3f;
-            Vector3 ajoutPosition = new Vector3(Random.Range(-0.2f, 0.2f), 0, z);
+            Vector3 ajoutPosition = new Vector3(Random.Range(-0.1f, 0.1f), 0, z);
             foreach (var pion in listePions)
             {
                 if (this.id < 7)
@@ -123,7 +123,7 @@ namespace Mvc.Models
                     pion.deplacerPionCase(Table.ListeCases[14], ajoutPosition);
                 }
                 z += 1.5f;
-                ajoutPosition = new Vector3(Random.Range(-0.2f, 0.2f), 0, z);
+                ajoutPosition = new Vector3(Random.Range(-0.1f, 0.1f), 0, z);
             }
             listePions.Clear();
         }

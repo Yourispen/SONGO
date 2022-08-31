@@ -58,8 +58,9 @@ MonoBehaviour:
   couleurToucheJoueur2: {fileID: 2100000, guid: 12ea4c7afb1120741a17304a52939970,
     type: 2}
   couleurTouche: {fileID: 0}
-  swipe: {fileID: 0}
+  swipe: {fileID: 3378262632702633794}
   nombreVictoire: 0
+  photonView: {fileID: 7116269568033024646}
   email: 
   typeJoueur: 0
   statutJoueur: 0
@@ -67,7 +68,6 @@ MonoBehaviour:
   niveau: {fileID: 0}
   statutDatabase: 0
   joueurOnController: {fileID: 0}
-  photonView: {fileID: 7116269568033024646}
 --- !u!114 &7116269568033024646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   stopPosition: {x: 0, y: 0}
   tempsActuel: 0
   tempsDepart: 0
-  joueur: {fileID: 0}
+  joueur: {fileID: 2889203787142978119}
   dragDistance: 70
   objetTouche: {fileID: 0}
   caseTouche: {fileID: 0}

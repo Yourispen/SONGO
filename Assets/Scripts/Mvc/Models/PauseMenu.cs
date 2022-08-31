@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mvc.Core;
 using Mvc.Controllers;
+using Photon.Pun;
 
 namespace Mvc.Models
 {
@@ -41,6 +42,20 @@ namespace Mvc.Models
             {
                 match.abandonMatch();
             }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                if (!ConnexionInternet.connect)
+                    return;
+                //photonView.RPC("RPC_jouer", RpcTarget.AllBuffered, case_de_depart);
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    match.Joueur1.PhotonView.RPC("abandonJoueur", RpcTarget.AllBuffered, PlayerPrefs.GetInt("numPositionMatchEnCours"));
+                }
+                else
+                {
+                    match.Joueur2.PhotonView.RPC("abandonJoueur", RpcTarget.AllBuffered, PlayerPrefs.GetInt("numPositionMatchEnCours"));
+                }
+            }
         }
         public void BoutonContinuer()
         {
@@ -49,12 +64,49 @@ namespace Mvc.Models
             {
                 match.TourJ.activerTourjoueur(1);
                 match.OutilsJoueur.activerCompteurJoueur(1);
+
             }
             else
             {
                 match.TourJ.activerTourjoueur(2);
                 match.OutilsJoueur.activerCompteurJoueur(2);
             }
+
+            /*  else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+             {
+                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                 {
+                     match.TourJ.activerTourjoueur(1);
+                     match.OutilsJoueur.activerCompteurJoueur(1);
+                     if (match.Joueur1.Tour == Tour.MonTour)
+                     {
+                         match.TourJ.activerTourjoueur(1);
+                         match.OutilsJoueur.activerCompteurJoueur(1);
+
+                     }
+                     else
+                     {
+                         match.TourJ.activerTourjoueur(2);
+                         match.OutilsJoueur.activerCompteurJoueur(2);
+                     }
+                 }
+                 else
+                 {
+                     match.TourJ.activerTourjoueur(2);
+                     match.OutilsJoueur.activerCompteurJoueur(2);
+                     if (match.Joueur1.Tour == Tour.MonTour)
+                     {
+                         match.TourJ.activerTourjoueur(1);
+                         match.OutilsJoueur.activerCompteurJoueur(1);
+
+                     }
+                     else
+                     {
+                         match.TourJ.activerTourjoueur(2);
+                         match.OutilsJoueur.activerCompteurJoueur(2);
+                     }
+                 }
+             } */
             Fonctions.activerObjet(boutonPausePrefab);
             Fonctions.desactiverObjet(menuPausePrefab);
         }
@@ -63,6 +115,12 @@ namespace Mvc.Models
             if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
             {
                 Fonctions.changerDeScene("SceneOffline");
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.QuitterMatch = true;
+                PhotonManager.connectePhoton = false;
+                ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.quitterLobby();
             }
         }
     }

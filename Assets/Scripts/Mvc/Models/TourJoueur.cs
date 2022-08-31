@@ -25,6 +25,20 @@ namespace Mvc.Models
         public TMP_Text TextTour2 { get => textTour2; set => textTour2 = value; }
         public Match Match { get => match; set => match = value; }
 
+        void Start()
+        {
+            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+                {
+                    Fonctions.changerTexte(textTour2, "à lui de jouer");
+                }
+                else
+                {
+                    Fonctions.changerTexte(textTour1, "à lui de jouer");
+                }
+            }
+        }
         public void activerTourjoueur(int joueur)
         {
             if (joueur == 1)

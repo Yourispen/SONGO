@@ -43,16 +43,22 @@ namespace Mvc.Controllers
 
         }
 
-        public void recupererScoreDuMatch()
+        public void recupererLesMatchGagneUnJoueur(int joueur, string idJoueur, string idAversaire)
         {
             matchEnligne.MsgSuccess = this.name + " récupéré avec succes ";
             matchEnligne.MsgFailed = "Echec de la récupération du " + this.name;
-            DatabaseReference refe = FirebaseDatabase.DefaultInstance.RootReference;
-            Query requete = refe.Child(matchEnligne.table()).OrderByChild("idVainqueur").EqualTo(PlayerPrefs.GetString("id")).OrderByChild("idAdversaire").EqualTo(PlayerPrefs.GetString("idAdversaire"));
-            matchEnligne.recupereScore(requete);
-            DatabaseReference refe1 = FirebaseDatabase.DefaultInstance.RootReference;
-            Query requete1 = refe1.Child(matchEnligne.table()).OrderByChild("idVainqueur").EqualTo(PlayerPrefs.GetString("idAdversaire")).OrderByChild("idAdversaire").EqualTo(PlayerPrefs.GetString("id"));
-            matchEnligne.recupereScore(requete1);
+            /*int score1 = 1;
+            int score2 = 2;
+            if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
+            {
+                score1 = 2;
+                score2 = 1;
+            }*/
+            matchEnligne.recupereMatch(joueur, idJoueur, idAversaire);
+            /*DatabaseReference refe1 = FirebaseDatabase.DefaultInstance.RootReference;
+            Query requete1 = refe1.Child(matchEnligne.table()).OrderByChild("idVainqueur").EqualTo(PlayerPrefs.GetString("idAdversaire"));
+            matchEnligne.recupereScore(requete1,score2);*/
         }
+
     }
 }

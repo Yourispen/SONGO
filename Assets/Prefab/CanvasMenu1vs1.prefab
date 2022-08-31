@@ -6763,6 +6763,9 @@ MonoBehaviour:
   backgroundVictoireMini: {fileID: 7938068913241050272}
   textVictoire: {fileID: 5926924718315885256}
   textVictoireMini: {fileID: 7484799022193081070}
+  couleurDefaite: {fileID: 0}
+  couleurVictoire: {fileID: 0}
+  couleurMatchNul: {fileID: 11400000, guid: 27a1648d1ed09c643993a74c6c20f176, type: 2}
 --- !u!1 &7938068913241050272
 GameObject:
   m_ObjectHideFlags: 0

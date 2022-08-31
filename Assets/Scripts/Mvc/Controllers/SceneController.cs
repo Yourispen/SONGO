@@ -37,7 +37,7 @@ namespace Mvc.Controllers
         void Awake()
         {
             //PlayerPrefs.SetInt("etatConnexionCompte", 1);
-            //PlayerPrefs.DeleteAll();
+            //PlayerPrefs.DeleteAll(); return;
             //PlayerPrefs.SetString("id", "z6hhsbMJRyaPRGSaDTHpNQ8QiKj2");
             //PlayerPrefs.SetString("surnom","Glenneriss"); return;
             connexionInternet = Fonctions.instancierObjet(connexionInternetPrefab).GetComponent<ConnexionInternet>();
