@@ -319,9 +319,10 @@ namespace Mvc.Models
             }
             PlayerPrefs.SetString("surnomAdversaire", songoJoueurOnline.Surnom);
             copyJoueurOn();
-            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
-            Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente);
+            //Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
+            Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente, "Le match va commencer...");
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
+            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.CodeMatch.gameObject);
             yield return new WaitForSeconds(3);
             match.ScoreMatch.afficherScoreMatch();
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.AttenteJoueur);
