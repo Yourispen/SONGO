@@ -75,6 +75,19 @@ namespace Mvc.Models
             joueur2.Tour = joueur2.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
             finDuMatch();
         }
+        public override void rejouerCoup(Case caseDepart)
+        {
+            if (joueur1.Tour == Tour.MonTour)
+            {
+                joueur1.Swipe.enabled = true;
+                tourJ.activerTourjoueur(1);
+            }
+            else if (joueur2.Tour == Tour.MonTour)
+            {
+                joueur2.Swipe.enabled = true;
+                tourJ.activerTourjoueur(2);
+            }
+        }
 
         public override void finDuMatch()
         {

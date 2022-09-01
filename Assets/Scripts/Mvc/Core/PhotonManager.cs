@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
-using UnityEngine.Networking;
 using Mvc.Controllers;
-using Mvc.Core;
 using Mvc.Models;
 
 namespace Mvc.Core
@@ -21,13 +17,15 @@ namespace Mvc.Core
         [SerializeField] private AttenteMenu attenteMenu;
         [SerializeField] private string versionJeu = "0.1";
         [SerializeField] private byte maxJoueurs = 2;
-        public static bool connectePhoton = false;
-        [SerializeField] private bool quitterMatch = false;
+        [SerializeField] private bool quitterMatch;
+        [SerializeField] private bool veutCreerMatch;
+        [SerializeField] private bool veutRejoindreMatch;
         [SerializeField] private GameObject joueurOnPrefab;
         [SerializeField] private GameObject joueurOn;
-        [SerializeField] private string nomSceneRetour = "ScenePlay";
+        [SerializeField] private string nomSceneRetour;
         [SerializeField] private string nomSceneMatch = "SceneMatchEnLigne";
         public static bool reconnect;
+        [SerializeField] private bool aderversaireDeconnecte;
 
 
 
@@ -38,6 +36,9 @@ namespace Mvc.Core
         public LobbyMenu LobbyMenu { get => lobbyMenu; set => lobbyMenu = value; }
         public bool QuitterMatch { get => quitterMatch; set => quitterMatch = value; }
         public AttenteMenu AttenteMenu { get => attenteMenu; set => attenteMenu = value; }
+        public bool VeutCreerMatch { get => veutCreerMatch; set => veutCreerMatch = value; }
+        public bool VeutRejoindreMatch { get => veutRejoindreMatch; set => veutRejoindreMatch = value; }
+        public bool AderversaireDeconnecte { get => aderversaireDeconnecte; set => aderversaireDeconnecte = value; }
 
         private void Awake()
         {
@@ -45,8 +46,17 @@ namespace Mvc.Core
             {
                 PhotonNetwork.AutomaticallySyncScene = true;
                 listeMatchs = new Dictionary<string, RoomInfo>();
-
-                initialiseJoueur();
+                Fonctions.activerObjet(lobbyMenu.CreerMatch);
+                Fonctions.activerObjet(lobbyMenu.RejoindreMatch);
+                veutCreerMatch = false;
+                veutRejoindreMatch = false;
+                quitterMatch = false;
+                nomSceneRetour = "ScenePlay";
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                aderversaireDeconnecte = false;
+                nomSceneRetour = "SceneLobbyMatchEnLigne";
             }
             reconnect = false;
         }
@@ -65,10 +75,6 @@ namespace Mvc.Core
                 if (!ConnexionInternet.connect)
                 {
                     Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
-                }
-                else if (ConnexionInternet.connect && !connectePhoton)
-                {
-                    initialiseJoueur();
                 }
             }
             if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
@@ -103,8 +109,6 @@ namespace Mvc.Core
         }
         public override void OnDisconnected(DisconnectCause cause)
         {
-            connectePhoton = false;
-            //PhotonNetwork.DestroyAll();
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a quitté le photon...");
             if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
@@ -121,12 +125,18 @@ namespace Mvc.Core
         }
         public override void OnConnectedToMaster()
         {
-            connectePhoton = true;
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " est connecé(e) à photon...");
             if (Fonctions.sceneActuelle("SceneLobbyMatchEnLigne"))
             {
-                Fonctions.activerObjet(lobbyMenu.CreerMatch);
-                Fonctions.activerObjet(lobbyMenu.RejoindreMatch);
+                if (veutCreerMatch)
+                {
+                    string matchEnCours = PlayerPrefs.GetString("codeMatchEnCours");
+                    creerMatch(matchEnCours);
+                }
+                else if (veutRejoindreMatch)
+                {
+                    rejoindreMatch();
+                }
             }
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
@@ -153,9 +163,7 @@ namespace Mvc.Core
                     Debug.Log("Match Ouvert : " + PhotonNetwork.CurrentRoom.IsOpen);
                 }
             }
-            //PhotonNetwork.CurrentRoom.remove;
 
-            Debug.Log("Connecte au Lobby : " + PhotonNetwork.InLobby);
             if (PhotonNetwork.InLobby)
             {
                 PhotonNetwork.LeaveLobby();
@@ -169,8 +177,7 @@ namespace Mvc.Core
         {
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a quitté le lobby...");
             listeMatchs.Clear();
-            if (!connectePhoton)
-                PhotonNetwork.Disconnect();
+            PhotonNetwork.Disconnect();
         }
         public void rejoindreMatch()
         {
@@ -178,13 +185,10 @@ namespace Mvc.Core
             {
                 PhotonNetwork.JoinLobby();
             }
-            //string matchEnCours = PlayerPrefs.GetString("codeMatchEnCours");
-            //PhotonNetwork.JoinRoom(matchEnCours);
         }
 
         public override void OnJoinedLobby()
         {
-            // whenever this joins a new lobby, clear any previous room lists
             listeMatchs.Clear();
             Debug.Log("Rejoins le Lobby");
         }
@@ -225,6 +229,9 @@ namespace Mvc.Core
             }
             else
             {
+                lobbyMenu.EnConnexion = false;
+                veutCreerMatch = false;
+                veutRejoindreMatch = false;
                 Fonctions.afficherMsgScene("Le code du match est incorrect", "erreur");
                 PhotonNetwork.LeaveLobby();
             }
@@ -235,6 +242,9 @@ namespace Mvc.Core
             Debug.Log("vous n'avez pas pu rejoindre le match");
             if (Fonctions.sceneActuelle("SceneLobbyMatchEnLigne"))
             {
+                lobbyMenu.EnConnexion = false;
+                veutCreerMatch = false;
+                veutRejoindreMatch = false;
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
                     Fonctions.changerDeScene(nomSceneRetour);
@@ -248,12 +258,12 @@ namespace Mvc.Core
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
                 reconnect = false;
-                //sceneController.MatchEnLigneController.MatchEnligne.
             }
         }
 
         public void creerMatch(string codeMatch)
         {
+            initialiseJoueur();
             RoomOptions options = new RoomOptions { MaxPlayers = maxJoueurs, PlayerTtl = 0, EmptyRoomTtl = 5 };
             PhotonNetwork.CreateRoom(codeMatch, options, null);
         }
@@ -265,6 +275,8 @@ namespace Mvc.Core
         }
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
+            lobbyMenu.EnConnexion = true;
+            veutCreerMatch = false;
             Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
         }
 
@@ -315,8 +327,10 @@ namespace Mvc.Core
         }
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
+            Debug.Log(otherPlayer.NickName+" a s'est déconnecté");
             if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
+                aderversaireDeconnecte = true;
                 if (sceneController.MatchEnLigneController.MatchEnligne.EtatDuMatch == EtatMatch.EnCours)
                 {
                     reconnect = true;

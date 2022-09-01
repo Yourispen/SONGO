@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mvc.Models;
 using Mvc.Controllers;
-using System;
 using UnityEngine.UI;
 
 namespace Mvc.Core

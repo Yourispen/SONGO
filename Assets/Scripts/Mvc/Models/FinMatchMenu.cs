@@ -42,7 +42,6 @@ namespace Mvc.Models
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.QuitterMatch = true;
-                PhotonManager.connectePhoton = false;
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.quitterLobby();
             }
         }

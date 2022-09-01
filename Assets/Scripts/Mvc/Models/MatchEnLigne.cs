@@ -22,13 +22,7 @@ namespace Mvc.Models
         [SerializeField] private GameObject cameraP2;
         [SerializeField] private bool abandon;
         [SerializeField] private bool joueurDeconnecte;
-
-
-        //[SerializeField] private SongoMatchEnLigne songoMatchEnLigne;
-
-        //[SerializeField] protected MatchEnLigne matchEnLigne = GameObject.Find("MatchEnLigne").GetComponent<MatchEnLigne>();
-
-        //[SerializeField] private List<JoueurOn> listeJoueurOn = new List<JoueurOn>();
+        [SerializeField] private int idDerniereCaseJoue;
 
 
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
@@ -36,23 +30,23 @@ namespace Mvc.Models
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
         public bool Abandon { get => abandon; set => abandon = value; }
         public bool JoueurDeconnecte { get => joueurDeconnecte; set => joueurDeconnecte = value; }
+        public int IdDerniereCaseJoue { get => idDerniereCaseJoue; set => idDerniereCaseJoue = value; }
 
         void Awake()
         {
             if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
+                idDerniereCaseJoue = 14;
                 Fonctions.activerObjet(cameraP1);
             }
             else
             {
+                idDerniereCaseJoue = 15;
                 Fonctions.activerObjet(cameraP2);
-                //Fonctions.desactiverObjet(cameraP1);
             }
         }
         private void Start()
         {
-            //joueurConnecte = GameObject.Find("JoueurConnecte").GetComponent<JoueurConnecte>();
-            //JoueurNonConnecte joueurNonConnecte = GameObject.Find("JoueurNonConnecte").GetComponent<JoueurNonConnecte>();
             abandon = false;
             joueurDeconnecte = false;
         }
@@ -151,7 +145,7 @@ namespace Mvc.Models
                         string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
-                    //matchEnLigneController.ajouter();
+                    matchEnLigneController.ajouter();
                 }
                 else
                 {
@@ -185,7 +179,7 @@ namespace Mvc.Models
                         string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
-                    //matchEnLigneController.ajouter();
+                    matchEnLigneController.ajouter();
                 }
                 else
                 {
@@ -203,7 +197,6 @@ namespace Mvc.Models
 
 
             }
-            //abandon = false;
             scoreMatch.afficherScoreMatch();
         }
 
@@ -230,6 +223,26 @@ namespace Mvc.Models
                 resultatDuMatch = ResultatMatch.V1;
             }
             finDuMatch();
+        }
+        public override void rejouerCoup(Case caseDepart)
+        {
+            Debug.Log("coup rejoué");
+            if (caseDepart.Id < 7 || caseDepart.Id == 14)
+            {
+                joueur1.Tour = Tour.MonTour;
+                joueur1.Swipe.enabled = true;
+                joueur2.Swipe.enabled = false;
+                joueur2.Tour = Tour.SonTour;
+                tourJ.activerTourjoueur(1);
+            }
+            else if ((caseDepart.Id >= 7 && caseDepart.Id < 14) || caseDepart.Id == 15)
+            {
+                joueur2.Tour = Tour.MonTour;
+                joueur2.Swipe.enabled = true;
+                joueur1.Swipe.enabled = false;
+                joueur1.Tour = Tour.SonTour;
+                tourJ.activerTourjoueur(2);
+            }
         }
 
         public new void insert()
@@ -277,7 +290,6 @@ namespace Mvc.Models
                        {
                            data = new Dictionary<string, Dictionary<string, string>>();
                        }
-                       //Fonctions.showDictionary(data);
                        Debug.Log(data.Count);
                        int cpt = 0;
                        foreach (var value in data.Values)
@@ -302,7 +314,6 @@ namespace Mvc.Models
                    {
                        Debug.Log(this.msgFailed);
                    }
-                   //statut = StatutDatabase.Succes;
                });
         }
 

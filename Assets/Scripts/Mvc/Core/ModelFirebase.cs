@@ -1,15 +1,6 @@
-using Firebase;
-//using Firebase.Analytics;
 using Firebase.Database;
-using Firebase.Auth;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
-using Firebase.Extensions;
-using UnityEditor;
-using Mvc.Entities;
-using System;
 
 namespace Mvc.Core
 {

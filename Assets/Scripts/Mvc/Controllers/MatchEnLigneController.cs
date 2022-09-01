@@ -1,10 +1,5 @@
-using Mvc.Core;
 using Mvc.Models;
-using System.Collections.Generic;
 using UnityEngine;
-using Mvc.Entities;
-using System;
-using Firebase.Database;
 
 namespace Mvc.Controllers
 {

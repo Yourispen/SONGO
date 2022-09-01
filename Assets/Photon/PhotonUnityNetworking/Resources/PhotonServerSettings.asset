@@ -43,6 +43,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - abandonJoueur
   - jouerMatch
+  - reconnecterJoueur
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

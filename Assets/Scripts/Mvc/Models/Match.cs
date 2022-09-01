@@ -140,20 +140,18 @@ namespace Mvc.Models
         {
             if (idCaseDepart >= 7)
             {
-                PlayerPrefs.SetInt("tourMatchEnCours", 1);
                 if (joueur1 != null)
                 {
                     joueur1.Tour = Tour.MonTour;
                     joueur1.Swipe.enabled = true;
                 }
-                if (joueur1 != null)
+                if (joueur2 != null)
                     joueur2.Tour = Tour.SonTour;
                 outilsJoueur.activerCompteurJoueur(1);
                 tourJ.activerTourjoueur(1);
             }
             else
             {
-                PlayerPrefs.SetInt("tourMatchEnCours", 2);
                 if (joueur2 != null)
                 {
                     joueur2.Tour = Tour.MonTour;
@@ -169,24 +167,15 @@ namespace Mvc.Models
         {
             if (etatDuMatch == EtatMatch.Debut || etatDuMatch == EtatMatch.Fin || caseDepart.Id == 14 || caseDepart.Id == 15)
             {
-                rejouerCoup();
+                Debug.Log("je rejoue le coup");
+                rejouerCoup(caseDepart);
             }
             else
             {
                 tableMatch.parcourirLaTable(caseDepart);
             }
         }
-        public void rejouerCoup()
-        {
-            if (joueur1.Tour == Tour.MonTour)
-            {
-                joueur1.Swipe.enabled = true;
-            }
-            else if (joueur2.Tour == Tour.MonTour)
-            {
-                joueur2.Swipe.enabled = true;
-            }
-        }
+        public abstract void rejouerCoup(Case caseDepart);
         public abstract void finDuMatch();
         public void rejouerMatch()
         {

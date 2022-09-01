@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mvc.Models;
 using Photon.Pun;
@@ -124,7 +122,6 @@ namespace Mvc.Core
                                     {
                                         if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
                                         {
-                                            //if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
                                             if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
                                             {
                                                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
@@ -179,7 +176,6 @@ namespace Mvc.Core
                 {
                     Debug.Log("J'ai joué");
                     ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 7);
-                    //photonView.RPC("RPC_jouer", RpcTarget.AllBuffered, case_de_depart);
                 }
             }
         }

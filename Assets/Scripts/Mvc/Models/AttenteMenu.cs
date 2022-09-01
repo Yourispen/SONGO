@@ -52,14 +52,12 @@ namespace Mvc.Models
         }
         void Start()
         {
-            // Debug.Log("instancier Joueur");
-            //photonManager.instancierUnJoueur();
+            
         }
 
         public void boutonRetourAttenteJoueur()
         {
             photonManager.QuitterMatch = true;
-            PhotonManager.connectePhoton = false;
             photonManager.quitterLobby();
         }
     }

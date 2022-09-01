@@ -47,22 +47,6 @@ namespace Mvc.Models
                         PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[0].NickName);
                         Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur2.gameObject);
                     }
-                    else
-                    {
-                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 1 : 2;
-                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 1)
-                        {
-                            tour = Tour.MonTour;
-                            swipe.enabled = true;
-                        }
-                        else
-                        {
-                            tour = Tour.SonTour;
-                            swipe.enabled = false;
-                        }
-                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
-
-                    }
                     surnom = PlayerPrefs.GetString("surnom");
                     email = PlayerPrefs.GetString("email");
 
@@ -84,19 +68,16 @@ namespace Mvc.Models
                     else
                     {
                         Fonctions.afficherMsgScene("", "primaire", 0);
-                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 2 : 1;
                         surnom = PlayerPrefs.GetString("surnomAdversaire");
-                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 2)
+                        if (((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte)
                         {
-                            tour = Tour.MonTour;
-                            swipe.enabled = true;
+
+                            PhotonView.RPC("reconnecterJoueur", RpcTarget.AllBuffered, ((MatchEnLigne)match).IdDerniereCaseJoue, match.Joueur1.NumPosition);
+
+                            ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte = false;
+
                         }
-                        else
-                        {
-                            tour = Tour.SonTour;
-                            swipe.enabled = false;
-                        }
-                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
+
                     }
                     PhotonManager.reconnect = false;
                 }
@@ -114,21 +95,7 @@ namespace Mvc.Models
                         match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position;
                         match.OutilsJoueur.PlaqueNom2.rectTransform.position = positionTemp;
                     }
-                    else
-                    {
-                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 2 : 1;
-                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 2)
-                        {
-                            tour = Tour.MonTour;
-                            swipe.enabled = true;
-                        }
-                        else
-                        {
-                            tour = Tour.SonTour;
-                            swipe.enabled = false;
-                        }
-                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
-                    }
+
                     surnom = PlayerPrefs.GetString("surnom");
                     email = PlayerPrefs.GetString("email");
                 }
@@ -149,24 +116,16 @@ namespace Mvc.Models
                     else
                     {
                         Fonctions.afficherMsgScene("", "primaire", 0);
-                        numPosition = PlayerPrefs.GetInt("premierAjouer") == 1 ? 1 : 2;
                         surnom = PlayerPrefs.GetString("surnomAdversaire");
-                        if (PlayerPrefs.GetInt("tourMatchEnCours") == 1)
+                        if (((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte)
                         {
-                            tour = Tour.MonTour;
-                            swipe.enabled = true;
+                            photonView.RPC("reconnecterJoueur", RpcTarget.AllBuffered, ((MatchEnLigne)match).IdDerniereCaseJoue, match.Joueur2.NumPosition);
+                            ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte = false;
                         }
-                        else
-                        {
-                            tour = Tour.SonTour;
-                            swipe.enabled = false;
-                        }
-                        match.tourJoueur(PlayerPrefs.GetInt("tourMatchEnCours"));
                     }
                     PhotonManager.reconnect = false;
                 }
             }
-
         }
         void OnEnable()
         {
@@ -238,6 +197,44 @@ namespace Mvc.Models
         [PunRPC]
         public void jouerMatch(int idCaseDepart)
         {
+            ((MatchEnLigne)match).IdDerniereCaseJoue = idCaseDepart;
+            swipe.enabled = false;
+            match.jouerTable(match.TableMatch.ListeCases[idCaseDepart]);
+        }
+
+        [PunRPC]
+        public void reconnecterJoueur(int idCaseDepart, int numPosition)
+        {
+            match.Joueur1.CouleurTouche = match.Joueur1.CouleurToucheJoueur1;
+            match.Joueur2.CouleurTouche = match.Joueur2.CouleurToucheJoueur2;
+            if (numPosition == 1)
+            {
+                if (idCaseDepart == 14 || idCaseDepart < 7)
+                {
+                    match.Joueur1.NumPosition = 1;
+                    match.Joueur2.NumPosition = 2;
+                }
+                else if (idCaseDepart == 15 || (idCaseDepart < 14 && idCaseDepart >= 7))
+                {
+                    match.Joueur1.NumPosition = 2;
+                    match.Joueur2.NumPosition = 1;
+                }
+            }
+            else
+            {
+                if (idCaseDepart == 14 || idCaseDepart < 7)
+                {
+                    match.Joueur1.NumPosition = 2;
+                    match.Joueur2.NumPosition = 1;
+                }
+                else if (idCaseDepart == 15 || (idCaseDepart < 14 && idCaseDepart >= 7))
+                {
+                    match.Joueur1.NumPosition = 1;
+                    match.Joueur2.NumPosition = 2;
+                }
+            }
+            Debug.Log(gameObject.name + " a joué la case " + idCaseDepart);
+            ((MatchEnLigne)match).IdDerniereCaseJoue = idCaseDepart;
             swipe.enabled = false;
             match.jouerTable(match.TableMatch.ListeCases[idCaseDepart]);
         }
@@ -325,8 +322,6 @@ namespace Mvc.Models
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
             Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente);
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
-            //Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
-            //((MatchEnLigne)match).MatchEnLigneController.recupererScoreDuMatch();
             yield return new WaitForSeconds(3);
             match.ScoreMatch.afficherScoreMatch();
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.AttenteJoueur);

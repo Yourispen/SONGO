@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Facebook.Unity;
-using Firebase.Auth;
-using System;
 using Mvc.Core;
-using Mvc.Controllers;
 
 namespace Mvc.Controllers
 {
@@ -44,14 +38,14 @@ namespace Mvc.Controllers
 
             if (Fonctions.sceneActuelle("SceneMenuPrincipal"))
             {
-                if (PlayerPrefs.HasKey("etatConnexionCompte"))
+                if (PlayerPrefs.HasKey("etatConnexionCompte") && PlayerPrefs.HasKey("surnom") && PlayerPrefs.HasKey("idConnexionCompte"))
                 {
                     Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
                     Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
                     return;
                 }
                 Fonctions.debutChargement();
-                if (PlayerPrefs.HasKey("surnom"))
+                if (PlayerPrefs.HasKey("surnom") && PlayerPrefs.HasKey("idConnexionCompte"))
                 {
                     Debug.Log(PlayerPrefs.GetString("surnom"));
                     Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));

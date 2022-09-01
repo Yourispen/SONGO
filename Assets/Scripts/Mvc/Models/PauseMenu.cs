@@ -50,7 +50,6 @@ namespace Mvc.Models
                     ((MatchEnLigne)match).abandonMatch(PlayerPrefs.GetInt("numPositionMatchEnCours"));
                     return;
                 }
-                //photonView.RPC("RPC_jouer", RpcTarget.AllBuffered, case_de_depart);
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
                     match.Joueur1.PhotonView.RPC("abandonJoueur", RpcTarget.AllBuffered, PlayerPrefs.GetInt("numPositionMatchEnCours"));
@@ -115,7 +114,6 @@ namespace Mvc.Models
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.QuitterMatch = true;
-                PhotonManager.connectePhoton = false;
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.quitterLobby();
             }
         }

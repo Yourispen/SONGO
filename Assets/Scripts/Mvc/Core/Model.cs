@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using Mvc.Models;
 using Newtonsoft.Json;
 
 namespace Mvc.Core

@@ -2,7 +2,6 @@ using Mvc.Core;
 using Mvc.Models;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 namespace Mvc.Controllers
 {

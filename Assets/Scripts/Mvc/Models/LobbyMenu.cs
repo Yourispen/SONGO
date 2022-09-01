@@ -24,6 +24,7 @@ namespace Mvc.Models
         public GameObject MenuLobby { get => menuLobby; set => menuLobby = value; }
         public GameObject CreerMatch { get => creerMatch; set => creerMatch = value; }
         public PhotonManager PhotonManager { get => photonManager; set => photonManager = value; }
+        public bool EnConnexion { get => enConnexion; set => enConnexion = value; }
 
         void Start()
         {
@@ -35,12 +36,14 @@ namespace Mvc.Models
                 return;
             if (ConnexionInternet.connect)
             {
+                enConnexion = true;
                 System.Random rand = new System.Random();
                 string codeMatch = rand.Next(10000000, 100000000).ToString();
-                PlayerPrefs.SetString("codeMatchEnCours",codeMatch);
+                PlayerPrefs.SetString("codeMatchEnCours", codeMatch);
                 PlayerPrefs.SetInt("numPositionMatchEnCours", 1);
                 Debug.Log("Code Match : " + codeMatch);
-                photonManager.creerMatch(codeMatch);
+                photonManager.VeutCreerMatch = true;
+                photonManager.initialiseJoueur();
             }
             else
             {
@@ -64,10 +67,12 @@ namespace Mvc.Models
                     Fonctions.afficherMsgScene("Le code du match est incorrect", "erreur");
                     return;
                 }
+                enConnexion = true;
                 PlayerPrefs.SetInt("numPositionMatchEnCours", 2);
                 PlayerPrefs.SetString("codeMatchEnCours", code);
                 Debug.Log("Code Match : " + code);
-                photonManager.rejoindreMatch();
+                photonManager.VeutRejoindreMatch = true;
+                photonManager.initialiseJoueur();
             }
             else
             {
@@ -79,10 +84,9 @@ namespace Mvc.Models
 
         public void boutonRetourScene()
         {
-            PhotonManager.connectePhoton = false;
-            photonManager.quitterLobby();
-            string nomScene = "ScenePlay";
-            Fonctions.changerDeScene(nomScene);
+            if (enConnexion)
+                return;
+            Fonctions.changerDeScene("ScenePlay");
         }
     }
 }
