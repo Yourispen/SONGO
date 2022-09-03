@@ -113,16 +113,19 @@ namespace Mvc.Models
         {
             if (tableMatch.ListeCases[14].ListePions.Count > 35)
             {
+                resultatDuMatch=ResultatMatch.V1;
                 etatDuMatch = EtatMatch.Fin;
                 finDuMatch();
             }
             else if (tableMatch.ListeCases[15].ListePions.Count > 35)
             {
+                resultatDuMatch = ResultatMatch.V2;
                 etatDuMatch = EtatMatch.Fin;
                 finDuMatch();
             }
             else if (tableMatch.ListeCases[14].ListePions.Count == 35 && tableMatch.ListeCases[15].ListePions.Count == 35)
             {
+                resultatDuMatch = ResultatMatch.MatchNul;
                 pauseMenu.EnPause = false;
                 Fonctions.desactiverObjet(pauseMenu.BoutonPausePrefab);
                 Fonctions.activerObjet(finMatchMenu.MenuFinMatch);

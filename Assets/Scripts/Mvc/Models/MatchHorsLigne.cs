@@ -71,8 +71,14 @@ namespace Mvc.Models
 
         public override void abandonMatch()
         {
-            joueur1.Tour = joueur1.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
-            joueur2.Tour = joueur2.Tour == Tour.MonTour ? Tour.SonTour : Tour.MonTour;
+            if (joueur1.Tour == Tour.MonTour)
+            {
+                resultatDuMatch = ResultatMatch.V2;
+            }
+            else if (joueur2.Tour == Tour.MonTour)
+            {
+                resultatDuMatch = ResultatMatch.V1;
+            }
             finDuMatch();
         }
         public override void rejouerCoup(Case caseDepart)
@@ -96,14 +102,14 @@ namespace Mvc.Models
             outilsJoueur.desactiverCompteursJoueurs();
             tourJ.desactiverToursjoueurs();
             Fonctions.activerObjet(finMatchMenu.MenuFinMatch);
-            if (joueur1.Tour == Tour.MonTour)
+            if (resultatDuMatch == ResultatMatch.V1)
             {
                 joueur1.victoireJoueur();
                 joueur2.defaiteJoueur();
                 resultatDuMatch = ResultatMatch.V1;
                 Fonctions.changerTexte(finMatchMenu.TextVictoire, "Victoire de " + joueur1.Surnom + " !!!");
             }
-            else if (joueur2.Tour == Tour.MonTour)
+            else if (resultatDuMatch == ResultatMatch.V2)
             {
                 joueur2.victoireJoueur();
                 joueur1.defaiteJoueur();
