@@ -33,7 +33,6 @@ namespace Mvc.Models
 
         void Awake()
         {
-            idCaseJoue = -1;
             this.gameObject.GetComponent<Renderer>().material = listeCouleurs[PlayerPrefs.GetInt("couleurTable")];
             couleur = this.gameObject.GetComponent<Renderer>().material;
         }
@@ -76,6 +75,8 @@ namespace Mvc.Models
             }
             else if (!peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
+                idCaseJoue = idCase;
+
                 if (idCase < 7)
                     match.ResultatDuMatch = ResultatMatch.V1;
                 else if (idCase >= 7 && idCase < 14)

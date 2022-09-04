@@ -27,6 +27,7 @@ namespace Mvc.Models
         [SerializeField] protected TourJoueur tourJ;
 
 
+
         protected Match()
         {
             //this.pauseMenu = GameObject.Find("PauseMenu").GetComponent<PauseMenu>();
@@ -113,7 +114,7 @@ namespace Mvc.Models
         {
             if (tableMatch.ListeCases[14].ListePions.Count > 35)
             {
-                resultatDuMatch=ResultatMatch.V1;
+                resultatDuMatch = ResultatMatch.V1;
                 etatDuMatch = EtatMatch.Fin;
                 finDuMatch();
             }
@@ -149,7 +150,10 @@ namespace Mvc.Models
                     joueur1.Swipe.enabled = true;
                 }
                 if (joueur2 != null)
+                {
                     joueur2.Tour = Tour.SonTour;
+                    joueur2.Swipe.enabled = false;
+                }
                 outilsJoueur.activerCompteurJoueur(1);
                 tourJ.activerTourjoueur(1);
             }
@@ -161,7 +165,10 @@ namespace Mvc.Models
                     joueur2.Swipe.enabled = true;
                 }
                 if (joueur1 != null)
+                {
                     joueur1.Tour = Tour.SonTour;
+                    joueur1.Swipe.enabled = false;
+                }
                 outilsJoueur.activerCompteurJoueur(2);
                 tourJ.activerTourjoueur(2);
             }

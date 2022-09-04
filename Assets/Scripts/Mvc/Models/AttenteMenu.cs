@@ -37,24 +37,20 @@ namespace Mvc.Models
             string code = PlayerPrefs.GetString("codeMatchEnCours");
             if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
-                texteCode = "Code du match : <color=blue><size=100>" + code + "</size></color>\nPartagez le code avec votre ami";
+                texteCode = "Code du match : <color=white><size=100>" + code + "</size></color>\nPartagez le code avec votre ami";
                 Fonctions.changerTexte(textPlaqueNom1, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(plaqueNom1.gameObject);
             }
             else
             {
-                texteCode = "Vous rejoignez le match : <color=blue><size=100>" + code + "</size></color>\n";
+                texteCode = "Vous rejoignez le match : <color=white><size=100>" + code + "</size></color>\n";
                 Fonctions.changerTexte(textPlaqueNom2, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(plaqueNom2.gameObject);
             }
             Fonctions.changerTexte(codeMatch, texteCode);
             Fonctions.activerObjet(menuAttente);
         }
-        void Start()
-        {
-            
-        }
-
+       
         public void boutonRetourAttenteJoueur()
         {
             photonManager.QuitterMatch = true;

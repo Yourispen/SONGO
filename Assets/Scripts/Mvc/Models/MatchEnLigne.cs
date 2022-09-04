@@ -22,7 +22,6 @@ namespace Mvc.Models
         [SerializeField] private GameObject cameraP2;
         [SerializeField] private bool abandon;
         [SerializeField] private bool joueurDeconnecte;
-        [SerializeField] private int idDerniereCaseJoue;
 
 
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
@@ -30,18 +29,15 @@ namespace Mvc.Models
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
         public bool Abandon { get => abandon; set => abandon = value; }
         public bool JoueurDeconnecte { get => joueurDeconnecte; set => joueurDeconnecte = value; }
-        public int IdDerniereCaseJoue { get => idDerniereCaseJoue; set => idDerniereCaseJoue = value; }
 
         void Awake()
         {
             if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
-                idDerniereCaseJoue = 14;
                 Fonctions.activerObjet(cameraP1);
             }
             else
             {
-                idDerniereCaseJoue = 15;
                 Fonctions.activerObjet(cameraP2);
             }
         }
@@ -107,6 +103,15 @@ namespace Mvc.Models
             initialiseJoueurs();
             tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
             tableMatch.Match = ((Match)this);
+            if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
+            {
+                Table.idCaseJoue = 14;
+            }
+            else
+            {
+                Table.idCaseJoue = 15;
+                Fonctions.activerObjet(cameraP2);
+            }
             Fonctions.desactiverObjet(matchEnLigneController.SceneController.PhotonManager.AttenteMenu.gameObject);
         }
 

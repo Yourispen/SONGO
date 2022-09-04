@@ -469,39 +469,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1041799420, guid: 77d214ad5580562488341a328206f63d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 25cc2a94d93ddd24da814a5dfa650d91,
+        type: 2}
     - target: {fileID: 1144883807, guid: 77d214ad5580562488341a328206f63d, type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 0
+      propertyPath: m_text
+      value: C'est votre tour...
       objectReference: {fileID: 0}
     - target: {fileID: 1950173381, guid: 77d214ad5580562488341a328206f63d, type: 3}
       propertyPath: sceneController
       value: 
       objectReference: {fileID: 2110151894}
-    - target: {fileID: 42695582424099653, guid: 77d214ad5580562488341a328206f63d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 42695582424099653, guid: 77d214ad5580562488341a328206f63d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 42695582424099653, guid: 77d214ad5580562488341a328206f63d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 42695582424099653, guid: 77d214ad5580562488341a328206f63d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 42695582424099653, guid: 77d214ad5580562488341a328206f63d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 132496142886294498, guid: 77d214ad5580562488341a328206f63d,
         type: 3}
       propertyPath: m_Name
@@ -611,6 +591,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430580049449909771, guid: 77d214ad5580562488341a328206f63d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d214ad5580562488341a328206f63d, type: 3}

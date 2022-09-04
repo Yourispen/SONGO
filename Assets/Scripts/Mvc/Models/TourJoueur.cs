@@ -31,11 +31,11 @@ namespace Mvc.Models
             {
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
-                    Fonctions.changerTexte(textTour2, "à lui de jouer");
+                    Fonctions.changerTexte(textTour2, "C'est son tour...");
                 }
                 else
                 {
-                    Fonctions.changerTexte(textTour1, "à lui de jouer");
+                    Fonctions.changerTexte(textTour1, "C'est son tour...");
                 }
             }
         }

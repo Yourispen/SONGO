@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 94b19322711e2144eb83d473ba73f55b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 697b691ded443ec4380f7de6215fed40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -207,7 +207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1830, y: -50}
+  m_AnchoredPosition: {x: 1730, y: -50}
   m_SizeDelta: {x: 570, y: 250}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &252337014
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bb885620fbc76f94884413bb3c9bef50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b351b56dd316e34a817ff3e9f1cce53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -341,7 +341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -60, y: -60}
+  m_AnchoredPosition: {x: -155, y: -60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &263330048
@@ -514,8 +514,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -746,7 +746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 34, y: -50}
+  m_AnchoredPosition: {x: 134, y: -50}
   m_SizeDelta: {x: 450, y: 250}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &609206227
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bb885620fbc76f94884413bb3c9bef50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b351b56dd316e34a817ff3e9f1cce53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1708,7 +1708,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 94b19322711e2144eb83d473ba73f55b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 697b691ded443ec4380f7de6215fed40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2180,8 +2180,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3107,7 +3107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1630, y: -380}
+  m_AnchoredPosition: {x: 1530, y: -380}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5062318134947032080
@@ -3138,7 +3138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 18454356d686ac24b8dd15ceb9f21f9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 467b7af4143bf164094c63b6ac74f043, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3545,7 +3545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1490, y: -380}
+  m_AnchoredPosition: {x: 1390, y: -380}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9034212692423495949
@@ -4059,7 +4059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1770, y: -380}
+  m_AnchoredPosition: {x: 1670, y: -380}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9034212692892341921
@@ -4090,7 +4090,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 05c84a7a4243b74439cde5a5ef1d2451, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db27d83d64f48f0489bee38644edb0ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4193,7 +4193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 90, y: -380}
+  m_AnchoredPosition: {x: 200, y: -380}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9034212692919658788
@@ -4358,7 +4358,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bb885620fbc76f94884413bb3c9bef50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b351b56dd316e34a817ff3e9f1cce53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4569,7 +4569,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1350, y: -380}
+  m_AnchoredPosition: {x: 1250, y: -380}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9034212693348711728
@@ -5131,6 +5131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9034212693065727118}
     m_Modifications:
+    - target: {fileID: 365296128780378858, guid: c7f1cf82df45d9d48a293764360617ed,
+        type: 3}
+      propertyPath: m_text
+      value: "Vous \xEAtes connext\xE9 avec Facebook"
+      objectReference: {fileID: 0}
     - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5214,7 +5219,7 @@ PrefabInstance:
     - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -100
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 946350868355159203, guid: c7f1cf82df45d9d48a293764360617ed,
         type: 3}

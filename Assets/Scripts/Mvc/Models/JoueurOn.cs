@@ -27,8 +27,6 @@ namespace Mvc.Models
         [SerializeField] protected StatutDatabase statutDatabase;
         [SerializeField] protected JoueurOnController joueurOnController;
 
-        //public Swipe Swipe { get => swipe; set => swipe = value; }
-
         void Start()
         {
             if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
@@ -72,7 +70,7 @@ namespace Mvc.Models
                         if (((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte)
                         {
 
-                            PhotonView.RPC("reconnecterJoueur", RpcTarget.AllBuffered, ((MatchEnLigne)match).IdDerniereCaseJoue, match.Joueur1.NumPosition);
+                            PhotonView.RPC("reconnecterJoueur", RpcTarget.AllBuffered, Table.idCaseJoue, PlayerPrefs.GetInt("numPositionMatchEnCours"), match.Joueur1.NumPosition);
 
                             ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte = false;
 
@@ -119,7 +117,7 @@ namespace Mvc.Models
                         surnom = PlayerPrefs.GetString("surnomAdversaire");
                         if (((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte)
                         {
-                            photonView.RPC("reconnecterJoueur", RpcTarget.AllBuffered, ((MatchEnLigne)match).IdDerniereCaseJoue, match.Joueur2.NumPosition);
+                            photonView.RPC("reconnecterJoueur", RpcTarget.AllBuffered, Table.idCaseJoue, PlayerPrefs.GetInt("numPositionMatchEnCours"), match.Joueur2.NumPosition);
                             ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.AderversaireDeconnecte = false;
                         }
                     }
@@ -197,46 +195,51 @@ namespace Mvc.Models
         [PunRPC]
         public void jouerMatch(int idCaseDepart)
         {
-            ((MatchEnLigne)match).IdDerniereCaseJoue = idCaseDepart;
             swipe.enabled = false;
             match.jouerTable(match.TableMatch.ListeCases[idCaseDepart]);
         }
 
         [PunRPC]
-        public void reconnecterJoueur(int idCaseDepart, int numPosition)
+        public void reconnecterJoueur(int idCaseJoue, int numPositionMatchEnCours, int numPosition)
         {
             match.Joueur1.CouleurTouche = match.Joueur1.CouleurToucheJoueur1;
             match.Joueur2.CouleurTouche = match.Joueur2.CouleurToucheJoueur2;
+
             if (numPosition == 1)
             {
-                if (idCaseDepart == 14 || idCaseDepart < 7)
-                {
-                    match.Joueur1.NumPosition = 1;
-                    match.Joueur2.NumPosition = 2;
-                }
-                else if (idCaseDepart == 15 || (idCaseDepart < 14 && idCaseDepart >= 7))
-                {
-                    match.Joueur1.NumPosition = 2;
-                    match.Joueur2.NumPosition = 1;
-                }
+                match.Joueur1.NumPosition = numPositionMatchEnCours == 1 ? 1 : 2;
+                match.Joueur2.NumPosition = numPositionMatchEnCours == 2 ? 1 : 2;
             }
             else
             {
-                if (idCaseDepart == 14 || idCaseDepart < 7)
+                match.Joueur1.NumPosition = numPositionMatchEnCours == 2 ? 1 : 2;
+                match.Joueur2.NumPosition = numPositionMatchEnCours == 1 ? 1 : 2;
+            }
+
+            if (idCaseJoue == 14)
+            {
+                match.tourJoueur(numPosition == 1 ? 7 : 0);
+            }
+            else if (idCaseJoue == 15)
+            {
+                match.tourJoueur(numPosition == 1 ? 0 : 7);
+            }
+            else
+            {
+                Table.idCaseJoue = idCaseJoue;
+
+                if (match.TableMatch.ListeCases[idCaseJoue].ListePions.Count == 0)
                 {
-                    match.Joueur1.NumPosition = 2;
-                    match.Joueur2.NumPosition = 1;
+                    match.tourJoueur(idCaseJoue);
                 }
-                else if (idCaseDepart == 15 || (idCaseDepart < 14 && idCaseDepart >= 7))
+                else
                 {
-                    match.Joueur1.NumPosition = 1;
-                    match.Joueur2.NumPosition = 2;
+                    Debug.Log(gameObject.name + " a joué la case " + idCaseJoue);
+                    match.jouerTable(match.TableMatch.ListeCases[idCaseJoue]);
                 }
             }
-            Debug.Log(gameObject.name + " a joué la case " + idCaseDepart);
-            ((MatchEnLigne)match).IdDerniereCaseJoue = idCaseDepart;
-            swipe.enabled = false;
-            match.jouerTable(match.TableMatch.ListeCases[idCaseDepart]);
+            Debug.Log("Case jouée : " + Table.idCaseJoue);
+
         }
 
         [PunRPC]
