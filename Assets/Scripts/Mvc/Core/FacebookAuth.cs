@@ -17,6 +17,7 @@ namespace Mvc.Core
         [SerializeField] private GameObject joueurOnControllerPrefab;
         [SerializeField] private JoueurOnController joueurOnController;
         [SerializeField] private ConnexionCompte connexionCompte;
+
         public static string msgConnexion = "Vous êtes connecté avec Facebook";
 
         public FirebaseUser User { get => user; set => user = value; }
@@ -144,6 +145,7 @@ namespace Mvc.Core
             PlayerPrefs.SetInt("idNiveau", 1);
             user = null;
             joueurOnController = Fonctions.instancierObjet(joueurOnControllerPrefab).GetComponent<JoueurOnController>();
+            joueurOnController.SceneController=connexionCompte.ConnexionCompteController.SceneController;
             joueurOnController.recupereJoueurConnecte();
 
         }

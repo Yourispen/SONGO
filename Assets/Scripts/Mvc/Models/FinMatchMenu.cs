@@ -37,7 +37,7 @@ namespace Mvc.Models
         {
             if (Fonctions.sceneActuelle("SceneMatch1vs1"))
             {
-                Fonctions.changerDeScene("SceneOffline");
+                Fonctions.changerDeScene("ScenePlay");
             }
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {

@@ -64,6 +64,7 @@ namespace Mvc.Models
             Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
             if (songoJoueurOnline != null)
             {
+                Fonctions.desactiverObjet(joueurOnController.SceneController.BoutonConnexionFacebook);
                 Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
                 DateInscription = DateTime.ParseExact(songoJoueurOnline.DateInscription, "yyyy'-'MM'-'dd", null);//songoJoueurOnline.DateInscription
                 heureInscription = DateTime.ParseExact(songoJoueurOnline.HeureInscription, "HH:mm", null);
@@ -80,6 +81,7 @@ namespace Mvc.Models
                 PlayerPrefs.SetString("heureInscription", dateInscription.ToString("HH:mm"));
                 PlayerPrefs.SetInt("idConnexionCompte", ((int)connexionCompte.TypeConnexionCompte));
                 PlayerPrefs.SetInt("idNiveau", Niveau.Id);
+                Fonctions.changerTexte(joueurOnController.SceneController.TextNomUtilisateur, PlayerPrefs.GetString("surnom"));
                 Fonctions.afficherMsgScene(FacebookAuth.msgConnexion, "succes");
             }
             Fonctions.finChargement();

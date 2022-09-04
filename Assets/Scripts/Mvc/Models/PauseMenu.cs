@@ -109,7 +109,7 @@ namespace Mvc.Models
         {
             if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
             {
-                Fonctions.changerDeScene("SceneOffline");
+                Fonctions.changerDeScene("ScenePlay");
             }
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {

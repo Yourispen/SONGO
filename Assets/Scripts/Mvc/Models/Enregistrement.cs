@@ -47,7 +47,7 @@ namespace Mvc.Models
         {
             if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
             {
-                nomScene = "SceneOffline";
+                nomScene = "ScenePlay";
                 Fonctions.changerDeScene(nomScene);
             }
 

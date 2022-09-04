@@ -32,15 +32,18 @@ namespace Mvc.Core
         {
             if (joueur.Match.EtatDuMatch == EtatMatch.Debut || joueur.Match.PauseMenu.EnPause)
             {
-                if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                return;
+            }
+            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                if (PhotonNetwork.IsConnected)
                 {
-                    if(PhotonNetwork.IsConnected){
-                        if(PhotonNetwork.CurrentRoom.PlayerCount<2)
-                            return;
-                    }
-                    else{
+                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
                         return;
-                    }
+                }
+                else
+                {
+                    return;
                 }
             }
             {

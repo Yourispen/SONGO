@@ -76,6 +76,10 @@ namespace Mvc.Models
             }
             else if (!peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
             {
+                if (idCase < 7)
+                    match.ResultatDuMatch = ResultatMatch.V1;
+                else if (idCase >= 7 && idCase < 14)
+                    match.ResultatDuMatch = ResultatMatch.V2;
                 match.finDuMatch();
             }
             else

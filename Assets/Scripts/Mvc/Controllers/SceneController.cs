@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using Mvc.Core;
 
 namespace Mvc.Controllers
@@ -18,8 +19,12 @@ namespace Mvc.Controllers
         [SerializeField] private GameObject matchEnLigneControllerPrefab;
         [SerializeField] private MatchEnLigneController matchEnLigneController;
         [SerializeField] private GameObject joueurOnControllerPrefab;
+        [SerializeField] private GameObject pageDeSaisiDuSurnom;
+        [SerializeField] private GameObject pageDeConnexionCompte;
         [SerializeField] private JoueurOnController joueurOnController;
         [SerializeField] PhotonManager photonManager;
+        [SerializeField] private TMPro.TMP_Text textNomUtilisateur;
+        [SerializeField] private GameObject boutonConnexionFacebook;
 
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
         public MatchHorsLigneController MatchHorsLigneController { get => matchHorsLigneController; set => matchHorsLigneController = value; }
@@ -27,6 +32,10 @@ namespace Mvc.Controllers
         public ConnexionInternet ConnexionInternet { get => connexionInternet; set => connexionInternet = value; }
         public PhotonManager PhotonManager { get => photonManager; set => photonManager = value; }
         public JoueurOnController JoueurOnController { get => joueurOnController; set => joueurOnController = value; }
+        public TMP_Text TextNomUtilisateur { get => textNomUtilisateur; set => textNomUtilisateur = value; }
+        public GameObject PageDeSaisiDuSurnom { get => pageDeSaisiDuSurnom; set => pageDeSaisiDuSurnom = value; }
+        public GameObject PageDeConnexionCompte { get => pageDeConnexionCompte; set => pageDeConnexionCompte = value; }
+        public GameObject BoutonConnexionFacebook { get => boutonConnexionFacebook; set => boutonConnexionFacebook = value; }
 
         void Awake()
         {
@@ -40,19 +49,26 @@ namespace Mvc.Controllers
             {
                 if (PlayerPrefs.HasKey("etatConnexionCompte") && PlayerPrefs.HasKey("surnom") && PlayerPrefs.HasKey("idConnexionCompte"))
                 {
-                    Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
-                    Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
+                    if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
+                    {
+                        Fonctions.desactiverObjet(BoutonConnexionFacebook);
+                    }
+                    Fonctions.changerTexte(textNomUtilisateur, PlayerPrefs.GetString("surnom"));
+                    Fonctions.desactiverObjet(pageDeSaisiDuSurnom);
+                    Fonctions.desactiverObjet(pageDeConnexionCompte);
                     return;
                 }
                 Fonctions.debutChargement();
                 if (PlayerPrefs.HasKey("surnom") && PlayerPrefs.HasKey("idConnexionCompte"))
                 {
+                    Fonctions.changerTexte(textNomUtilisateur, PlayerPrefs.GetString("surnom"));
                     Debug.Log(PlayerPrefs.GetString("surnom"));
-                    Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
-                    Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
+                    Fonctions.desactiverObjet(pageDeSaisiDuSurnom);
+                    Fonctions.desactiverObjet(pageDeConnexionCompte);
                     Fonctions.finChargement();
                     if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
                     {
+                        Fonctions.desactiverObjet(BoutonConnexionFacebook);
                         Fonctions.afficherMsgScene(FacebookAuth.msgConnexion, "succes");
                         PlayerPrefs.SetInt("etatConnexionCompte", 1);
                     }
@@ -63,6 +79,7 @@ namespace Mvc.Controllers
                     connexionCompteController = connexionCompteControllerPrefab.GetComponent<ConnexionCompteController>();
                     Fonctions.finChargement();
                 }
+
                 //PlayerPrefs.DeleteAll();
             }
             else if (Fonctions.sceneActuelle("SceneMatch1vs1"))
@@ -76,6 +93,21 @@ namespace Mvc.Controllers
                 joueurOnController = Fonctions.instancierObjet(joueurOnControllerPrefab).GetComponentInChildren<JoueurOnController>();
                 joueurOnController.SceneController=this;*/
                 photonManager.instancierUnJoueur();
+            }
+            else if (Fonctions.sceneActuelle("ScenePlay"))
+            {
+                if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
+                {
+                    Fonctions.changerTexte(textNomUtilisateur, PlayerPrefs.GetString("surnom"));
+                    Fonctions.desactiverObjet(BoutonConnexionFacebook);
+                }
+            }
+            else if (Fonctions.sceneActuelle("SceneSetting"))
+            {
+                if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
+                {
+                    //Fonctions.desactiverObjet(boutonConnexionFacebook);
+                }
             }
         }
         void Start()
@@ -96,16 +128,16 @@ namespace Mvc.Controllers
                 Fonctions.desactiverObjet(chargement);
                 PlayerPrefs.SetString("surnom", textSaisiSurnom);
                 PlayerPrefs.SetString("role", "ROLE_CLIENT");
+                Fonctions.changerTexte(textNomUtilisateur, PlayerPrefs.GetString("surnom"));
                 if (PlayerPrefs.GetInt("idConnexionCompte") == 0)
                 {
                     Fonctions.finChargement();
-
                 }
                 else if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
                 {
                     GameObject.Find("joueurOnController").GetComponent<JoueurOnController>().ajouter();
                 }
-                Fonctions.desactiverObjet(GameObject.Find("PageDeSaisiDuSurnom"));
+                Fonctions.desactiverObjet(pageDeSaisiDuSurnom);
                 PlayerPrefs.SetInt("etatConnexionCompte", 1);
 
             }
@@ -141,18 +173,13 @@ namespace Mvc.Controllers
         {
 
         }
-        public void bouton1vs1()
-        {
-            nomScene = "SceneMatch1vs1";
-            Fonctions.changerDeScene(nomScene);
-        }
         public void bouton1vsIA()
         {
 
         }
         public void boutonHorsLigne()
         {
-            nomScene = "SceneOffline";
+            nomScene = "SceneMatch1vs1";
             Fonctions.changerDeScene(nomScene);
         }
         public void boutonEnligne()
@@ -172,10 +199,6 @@ namespace Mvc.Controllers
             if (Fonctions.sceneActuelle("ScenePlay"))
             {
                 nomScene = "SceneMenuPrincipal";
-            }
-            else if (Fonctions.sceneActuelle("SceneOffline"))
-            {
-                nomScene = "ScenePlay";
             }
             Fonctions.changerDeScene(nomScene);
         }

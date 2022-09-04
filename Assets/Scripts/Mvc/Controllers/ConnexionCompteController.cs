@@ -9,12 +9,16 @@ namespace Mvc.Controllers
     {
         [SerializeField] private GameObject connexionComptePrefab;
         [SerializeField] private ConnexionCompte connexionCompte;
+        [SerializeField] private SceneController sceneController;
         [SerializeField] public Button boutonConnexionFacebook;
+
+        public SceneController SceneController { get => sceneController; set => sceneController = value; }
 
         void OnEnable()
         {
             //connexionCompte = connexionComptePrefab.GetComponent<ConnexionCompte>();
             connexionCompte = Fonctions.instancierObjet(connexionComptePrefab).GetComponent<ConnexionCompte>();
+            connexionCompte.ConnexionCompteController = this;
             //GameObject.Find("BoutonConnexionFacebook").GetComponent<Button>(); // connexionAuCompteFacebook();
         }
         public void lister(bool single = false)
@@ -50,6 +54,8 @@ namespace Mvc.Controllers
             }
             else
             {
+                //Fonctions.activerObjet(sceneController.PageDeConnexionCompte);
+                //Fonctions.finChargement();
                 Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
             }
         }
@@ -64,7 +70,7 @@ namespace Mvc.Controllers
             //
             //PlayerPrefs.SetString("id", "z6hhsbMJRyaPRGSaDTHpNQ8QiKj2");
             //
-            Fonctions.desactiverObjet(GameObject.Find("PageDeConnexionCompte"));
+            Fonctions.desactiverObjet(sceneController.PageDeConnexionCompte);
         }
     }
 }

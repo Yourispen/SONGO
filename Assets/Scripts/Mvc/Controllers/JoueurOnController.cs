@@ -25,6 +25,7 @@ namespace Mvc.Controllers
             if (Fonctions.sceneActuelle("SceneMenuPrincipal"))
             {
                 joueurConnecte = Fonctions.instancierObjet(joueurConnectePrefab).GetComponent<JoueurConnecte>();
+                joueurConnecte.JoueurOnController=this;
             }
             /*else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
