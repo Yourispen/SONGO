@@ -38,7 +38,7 @@ namespace Mvc.Core
             {
                 if (PhotonNetwork.IsConnected)
                 {
-                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
+                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2 && joueur.Match.EtatDuMatch == EtatMatch.EnCours)
                         return;
                 }
                 else

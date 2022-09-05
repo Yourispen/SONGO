@@ -158,5 +158,18 @@ namespace Mvc.Core
         {
             return SceneManager.GetActiveScene().name.CompareTo(nomScene) == 0;
         }
+
+        public static void activerAudioSourceDebutMatch()
+        {
+            GameObject.Find("AudioSourceDebutMatch").GetComponent<AudioSource>().Play();
+        }
+        public static void activerAudioSourceVictoire()
+        {
+            GameObject.Find("AudioSourceVictoire").GetComponent<AudioSource>().Play();
+        }
+        public static void activerAudioSourceDefaite()
+        {
+            GameObject.Find("AudioSourceDefaite").GetComponent<AudioSource>().Play();
+        }
     }
 }

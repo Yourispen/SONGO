@@ -141,6 +141,7 @@ namespace Mvc.Models
 
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
+                    Fonctions.activerAudioSourceVictoire();
                     finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurVictoire;
                     Fonctions.changerTexte(finMatchMenu.TextVictoire, "Félicitations, vous avez gagné !!!");
                     if (abandon)
@@ -154,6 +155,7 @@ namespace Mvc.Models
                 }
                 else
                 {
+                    Fonctions.activerAudioSourceDefaite();
                     finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurDefaite;
                     Fonctions.changerTexte(finMatchMenu.TextVictoire, "Désolé, vous avez perdu !!!");
                     if (abandon)
@@ -175,6 +177,7 @@ namespace Mvc.Models
 
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 2)
                 {
+                    Fonctions.activerAudioSourceVictoire();
                     finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurVictoire;
                     Fonctions.changerTexte(finMatchMenu.TextVictoire, "Félicitations, vous avez gagné !!!");
                     if (abandon)
@@ -188,6 +191,7 @@ namespace Mvc.Models
                 }
                 else
                 {
+                    Fonctions.activerAudioSourceDefaite();
                     finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurDefaite;
                     Fonctions.changerTexte(finMatchMenu.TextVictoire, "Désolé, vous avez perdu !!!");
                     if (abandon)

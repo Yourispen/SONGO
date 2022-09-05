@@ -131,6 +131,7 @@ namespace Mvc.Models
                 Fonctions.desactiverObjet(pauseMenu.BoutonPausePrefab);
                 Fonctions.activerObjet(finMatchMenu.MenuFinMatch);
                 finMatchMenu.TextVictoire.colorGradientPreset = finMatchMenu.CouleurMatchNul;
+                Fonctions.activerAudioSourceVictoire();
                 Fonctions.changerTexte(finMatchMenu.TextVictoire, "Match Nul !!!");
                 etatDuMatch = EtatMatch.Fin;
             }

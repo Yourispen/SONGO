@@ -325,7 +325,8 @@ namespace Mvc.Models
             //Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
             Fonctions.changerTexte(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente, "Le match va commencer...");
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
-            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.CodeMatch.gameObject);
+            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.CodeMatch);
+            Fonctions.activerAudioSourceDebutMatch();
             yield return new WaitForSeconds(3);
             match.ScoreMatch.afficherScoreMatch();
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.AttenteJoueur);

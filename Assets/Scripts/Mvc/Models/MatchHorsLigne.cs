@@ -102,6 +102,7 @@ namespace Mvc.Models
             outilsJoueur.desactiverCompteursJoueurs();
             tourJ.desactiverToursjoueurs();
             Fonctions.activerObjet(finMatchMenu.MenuFinMatch);
+            Fonctions.activerAudioSourceVictoire();
             if (resultatDuMatch == ResultatMatch.V1)
             {
                 joueur1.victoireJoueur();
