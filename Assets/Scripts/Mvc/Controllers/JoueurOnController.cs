@@ -1,8 +1,8 @@
 using Mvc.Core;
-using Mvc.Models;
+using Mvc.Entities;
 using System.Collections.Generic;
 using UnityEngine;
-using Mvc.Entities;
+using Mvc.Repositories;
 using System;
 
 namespace Mvc.Controllers
@@ -25,7 +25,7 @@ namespace Mvc.Controllers
             if (Fonctions.sceneActuelle("SceneMenuPrincipal"))
             {
                 joueurConnecte = Fonctions.instancierObjet(joueurConnectePrefab).GetComponent<JoueurConnecte>();
-                joueurConnecte.JoueurOnController=this;
+                joueurConnecte.JoueurOnController = this;
             }
             /*else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {

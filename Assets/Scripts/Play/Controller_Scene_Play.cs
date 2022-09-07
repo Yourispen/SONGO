@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mvc.Models;
+using Mvc.Entities;
 
 public class Controller_Scene_Play : MonoBehaviour
 {

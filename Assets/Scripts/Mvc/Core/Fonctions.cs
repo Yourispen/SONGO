@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mvc.Models;
+using Mvc.Entities;
 using Mvc.Controllers;
 using UnityEngine.UI;
 

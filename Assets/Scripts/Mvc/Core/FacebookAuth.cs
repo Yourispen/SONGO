@@ -4,7 +4,7 @@ using Facebook.Unity;
 using Firebase.Auth;
 using System;
 using Mvc.Controllers;
-using Mvc.Models;
+using Mvc.Entities;
 
 namespace Mvc.Core
 {
@@ -145,7 +145,7 @@ namespace Mvc.Core
             PlayerPrefs.SetInt("idNiveau", 1);
             user = null;
             joueurOnController = Fonctions.instancierObjet(joueurOnControllerPrefab).GetComponent<JoueurOnController>();
-            joueurOnController.SceneController=connexionCompte.ConnexionCompteController.SceneController;
+            joueurOnController.SceneController = connexionCompte.ConnexionCompteController.SceneController;
             joueurOnController.recupereJoueurConnecte();
 
         }

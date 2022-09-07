@@ -3,7 +3,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Mvc.Controllers;
-using Mvc.Models;
+using Mvc.Entities;
 
 namespace Mvc.Core
 {
@@ -327,7 +327,7 @@ namespace Mvc.Core
         }
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
-            Debug.Log(otherPlayer.NickName+" a s'est déconnecté");
+            Debug.Log(otherPlayer.NickName + " a s'est déconnecté");
             if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
                 aderversaireDeconnecte = true;

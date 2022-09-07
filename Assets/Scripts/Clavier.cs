@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Mvc.Models;
+using Mvc.Entities;
 
 public class Clavier : MonoBehaviour
 {
@@ -12,13 +12,13 @@ public class Clavier : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ouvrir_clavier()
     {
-        clavier = TouchScreenKeyboard.Open("",TouchScreenKeyboardType.NamePhonePad);
+        clavier = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NamePhonePad);
 
-        
+
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using Mvc.Core;
-using Mvc.Models;
+using Mvc.Entities;
 using Mvc.Controllers;
 
 public class Controller_Menu_Principal : MonoBehaviour

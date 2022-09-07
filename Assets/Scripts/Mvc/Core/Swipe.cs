@@ -1,5 +1,5 @@
 using UnityEngine;
-using Mvc.Models;
+using Mvc.Entities;
 using Photon.Pun;
 
 namespace Mvc.Core
@@ -10,7 +10,7 @@ namespace Mvc.Core
         [SerializeField] private Vector2 startPosition, stopPosition;
         [SerializeField] private float tempsActuel;
         [SerializeField] private float tempsDepart;
-        [SerializeField] private Mvc.Models.Joueur joueur;
+        [SerializeField] private Mvc.Entities.Joueur joueur;
         [SerializeField] private float dragDistance = 70f;
         [SerializeField] private GameObject objetTouche;
         [SerializeField] private Case caseTouche;

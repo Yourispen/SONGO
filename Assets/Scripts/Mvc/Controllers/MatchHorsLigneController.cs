@@ -1,5 +1,5 @@
 using Mvc.Core;
-using Mvc.Models;
+using Mvc.Entities;
 using UnityEngine;
 
 namespace Mvc.Controllers

@@ -1,4 +1,4 @@
-using Mvc.Models;
+using Mvc.Entities;
 using UnityEngine;
 
 namespace Mvc.Controllers
