@@ -38,7 +38,7 @@ namespace Mvc.Entities
         public void BoutonAbondonner()
         {
             Fonctions.desactiverObjet(menuPausePrefab);
-            if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            if (SceneManager.GetActiveScene().name == "SceneMatch1vs1" || Fonctions.sceneActuelle("SceneMatchEntrainement"))
             {
                 match.abandonMatch();
             }
@@ -63,7 +63,7 @@ namespace Mvc.Entities
         public void BoutonContinuer()
         {
             enPause = false;
-            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+            if (Fonctions.sceneActuelle("SceneMatch1vs1") || Fonctions.sceneActuelle("SceneMatchEntrainement"))
             {
                 if (match.Joueur1.Tour == Tour.MonTour)
                 {
@@ -107,7 +107,7 @@ namespace Mvc.Entities
         }
         public void BoutonQuitter()
         {
-            if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
             {
                 Fonctions.changerDeScene("ScenePlay");
             }
@@ -115,6 +115,10 @@ namespace Mvc.Entities
             {
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.QuitterMatch = true;
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.quitterLobby();
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEntrainement"))
+            {
+                Fonctions.changerDeScene("SceneMenuPrincipal");
             }
         }
     }

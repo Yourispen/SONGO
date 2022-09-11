@@ -90,7 +90,7 @@ namespace Mvc.Entities
                         PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[1].NickName);
                         Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur1.gameObject);
                         Vector3 positionTemp = match.OutilsJoueur.PlaqueNom1.rectTransform.position;
-                        match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position;
+                        match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position + new Vector3(0, -3, 0);
                         match.OutilsJoueur.PlaqueNom2.rectTransform.position = positionTemp;
                     }
 

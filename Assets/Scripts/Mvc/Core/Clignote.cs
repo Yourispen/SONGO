@@ -10,7 +10,7 @@ namespace Mvc.Core
         [SerializeField] private Material couleurInitiale;
         void Start()
         {
-            couleurInitiale = this.gameObject.GetComponent<Renderer>().material;
+            //couleurInitiale = this.gameObject.GetComponent<Renderer>().material;
             tempsDepart = Time.time;
         }
 

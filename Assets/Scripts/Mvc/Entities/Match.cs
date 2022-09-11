@@ -46,6 +46,7 @@ namespace Mvc.Entities
         public ScoreMatch ScoreMatch { get => scoreMatch; set => scoreMatch = value; }
         public OutilsJoueur OutilsJoueur { get => outilsJoueur; set => outilsJoueur = value; }
         public TourJoueur TourJ { get => tourJ; set => tourJ = value; }
+        public bool MatchRejoue { get => matchRejoue; set => matchRejoue = value; }
 
         public IEnumerator instancierLesPions()
         {
@@ -60,6 +61,8 @@ namespace Mvc.Entities
         }
         public IEnumerator partagerLesPions()
         {
+            if (!Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                Fonctions.finChargement();
             tableMatch.reinitialiseCases();
             int i = 0;
             while (i < 70)

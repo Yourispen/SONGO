@@ -9,45 +9,45 @@ namespace Mvc.Entities
     public class MatchHorsLigne : Match
     {
         public static int nbJoueur;
-        [SerializeField] private GameObject joueurOffPrefab;
-        [SerializeField] private MatchHorsLigneController matchHorsLigneController;
-        [SerializeField] private Enregistrement enregistrement;
+        [SerializeField] protected GameObject joueurOffPrefab;
+        [SerializeField] protected MatchHorsLigneController matchHorsLigneController;
+        [SerializeField] protected Enregistrement enregistrement;
         public MatchHorsLigneController MatchHorsLigneController { get => matchHorsLigneController; set => matchHorsLigneController = value; }
+        public Enregistrement Enregistrement { get => enregistrement; set => enregistrement = value; }
 
-        void OnEnable()
-        {
-            debuterMatch();
-        }
         public override void debuterMatch()
         {
-            matchRejoue = false;
             nbJoueur = 0;
             tableMatch = Fonctions.instancierObjet(songoMatchPrefab).GetComponentInChildren<Table>();
-            tableMatch.Match = ((Match)this);
+            tableMatch.Match = this;
 
             pauseMenu = Fonctions.instancierObjet(GameObject.Find("PauseMenu")).GetComponentInChildren<PauseMenu>();
-            pauseMenu.Match = ((Match)this);
+            pauseMenu.Match = this;
 
             finMatchMenu = Fonctions.instancierObjet(GameObject.Find("FinMatchMenu")).GetComponentInChildren<FinMatchMenu>();
-            finMatchMenu.Match = ((Match)this);
+            finMatchMenu.Match = this;
 
             tourJ = Fonctions.instancierObjet(GameObject.Find("TourJoueur")).GetComponentInChildren<TourJoueur>();
-            tourJ.Match = ((Match)this);
+            tourJ.Match = this;
 
             outilsJoueur = Fonctions.instancierObjet(GameObject.Find("OutilsJoueur")).GetComponentInChildren<OutilsJoueur>();
-            outilsJoueur.Match = ((Match)this);
+            outilsJoueur.Match = this;
 
             scoreMatch = Fonctions.instancierObjet(GameObject.Find("ScoreMatch")).GetComponentInChildren<ScoreMatch>();
-            scoreMatch.Match = ((Match)this);
+            scoreMatch.Match = this;
 
-            enregistrement = Fonctions.instancierObjet(GameObject.Find("Enregistrement")).GetComponentInChildren<Enregistrement>();
-            enregistrement.Match = ((Match)this);
+            Enregistrement = Fonctions.instancierObjet(GameObject.Find("Enregistrement")).GetComponentInChildren<Enregistrement>();
+            Enregistrement.Match = this;
+
+            initialiseJoueurs();
+            matchRejoue = false;
+
+
         }
 
         private void Start()
         {
             typeDuMatch = TypeMatch.HorsLigne1vs1;
-            initialiseJoueurs();
         }
 
         public override void initialiseJoueurs()
@@ -56,16 +56,16 @@ namespace Mvc.Entities
             joueur1.Match = ((Match)this);
             joueur1.gameObject.name = "joueur" + (nbJoueur + 1).ToString();
             joueur1.Id = "1";
-            joueur1.Surnom = enregistrement.NomJoueur1;
+            joueur1.Surnom = Enregistrement.NomJoueur1;
             joueur1.CouleurTouche = joueur1.CouleurToucheJoueur1;
             nbJoueur += 1;
             joueur2 = ((Joueur)Fonctions.instancierObjet(joueurOffPrefab).GetComponent<JoueurOff>());
             joueur2.Match = ((Match)this);
             joueur2.gameObject.name = "joueur" + (nbJoueur + 1).ToString();
             joueur2.Id = "2";
-            joueur2.Surnom = enregistrement.NomJoueur2;
+            joueur2.Surnom = Enregistrement.NomJoueur2;
             joueur2.CouleurTouche = joueur2.CouleurToucheJoueur2;
-            Fonctions.desactiverObjet(enregistrement.gameObject);
+            Fonctions.desactiverObjet(Enregistrement.gameObject);
             outilsJoueur.afficherNomsJoueurs(joueur1.Surnom, joueur2.Surnom);
         }
 

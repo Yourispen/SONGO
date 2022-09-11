@@ -46,5 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchHorslignePrefab: {fileID: 773299195938390122, guid: a3b36bc2bacf5894698d7dc83194adbe,
     type: 3}
+  matchEntrainementPrefab: {fileID: 9168264450090901229, guid: c7cfdb589dc1627439b82b27cdd26019,
+    type: 3}
   matchHorsligne: {fileID: 0}
   sceneController: {fileID: 0}

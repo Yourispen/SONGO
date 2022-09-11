@@ -43,10 +43,14 @@ namespace Mvc.Entities
             caisse.Table = this;
         }
 
-        // Start is called before the first frame update
         void Start()
         {
-            StartCoroutine(match.instancierLesPions());
+            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                StartCoroutine(((MatchEnLigne)match).instancierLesPions());
+            else if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+                StartCoroutine(((MatchHorsLigne)match).instancierLesPions());
+            else if (Fonctions.sceneActuelle("SceneMatchEntrainement"))
+                StartCoroutine(((MatchEntrainement)match).instancierLesPions());
         }
 
         public void parcourirLaTable(Case caseDepart)

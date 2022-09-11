@@ -44,6 +44,10 @@ namespace Mvc.Entities
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.QuitterMatch = true;
                 ((MatchEnLigne)match).MatchEnLigneController.SceneController.PhotonManager.quitterLobby();
             }
+            else if (Fonctions.sceneActuelle("SceneMatchEntrainement"))
+            {
+                Fonctions.changerDeScene("SceneMenuPrincipal");
+            }
         }
         public void boutonRejouer()
         {
@@ -52,7 +56,18 @@ namespace Mvc.Entities
             Fonctions.changerTexte(textVictoireMini);
             Fonctions.desactiverObjet(backgroundVictoireMini);
             Fonctions.activerObjet(match.PauseMenu.BoutonPausePrefab);
-            match.rejouerMatch();
+            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+            {
+                ((MatchHorsLigne)match).rejouerMatch();
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+            {
+                ((MatchEnLigne)match).rejouerMatch();
+            }
+            else if (Fonctions.sceneActuelle("SceneMatchEntrainement"))
+            {
+                ((MatchEntrainement)match).rejouerMatch();
+            }
         }
         public void boutonVoirTable()
         {
@@ -68,7 +83,7 @@ namespace Mvc.Entities
                 match.Joueur2.Tour = Tour.SonTour;
                 match.Joueur2.Swipe.enabled = false;
             }
-            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+            if (Fonctions.sceneActuelle("SceneMatch1vs1") || Fonctions.sceneActuelle("SceneMatchEntrainement"))
             {
                 Fonctions.changerTexte(textVictoireMini, textVictoire.text);
                 Fonctions.desactiverObjet(backgroundVictoire);

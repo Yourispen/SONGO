@@ -21,6 +21,7 @@ namespace Mvc.Entities
         [SerializeField] private TMPro.TMP_Text textAttente;
         [SerializeField] PhotonManager photonManager;
         [SerializeField] Button boutonRetour;
+        [SerializeField] Button boutonPartage;
 
         public GameObject AttenteJoueur { get => menuAttente; set => menuAttente = value; }
         public Image PlaqueNom1 { get => plaqueNom1; set => plaqueNom1 = value; }
@@ -32,6 +33,7 @@ namespace Mvc.Entities
         public Button BoutonRetour { get => boutonRetour; set => boutonRetour = value; }
         public TMP_Text TextAttente { get => textAttente; set => textAttente = value; }
         public GameObject CodeMatch { get => codeMatch; set => codeMatch = value; }
+        public Button BoutonPartage { get => boutonPartage; set => boutonPartage = value; }
 
         void Awake()
         {
@@ -45,6 +47,7 @@ namespace Mvc.Entities
             }
             else
             {
+                Fonctions.desactiverObjet(boutonPartage.gameObject);
                 texteCode = "Vous rejoignez le match : <color=white><size=100>" + code + "</size></color>\n";
                 Fonctions.changerTexte(textPlaqueNom2, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(plaqueNom2.gameObject);

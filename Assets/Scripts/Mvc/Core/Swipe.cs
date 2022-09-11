@@ -18,7 +18,7 @@ namespace Mvc.Core
         [SerializeField] private int compteurPion;
         RaycastHit hit;
 
-        public Models.Joueur Joueur { get => joueur; set => joueur = value; }
+        public Entities.Joueur Joueur { get => joueur; set => joueur = value; }
         public Case CaseTouche { get => caseTouche; set => caseTouche = value; }
         public GameObject ObjetTouche { get => objetTouche; set => objetTouche = value; }
 
@@ -109,7 +109,7 @@ namespace Mvc.Core
                                     //Debug.Log("Swipe à droite");
                                     if (toucheJouer)
                                     {
-                                        if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+                                        if (Fonctions.sceneActuelle("SceneMatch1vs1") || Fonctions.sceneActuelle("SceneMatchEntrainement"))
                                         {
                                             if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur2") == 0 && caseTouche.Id >= 7 && caseTouche.Id < 14)
                                             {
@@ -138,7 +138,7 @@ namespace Mvc.Core
 
 
                                         }
-                                        else if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+                                        else if (Fonctions.sceneActuelle("SceneMatch1vs1") || Fonctions.sceneActuelle("SceneMatchEntrainement"))
                                         {
                                             if (joueur.Tour == Tour.MonTour && joueur.gameObject.name.CompareTo("joueur1") == 0 && caseTouche.Id < 7)
                                             {

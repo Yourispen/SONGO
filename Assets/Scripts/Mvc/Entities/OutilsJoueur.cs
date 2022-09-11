@@ -39,7 +39,7 @@ namespace Mvc.Entities
 
         public void activerCompteurJoueur(int joueur)
         {
-            if (Fonctions.sceneActuelle("SceneMatch1vs1"))
+            if (Fonctions.sceneActuelle("SceneMatch1vs1") || Fonctions.sceneActuelle("SceneMatchEntrainement"))
             {
                 if (joueur == 1)
                 {

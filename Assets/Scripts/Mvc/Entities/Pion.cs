@@ -44,6 +44,12 @@ namespace Mvc.Entities
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             this.transform.position = caisse.transform.position + new Vector3(Random.Range(-1.9f, 1.9f), 5f, Random.Range(-1.9f, 1.9f));
         }
+        void OnCollisionEnter(Collision collisionInfo)
+        {
+            if(collisionInfo.gameObject.name.CompareTo("Sol")==0){
+                this.transform.position = caseActuelle.transform.position;
+            }
+        }
 
     }
 }

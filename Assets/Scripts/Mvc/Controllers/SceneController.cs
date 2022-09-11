@@ -88,10 +88,6 @@ namespace Mvc.Controllers
             }
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
-                /*matchEnLigneController = Fonctions.instancierObjet(matchEnLigneControllerPrefab).GetComponentInChildren<MatchEnLigneController>();
-                matchEnLigneController.SceneController=this;
-                joueurOnController = Fonctions.instancierObjet(joueurOnControllerPrefab).GetComponentInChildren<JoueurOnController>();
-                joueurOnController.SceneController=this;*/
                 photonManager.instancierUnJoueur();
             }
             else if (Fonctions.sceneActuelle("ScenePlay"))
@@ -177,6 +173,11 @@ namespace Mvc.Controllers
         {
 
         }
+        public void boutonMatchEntrainement()
+        {
+            nomScene = "SceneMatchEntrainement";
+            Fonctions.changerDeScene(nomScene);
+        }
         public void boutonHorsLigne()
         {
             nomScene = "SceneMatch1vs1";
@@ -202,10 +203,11 @@ namespace Mvc.Controllers
             }
             Fonctions.changerDeScene(nomScene);
         }
-        public void commencerMatch1vs1()
+        public void commencerMatchHorsLigne()
         {
             matchHorsLigneController = Fonctions.instancierObjet(matchHorsLigneControllerPrefab).GetComponent<MatchHorsLigneController>();
             matchHorsLigneController.SceneController = this;
+            matchHorsLigneController.instancierLeMatch();
         }
 
     }

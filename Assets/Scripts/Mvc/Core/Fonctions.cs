@@ -42,7 +42,9 @@ namespace Mvc.Core
         public static GameObject instancierObjet(GameObject gameObjetPrefab, Vector3 position = new Vector3())
         {
             if (GameObject.Find(gameObjetPrefab.name) != null)
-                return gameObjetPrefab;
+            {
+                return GameObject.Find(gameObjetPrefab.name);
+            }
             if (position.x == 0.00 && position.y == 0.00 && position.y == 0.00)
             {
                 position = gameObjetPrefab.transform.position;
