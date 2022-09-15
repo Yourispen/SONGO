@@ -11,7 +11,7 @@ namespace Mvc.Core
     {
         public static void faireVibrer()
         {
-            //Handheld.Vibrate();
+            Handheld.Vibrate();
         }
 
         public static void nonVeille()
@@ -39,7 +39,7 @@ namespace Mvc.Core
             return form;
         }
 
-        public static GameObject instancierObjet(GameObject gameObjetPrefab, Vector3 position = new Vector3())
+        public static GameObject instancierObjet(GameObject gameObjetPrefab, Vector3 position = new Vector3(), string nomGameObject = "")
         {
             if (GameObject.Find(gameObjetPrefab.name) != null)
             {
@@ -50,7 +50,10 @@ namespace Mvc.Core
                 position = gameObjetPrefab.transform.position;
             }
             GameObject gameObject = Instantiate(gameObjetPrefab, position, Quaternion.identity);
-            gameObject.name = gameObjetPrefab.name;
+            if (nomGameObject == "")
+                gameObject.name = gameObjetPrefab.name;
+            else
+                gameObject.name = nomGameObject;
             return gameObject;
         }
 
@@ -154,6 +157,19 @@ namespace Mvc.Core
         {
             texteDepart.text = "";
             texteDepart.text = texteArrivee;
+        }
+
+        public static void changerSprite(Image image, Sprite sprite)
+        {
+            if (image.gameObject == null)
+                return;
+            image.sprite = sprite;
+        }
+        public static void changerImage(Image ImageSortie, Image imageEntree)
+        {
+            if (imageEntree.gameObject == null)
+                return;
+            ImageSortie = imageEntree;
         }
 
         public static bool sceneActuelle(string nomScene)

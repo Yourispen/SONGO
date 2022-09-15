@@ -20,6 +20,7 @@ namespace Mvc.Entities
         [SerializeField] protected StatutDatabase statutDatabase;
         [SerializeField] private GameObject cameraP1;
         [SerializeField] private GameObject cameraP2;
+        [SerializeField] private ChatMenu chatMenu;
         [SerializeField] private bool abandon;
         [SerializeField] private bool joueurDeconnecte;
 
@@ -29,6 +30,7 @@ namespace Mvc.Entities
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
         public bool Abandon { get => abandon; set => abandon = value; }
         public bool JoueurDeconnecte { get => joueurDeconnecte; set => joueurDeconnecte = value; }
+        public ChatMenu ChatMenu { get => chatMenu; set => chatMenu = value; }
 
         void Awake()
         {

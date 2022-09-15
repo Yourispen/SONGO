@@ -100,6 +100,9 @@ namespace Mvc.Core
             }
             else
             {
+                veutCreerMatch = false;
+                veutRejoindreMatch = false;
+                lobbyMenu.EnConnexion = false;
                 Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
             }
         }
@@ -107,6 +110,7 @@ namespace Mvc.Core
         {
             Debug.Log("Connexion à internet...");
         }
+        
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a quitté le photon...");
@@ -275,7 +279,7 @@ namespace Mvc.Core
         }
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
-            lobbyMenu.EnConnexion = true;
+            lobbyMenu.EnConnexion = false;
             veutCreerMatch = false;
             Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
         }

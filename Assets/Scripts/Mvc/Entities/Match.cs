@@ -158,6 +158,10 @@ namespace Mvc.Entities
                     joueur2.Tour = Tour.SonTour;
                     joueur2.Swipe.enabled = false;
                 }
+                if(etatDuMatch==EtatMatch.EnCours){
+                    Fonctions.faireVibrer();
+                    Fonctions.activerAudioSourceDebutMatch();
+                }
                 outilsJoueur.activerCompteurJoueur(1);
                 tourJ.activerTourjoueur(1);
             }
@@ -172,6 +176,11 @@ namespace Mvc.Entities
                 {
                     joueur1.Tour = Tour.SonTour;
                     joueur1.Swipe.enabled = false;
+                }
+                if (etatDuMatch == EtatMatch.EnCours)
+                {
+                    Fonctions.faireVibrer();
+                    Fonctions.activerAudioSourceDebutMatch();
                 }
                 outilsJoueur.activerCompteurJoueur(2);
                 tourJ.activerTourjoueur(2);

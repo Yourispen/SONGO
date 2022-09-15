@@ -15,12 +15,18 @@ namespace Mvc.Entities
         [SerializeField] private GameObject plaqueCompteur1;
         [SerializeField] private Image backgroundCompteurPion1;
         [SerializeField] private TMPro.TMP_Text textPlaqueCompteur1;
+        [SerializeField] private GameObject plaqueChat1;
+        [SerializeField] private Image backgroundMessage1;
+        [SerializeField] private Image backgroundEmoji1;
         [SerializeField] private GameObject outilsJoueur2;
         [SerializeField] private Image plaqueNom2;
         [SerializeField] private TMPro.TMP_Text textPlaqueNom2;
         [SerializeField] private GameObject plaqueCompteur2;
         [SerializeField] private Image backgroundCompteurPion2;
         [SerializeField] private TMPro.TMP_Text textPlaqueCompteur2;
+        [SerializeField] private GameObject plaqueChat2;
+        [SerializeField] private Image backgroundMessage2;
+        [SerializeField] private Image backgroundEmoji2;
         [SerializeField] private Match match;
 
         public GameObject OutilsJoueur1 { get => outilsJoueur1; set => outilsJoueur1 = value; }
@@ -36,6 +42,9 @@ namespace Mvc.Entities
         public Image BackgroundCompteurPion2 { get => backgroundCompteurPion2; set => backgroundCompteurPion2 = value; }
         public TMP_Text TextPlaqueCompteur2 { get => textPlaqueCompteur2; set => textPlaqueCompteur2 = value; }
         public Match Match { get => match; set => match = value; }
+        public Image BackgroundMessage1 { get => backgroundMessage1; set => backgroundMessage1 = value; }
+        public Image BackgroundEmoji1 { get => backgroundEmoji1; set => backgroundEmoji1 = value; }
+        public Image BackgroundMessage2 { get => backgroundMessage2; set => backgroundMessage2 = value; }
 
         public void activerCompteurJoueur(int joueur)
         {
@@ -73,6 +82,45 @@ namespace Mvc.Entities
         {
             Fonctions.changerTexte(textPlaqueNom1, nom1);
             Fonctions.changerTexte(textPlaqueNom2, nom2);
+        }
+        public IEnumerator afficherMessage(string msg, int joueur)
+        {
+            if (joueur == 1)
+            {
+                if (plaqueChat1.activeSelf)
+                    yield break;
+                Fonctions.activerObjet(plaqueChat1);
+                Fonctions.activerObjet(backgroundMessage1.gameObject);
+                backgroundMessage1.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 12, backgroundMessage1.rectTransform.sizeDelta.y);
+                Fonctions.changerTexte(backgroundMessage1.GetComponentInChildren<TMPro.TMP_Text>(), msg);
+                yield return new WaitForSeconds(3);
+                Fonctions.changerTexte(backgroundMessage1.GetComponentInChildren<TMPro.TMP_Text>());
+                Fonctions.desactiverObjet(backgroundMessage1.gameObject);
+                Fonctions.desactiverObjet(plaqueChat1);
+            }
+            else
+            {
+
+            }
+
+        }
+        public IEnumerator afficherEmoji(Image emoji, int joueur)
+        {
+            if (joueur == 1)
+            {
+                if (plaqueChat1.activeSelf)
+                    yield break;
+                Fonctions.activerObjet(plaqueChat1);
+                Fonctions.changerImage(backgroundEmoji1.GetComponentInChildren<Image>(),emoji);
+                Fonctions.activerObjet(backgroundEmoji1.gameObject);
+                yield return new WaitForSeconds(3);
+                Fonctions.desactiverObjet(backgroundEmoji1.gameObject);
+                Fonctions.desactiverObjet(plaqueChat1);
+            }
+            else
+            {
+
+            }
         }
     }
 }

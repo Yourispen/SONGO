@@ -48,7 +48,7 @@ namespace Mvc.Entities
             else
             {
                 Fonctions.desactiverObjet(boutonPartage.gameObject);
-                texteCode = "Vous rejoignez le match : <color=white><size=100>" + code + "</size></color>\n";
+                texteCode = "Vous rejoignez le match : <color=white><size=50>" + code + "</size></color>\n";
                 Fonctions.changerTexte(textPlaqueNom2, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(plaqueNom2.gameObject);
             }
