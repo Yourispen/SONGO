@@ -42,7 +42,7 @@ namespace Mvc.Controllers
             //PlayerPrefs.SetInt("etatConnexionCompte", 1);
             //PlayerPrefs.DeleteAll(); return;
             //PlayerPrefs.SetString("id", "z6hhsbMJRyaPRGSaDTHpNQ8QiKj2");
-            //PlayerPrefs.SetString("surnom","Glenneriss"); return;
+            //PlayerPrefs.SetString("surnom","Glenneriss"); //return;
             connexionInternet = Fonctions.instancierObjet(connexionInternetPrefab).GetComponent<ConnexionInternet>();
 
             if (Fonctions.sceneActuelle("SceneMenuPrincipal"))

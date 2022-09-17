@@ -44,6 +44,10 @@ MonoBehaviour:
   - abandonJoueur
   - jouerMatch
   - reconnecterJoueur
+  - envoyerEmoji
+  - envoyerMessage
+  - joueurEstPret
+  - joueurVeutRejouer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

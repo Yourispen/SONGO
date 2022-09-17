@@ -25,6 +25,12 @@ namespace Mvc.Entities
         [SerializeField] protected ScoreMatch scoreMatch;
         [SerializeField] protected OutilsJoueur outilsJoueur;
         [SerializeField] protected TourJoueur tourJ;
+        [SerializeField] protected ChatMenu chatMenu;
+
+        [SerializeField] protected bool joueur1EstPret;
+        [SerializeField] protected bool joueur2EstPret;
+        [SerializeField] protected bool joueur1VeutRejouer;
+        [SerializeField] protected bool joueur2VeutRejouer;
 
 
 
@@ -47,6 +53,11 @@ namespace Mvc.Entities
         public OutilsJoueur OutilsJoueur { get => outilsJoueur; set => outilsJoueur = value; }
         public TourJoueur TourJ { get => tourJ; set => tourJ = value; }
         public bool MatchRejoue { get => matchRejoue; set => matchRejoue = value; }
+        public bool Joueur1EstPret { get => joueur1EstPret; set => joueur1EstPret = value; }
+        public bool Joueur2EstPret { get => joueur2EstPret; set => joueur2EstPret = value; }
+        public bool Joueur1VeutRejouer { get => joueur1VeutRejouer; set => joueur1VeutRejouer = value; }
+        public bool Joueur2VeutRejouer { get => joueur2VeutRejouer; set => joueur2VeutRejouer = value; }
+        public ChatMenu ChatMenu { get => chatMenu; set => chatMenu = value; }
 
         public IEnumerator instancierLesPions()
         {
@@ -103,14 +114,10 @@ namespace Mvc.Entities
             scoreMatch.afficherScoreMatch();
             etatDuMatch = EtatMatch.EnCours;
             pauseMenu.EnPause = false;
-            /*if (SceneManager.GetActiveScene().name == "SceneMatch1vs1")
+            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
-
+                ((MatchEnLigne)this).pretPourJouer();
             }
-            else if (SceneManager.GetActiveScene().name == "SceneMatchEnLigne")
-            {
-
-            }*/
 
         }
         public void verifierEtatDuMatch(Case caseDepart)
@@ -158,7 +165,8 @@ namespace Mvc.Entities
                     joueur2.Tour = Tour.SonTour;
                     joueur2.Swipe.enabled = false;
                 }
-                if(etatDuMatch==EtatMatch.EnCours){
+                if (etatDuMatch == EtatMatch.EnCours)
+                {
                     Fonctions.faireVibrer();
                     Fonctions.activerAudioSourceDebutMatch();
                 }
@@ -207,6 +215,8 @@ namespace Mvc.Entities
             Fonctions.desactiverObjet(finMatchMenu.MenuFinMatch);
             joueur1.NumPosition = joueur1.NumPosition == 1 ? 2 : 1;
             joueur2.NumPosition = joueur2.NumPosition == 1 ? 2 : 1;
+            joueur1VeutRejouer = false;
+            joueur2VeutRejouer = false;
             StartCoroutine(partagerLesPions());
         }
 

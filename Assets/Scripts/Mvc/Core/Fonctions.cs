@@ -11,7 +11,7 @@ namespace Mvc.Core
     {
         public static void faireVibrer()
         {
-            Handheld.Vibrate();
+            //Handheld.Vibrate();
         }
 
         public static void nonVeille()
@@ -164,12 +164,6 @@ namespace Mvc.Core
             if (image.gameObject == null)
                 return;
             image.sprite = sprite;
-        }
-        public static void changerImage(Image ImageSortie, Image imageEntree)
-        {
-            if (imageEntree.gameObject == null)
-                return;
-            ImageSortie = imageEntree;
         }
 
         public static bool sceneActuelle(string nomScene)

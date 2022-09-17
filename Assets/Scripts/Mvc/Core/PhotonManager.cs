@@ -48,9 +48,7 @@ namespace Mvc.Core
                 listeMatchs = new Dictionary<string, RoomInfo>();
                 Fonctions.activerObjet(lobbyMenu.CreerMatch);
                 Fonctions.activerObjet(lobbyMenu.RejoindreMatch);
-                veutCreerMatch = false;
-                veutRejoindreMatch = false;
-                quitterMatch = false;
+                initialiserSceneLobby();
                 nomSceneRetour = "ScenePlay";
             }
             else if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
@@ -72,10 +70,10 @@ namespace Mvc.Core
             //Debug.Log("�tat du r�seau : "+PhotonNetwork.NetworkClientState);
             if (Fonctions.sceneActuelle("SceneLobbyMatchEnLigne"))
             {
-                if (!ConnexionInternet.connect)
+                /*if (!ConnexionInternet.connect)
                 {
                     Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
-                }
+                }*/
             }
             if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
             {
@@ -100,9 +98,7 @@ namespace Mvc.Core
             }
             else
             {
-                veutCreerMatch = false;
-                veutRejoindreMatch = false;
-                lobbyMenu.EnConnexion = false;
+                initialiserSceneLobby();
                 Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
             }
         }
@@ -110,7 +106,7 @@ namespace Mvc.Core
         {
             Debug.Log("Connexion à internet...");
         }
-        
+
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a quitté le photon...");
@@ -121,6 +117,17 @@ namespace Mvc.Core
                     reconnect = true;
                     sceneController.MatchEnLigneController.MatchEnligne.JoueurDeconnecte = true;
                 }
+                if (sceneController.MatchEnLigneController.MatchEnligne.EtatDuMatch == EtatMatch.Fin)
+                {
+                    Fonctions.desactiverObjet(sceneController.MatchEnLigneController.MatchEnligne.FinMatchMenu.ButtonRejouer.gameObject);
+                }
+            }
+            else if (Fonctions.sceneActuelle("SceneLobbyMatchEnLigne"))
+            {
+                if (!veutRejoindreMatch)
+                    Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
+                initialiserSceneLobby();
+
             }
             if (quitterMatch)
             {
@@ -233,9 +240,6 @@ namespace Mvc.Core
             }
             else
             {
-                lobbyMenu.EnConnexion = false;
-                veutCreerMatch = false;
-                veutRejoindreMatch = false;
                 Fonctions.afficherMsgScene("Le code du match est incorrect", "erreur");
                 PhotonNetwork.LeaveLobby();
             }
@@ -246,9 +250,7 @@ namespace Mvc.Core
             Debug.Log("vous n'avez pas pu rejoindre le match");
             if (Fonctions.sceneActuelle("SceneLobbyMatchEnLigne"))
             {
-                lobbyMenu.EnConnexion = false;
-                veutCreerMatch = false;
-                veutRejoindreMatch = false;
+                initialiserSceneLobby();
                 if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
                 {
                     Fonctions.changerDeScene(nomSceneRetour);
@@ -279,8 +281,7 @@ namespace Mvc.Core
         }
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
-            lobbyMenu.EnConnexion = false;
-            veutCreerMatch = false;
+            initialiserSceneLobby();
             Fonctions.afficherMsgScene(ConnexionInternet.msgNonConnecte, "erreur");
         }
 
@@ -302,7 +303,16 @@ namespace Mvc.Core
             {
                 if (reconnect)
                 {
-                    instancierUnJoueur();
+                    Debug.Log("Nombre de joueur : " + PhotonNetwork.PlayerList.Length);
+                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
+                    {
+                        PhotonNetwork.CurrentRoom.IsOpen = false;
+                        sceneController.MatchEnLigneController.MatchEnligne.abandonMatch(PlayerPrefs.GetInt("numPositionMatchEnCours") == 1 ? 2 : 1);
+                    }
+                    else
+                    {
+                        instancierUnJoueur();
+                    }
                 }
 
             }
@@ -340,6 +350,19 @@ namespace Mvc.Core
                     reconnect = true;
                     sceneController.MatchEnLigneController.MatchEnligne.JoueurDeconnecte = true;
                 }
+                else if (sceneController.MatchEnLigneController.MatchEnligne.EtatDuMatch == EtatMatch.Fin)
+                {
+                    string msg = "Je ne veux pas rejouer";
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                    Fonctions.desactiverObjet(sceneController.MatchEnLigneController.MatchEnligne.FinMatchMenu.ButtonRejouer.gameObject);
+                    StartCoroutine(sceneController.MatchEnLigneController.MatchEnligne.OutilsJoueur.afficherMessage(msg, PlayerPrefs.GetInt("numPositionMatchEnCours") == 1 ? 2 : 1, true));
+                }
+                else if (sceneController.MatchEnLigneController.MatchEnligne.EtatDuMatch == EtatMatch.Debut)
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                    Fonctions.desactiverObjet(attenteMenu.gameObject);
+                    sceneController.MatchEnLigneController.MatchEnligne.abandonMatch(PlayerPrefs.GetInt("numPositionMatchEnCours") == 1 ? 2 : 1);
+                }
             }
         }
         public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -351,6 +374,13 @@ namespace Mvc.Core
         {
             reconnect = true;
             initialiseJoueur();
+        }
+
+        public void initialiserSceneLobby()
+        {
+            veutCreerMatch = false;
+            veutRejoindreMatch = false;
+            lobbyMenu.EnConnexion = false;
         }
     }
 }

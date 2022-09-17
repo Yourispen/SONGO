@@ -8,6 +8,7 @@ using Mvc.Repositories;
 using System;
 using Firebase.Database;
 using Newtonsoft.Json;
+using Photon.Pun;
 
 namespace Mvc.Entities
 {
@@ -20,20 +21,21 @@ namespace Mvc.Entities
         [SerializeField] protected StatutDatabase statutDatabase;
         [SerializeField] private GameObject cameraP1;
         [SerializeField] private GameObject cameraP2;
-        [SerializeField] private ChatMenu chatMenu;
         [SerializeField] private bool abandon;
         [SerializeField] private bool joueurDeconnecte;
-
 
         public string NumeroMatch { get => numeroMatch; set => numeroMatch = value; }
         public DateTime DateMatch { get => dateMatch; set => dateMatch = value; }
         public MatchEnLigneController MatchEnLigneController { get => matchEnLigneController; set => matchEnLigneController = value; }
         public bool Abandon { get => abandon; set => abandon = value; }
         public bool JoueurDeconnecte { get => joueurDeconnecte; set => joueurDeconnecte = value; }
-        public ChatMenu ChatMenu { get => chatMenu; set => chatMenu = value; }
 
         void Awake()
         {
+            joueur1EstPret = false;
+            joueur2EstPret = false;
+            joueur1VeutRejouer = false;
+            joueur2VeutRejouer = false;
             if (PlayerPrefs.GetInt("numPositionMatchEnCours") == 1)
             {
                 Fonctions.activerObjet(cameraP1);
@@ -114,7 +116,6 @@ namespace Mvc.Entities
                 Table.idCaseJoue = 15;
                 Fonctions.activerObjet(cameraP2);
             }
-            Fonctions.desactiverObjet(matchEnLigneController.SceneController.PhotonManager.AttenteMenu.gameObject);
         }
 
         public override void initialiseJoueurs()
@@ -333,6 +334,34 @@ namespace Mvc.Entities
             scoreMatch.afficherScoreMatch();
         }
 
-
+        public void pretPourJouer()
+        {
+            int numPosition = PlayerPrefs.GetInt("numPositionMatchEnCours");
+            if (numPosition == 1)
+            {
+                if (Joueur1 != null)
+                    ((JoueurOn)joueur1).PhotonView.RPC("joueurEstPret", RpcTarget.AllBuffered, numPosition);
+            }
+            else
+            {
+                if (Joueur2 != null)
+                    ((JoueurOn)joueur2).PhotonView.RPC("joueurEstPret", RpcTarget.AllBuffered, numPosition);
+            }
+        }
+        public void pretPourRejouer()
+        {
+            Fonctions.desactiverObjet(finMatchMenu.ButtonRejouer.gameObject);
+            int numPosition = PlayerPrefs.GetInt("numPositionMatchEnCours");
+            if (numPosition == 1)
+            {
+                if (Joueur1 != null)
+                    ((JoueurOn)joueur1).PhotonView.RPC("joueurVeutRejouer", RpcTarget.AllBuffered, numPosition);
+            }
+            else
+            {
+                if (Joueur2 != null)
+                    ((JoueurOn)joueur2).PhotonView.RPC("joueurVeutRejouer", RpcTarget.AllBuffered, numPosition);
+            }
+        }
     }
 }

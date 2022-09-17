@@ -17,7 +17,9 @@ namespace Mvc.Entities
         [SerializeField] private TMPro.TMP_Text textPlaqueCompteur1;
         [SerializeField] private GameObject plaqueChat1;
         [SerializeField] private Image backgroundMessage1;
+        [SerializeField] private TMPro.TMP_Text textMessage1;
         [SerializeField] private Image backgroundEmoji1;
+        [SerializeField] private Image imageEmoji1;
         [SerializeField] private GameObject outilsJoueur2;
         [SerializeField] private Image plaqueNom2;
         [SerializeField] private TMPro.TMP_Text textPlaqueNom2;
@@ -26,7 +28,9 @@ namespace Mvc.Entities
         [SerializeField] private TMPro.TMP_Text textPlaqueCompteur2;
         [SerializeField] private GameObject plaqueChat2;
         [SerializeField] private Image backgroundMessage2;
+        [SerializeField] private TMPro.TMP_Text textMessage2;
         [SerializeField] private Image backgroundEmoji2;
+        [SerializeField] private Image imageEmoji2;
         [SerializeField] private Match match;
 
         public GameObject OutilsJoueur1 { get => outilsJoueur1; set => outilsJoueur1 = value; }
@@ -45,6 +49,9 @@ namespace Mvc.Entities
         public Image BackgroundMessage1 { get => backgroundMessage1; set => backgroundMessage1 = value; }
         public Image BackgroundEmoji1 { get => backgroundEmoji1; set => backgroundEmoji1 = value; }
         public Image BackgroundMessage2 { get => backgroundMessage2; set => backgroundMessage2 = value; }
+        public TMP_Text TextMessage2 { get => textMessage2; set => textMessage2 = value; }
+        public GameObject PlaqueChat2 { get => plaqueChat2; set => plaqueChat2 = value; }
+        public GameObject PlaqueChat1 { get => plaqueChat1; set => plaqueChat1 = value; }
 
         public void activerCompteurJoueur(int joueur)
         {
@@ -83,24 +90,41 @@ namespace Mvc.Entities
             Fonctions.changerTexte(textPlaqueNom1, nom1);
             Fonctions.changerTexte(textPlaqueNom2, nom2);
         }
-        public IEnumerator afficherMessage(string msg, int joueur)
+        public IEnumerator afficherMessage(string msg, int joueur, bool affichePermanent = false)
         {
             if (joueur == 1)
             {
                 if (plaqueChat1.activeSelf)
                     yield break;
+                Fonctions.desactiverObjet(backgroundEmoji1.gameObject);
                 Fonctions.activerObjet(plaqueChat1);
                 Fonctions.activerObjet(backgroundMessage1.gameObject);
                 backgroundMessage1.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 12, backgroundMessage1.rectTransform.sizeDelta.y);
-                Fonctions.changerTexte(backgroundMessage1.GetComponentInChildren<TMPro.TMP_Text>(), msg);
+                Fonctions.changerTexte(textMessage1, msg);
                 yield return new WaitForSeconds(3);
-                Fonctions.changerTexte(backgroundMessage1.GetComponentInChildren<TMPro.TMP_Text>());
-                Fonctions.desactiverObjet(backgroundMessage1.gameObject);
-                Fonctions.desactiverObjet(plaqueChat1);
+                if (!affichePermanent)
+                {
+                    Fonctions.changerTexte(textMessage1);
+                    Fonctions.desactiverObjet(backgroundMessage1.gameObject);
+                    Fonctions.desactiverObjet(plaqueChat1);
+                }
             }
             else
             {
-
+                if (plaqueChat2.activeSelf)
+                    yield break;
+                Fonctions.desactiverObjet(backgroundEmoji2.gameObject);
+                Fonctions.activerObjet(plaqueChat2);
+                Fonctions.activerObjet(backgroundMessage2.gameObject);
+                backgroundMessage2.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 12, backgroundMessage2.rectTransform.sizeDelta.y);
+                Fonctions.changerTexte(textMessage2, msg);
+                yield return new WaitForSeconds(3);
+                if (!affichePermanent)
+                {
+                    Fonctions.changerTexte(textMessage2);
+                    Fonctions.desactiverObjet(backgroundMessage2.gameObject);
+                    Fonctions.desactiverObjet(plaqueChat2);
+                }
             }
 
         }
@@ -110,8 +134,9 @@ namespace Mvc.Entities
             {
                 if (plaqueChat1.activeSelf)
                     yield break;
+                Fonctions.desactiverObjet(backgroundMessage1.gameObject);
                 Fonctions.activerObjet(plaqueChat1);
-                Fonctions.changerImage(backgroundEmoji1.GetComponentInChildren<Image>(),emoji);
+                Fonctions.changerSprite(imageEmoji1, emoji.sprite);
                 Fonctions.activerObjet(backgroundEmoji1.gameObject);
                 yield return new WaitForSeconds(3);
                 Fonctions.desactiverObjet(backgroundEmoji1.gameObject);
@@ -119,8 +144,45 @@ namespace Mvc.Entities
             }
             else
             {
-
+                if (plaqueChat2.activeSelf)
+                    yield break;
+                Fonctions.desactiverObjet(backgroundMessage2.gameObject);
+                Fonctions.activerObjet(plaqueChat2);
+                Fonctions.changerSprite(imageEmoji2, emoji.sprite);
+                Fonctions.activerObjet(backgroundEmoji2.gameObject);
+                yield return new WaitForSeconds(3);
+                Fonctions.desactiverObjet(backgroundEmoji2.gameObject);
+                Fonctions.desactiverObjet(plaqueChat2);
             }
+        }
+
+        public void initialiseOutilsCote2()
+        {
+            Vector3 positionTemp = plaqueNom1.rectTransform.position;
+            plaqueNom1.rectTransform.position = plaqueNom2.rectTransform.position + new Vector3(0, -3, 0);
+            plaqueNom2.rectTransform.position = positionTemp;
+
+            positionTemp = plaqueChat1.transform.position;
+            Quaternion rotationTemp = plaqueChat1.transform.rotation;
+            plaqueChat1.transform.position = plaqueChat2.transform.position;
+            plaqueChat1.transform.rotation = plaqueChat2.transform.rotation;
+            plaqueChat2.transform.position = positionTemp;
+            plaqueChat2.transform.rotation = rotationTemp;
+
+            positionTemp = textMessage1.transform.localPosition;
+            rotationTemp = textMessage1.transform.localRotation;
+            textMessage1.transform.localPosition = textMessage2.transform.localPosition;
+            textMessage1.transform.localRotation = textMessage2.transform.localRotation;
+            textMessage2.transform.localPosition = positionTemp;
+            textMessage2.transform.localRotation = rotationTemp;
+
+            positionTemp = imageEmoji1.transform.localPosition;
+            rotationTemp = imageEmoji1.transform.localRotation;
+            imageEmoji1.transform.localPosition = imageEmoji2.transform.localPosition;
+            imageEmoji1.transform.localRotation = imageEmoji2.transform.localRotation;
+            imageEmoji2.transform.localPosition = positionTemp;
+            imageEmoji2.transform.localRotation = rotationTemp;
+
         }
     }
 }

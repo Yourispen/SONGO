@@ -45,6 +45,10 @@ namespace Mvc.Core
                 {
                     return;
                 }
+                if (!joueur.Match.Joueur1EstPret || !joueur.Match.Joueur2EstPret)
+                    return;
+                if (joueur.Match.ChatMenu.EnChat)
+                    return;
             }
             {
                 if (Input.touchCount == 1)

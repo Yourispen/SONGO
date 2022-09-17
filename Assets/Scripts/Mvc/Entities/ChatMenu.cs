@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mvc.Core;
 using TMPro;
+using Photon.Pun;
 
 namespace Mvc.Entities
 {
@@ -16,21 +17,19 @@ namespace Mvc.Entities
         [SerializeField] private MatchEnLigne matchEnLigne;
         [SerializeField] private GameObject messageChatPrefab;
         [SerializeField] private Transform listeParentMessageChat;
+        [SerializeField] private GameObject listeMessageChatScrollView;
         [SerializeField] private List<GameObject> listeBoutonMessage = new List<GameObject>();
         [SerializeField] private List<int> packMessage1 = new List<int> { 0, 1, 2, 3, 5, 6 };
-        [SerializeField] private List<int> packMessage2 = new List<int> { 4, 7, 8, 9, 10, 11, 12 };
+        [SerializeField] private List<int> packMessage2 = new List<int> { 4, 7, 8, 9, 10 };
+        [SerializeField] private List<int> packMessage3 = new List<int> { 11, 12, 13, 14 };
+        [SerializeField] private List<List<int>> listePackMessage = new List<List<int>>();
+        [SerializeField] private GameObject listeEmojiChatScrollView;
         [SerializeField] private List<GameObject> listeBoutonEmoji = new List<GameObject>();
-        [SerializeField] private List<int> packEmoji1 = new List<int> { 1, 9, 17, 15 };
-        [SerializeField] private List<int> packEmoji2 = new List<int> { 0, 11, 7, 5 };
-        [SerializeField] private List<int> packEmoji3 = new List<int> { 10, 2, 12, 14 };
-        [SerializeField] private List<int> packEmoji4 = new List<int> { 6, 13, 3, 16 };
-        [SerializeField] private List<int> packEmoji5 = new List<int> { 8, 4, 22, 18 };
-        [SerializeField] private List<int> packEmoji6 = new List<int> { 21, 23, 20, 19 };
+        [SerializeField] private List<GameObject> listePackEmoji = new List<GameObject>();
         [SerializeField] private List<Sprite> listeEmojiSquareBleu = new List<Sprite>();
-
-
-
-        [SerializeField] private OutilsJoueur outilsJoueur;
+        [SerializeField] private Color couleurSelect;
+        [SerializeField] private Color couleurNormal;
+        [SerializeField] private bool enChat;
 
         public Button BoutonChat { get => boutonChat; set => boutonChat = value; }
         public GameObject MenuChat { get => menuChat; set => menuChat = value; }
@@ -38,43 +37,97 @@ namespace Mvc.Entities
         public Button BoutonMessage { get => boutonMessage; set => boutonMessage = value; }
         public List<GameObject> ListeBoutonMessage { get => listeBoutonMessage; set => listeBoutonMessage = value; }
         public MatchEnLigne MatchEnLigne { get => matchEnLigne; set => matchEnLigne = value; }
+        public List<GameObject> ListeBoutonEmoji { get => listeBoutonEmoji; set => listeBoutonEmoji = value; }
+        public bool EnChat { get => enChat; set => enChat = value; }
 
         void Start()
         {
+            EnChat = false;
             instancierMenuChat();
         }
         public void instancierMenuChat()
         {
-            foreach (var message in packMessage1)
+            listePackMessage.Add(packMessage1);
+            listePackMessage.Add(packMessage2);
+            listePackMessage.Add(packMessage3);
+            foreach (var packMessage in listePackMessage)
             {
-                Fonctions.activerObjet(listeBoutonMessage[message]);
+                foreach (var message in packMessage)
+                {
+                    Fonctions.activerObjet(listeBoutonMessage[message]);
+                }
+                //packMessage.ForEach(value => Debug.Log(value));
             }
-            foreach (var emoji in packEmoji1)
+            foreach (var packEmoji in listePackEmoji)
             {
-                Fonctions.activerObjet(listeBoutonEmoji[emoji]);
+                Fonctions.activerObjet(packEmoji);
             }
         }
         public void buttonChat()
         {
-            //matchEnLigne.PauseMenu.EnPause = !matchEnLigne.PauseMenu.EnPause;
+            enChat = !enChat;
+            initialiseChatMenu();
             menuChat.SetActive(!menuChat.activeSelf);
         }
         public void buttonEmoji()
         {
-
+            boutonMessage.GetComponent<Image>().color = couleurNormal;
+            boutonEmoji.GetComponent<Image>().color = couleurSelect;
+            Fonctions.activerObjet(listeEmojiChatScrollView);
+            Fonctions.desactiverObjet(listeMessageChatScrollView);
         }
         public void buttonMessage()
         {
+            boutonEmoji.GetComponent<Image>().color = couleurNormal;
+            boutonMessage.GetComponent<Image>().color = couleurSelect;
+            Fonctions.activerObjet(listeMessageChatScrollView);
+            Fonctions.desactiverObjet(listeEmojiChatScrollView);
 
         }
         public void emoji(int indiceEmoji)
         {
-            StartCoroutine(outilsJoueur.afficherEmoji(listeBoutonEmoji[indiceEmoji].GetComponentInChildren<Image>(), 1));
+            buttonChat();
+            int numPosition = PlayerPrefs.GetInt("numPositionMatchEnCours");
+            if (numPosition == 1)
+            {
+                if (PhotonNetwork.IsConnected)
+                {
+                    matchEnLigne.Joueur1.PhotonView.RPC("envoyerEmoji", RpcTarget.AllBuffered, indiceEmoji, numPosition);
+                }
+            }
+            else
+            {
+                if (PhotonNetwork.IsConnected)
+                {
+                    matchEnLigne.Joueur2.PhotonView.RPC("envoyerEmoji", RpcTarget.AllBuffered, indiceEmoji, numPosition);
+                }
+            }
         }
         public void message(int indiceMessage)
         {
-            //Debug.Log(listeBoutonMessage[indiceMessage].GetComponentInChildren<TMPro.TMP_Text>().text);
-            StartCoroutine(outilsJoueur.afficherMessage(listeBoutonMessage[indiceMessage].GetComponentInChildren<TMPro.TMP_Text>().text, 1));
+            buttonChat();
+            int numPosition = PlayerPrefs.GetInt("numPositionMatchEnCours");
+            if (numPosition == 1)
+            {
+                if (PhotonNetwork.IsConnected)
+                {
+                    matchEnLigne.Joueur1.PhotonView.RPC("envoyerMessage", RpcTarget.AllBuffered, indiceMessage, numPosition);
+                }
+            }
+            else
+            {
+                if (PhotonNetwork.IsConnected)
+                {
+                    matchEnLigne.Joueur2.PhotonView.RPC("envoyerMessage", RpcTarget.AllBuffered, indiceMessage, numPosition);
+                }
+            }
+        }
+        public void initialiseChatMenu()
+        {
+            Fonctions.desactiverObjet(listeMessageChatScrollView);
+            Fonctions.activerObjet(listeEmojiChatScrollView);
+            boutonEmoji.GetComponent<Image>().color = couleurSelect;
+            boutonMessage.GetComponent<Image>().color = couleurNormal;
         }
 
     }

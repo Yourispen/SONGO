@@ -19,7 +19,7 @@ namespace Mvc.Entities
         [SerializeField] private TMP_ColorGradient couleurDefaite;
         [SerializeField] private TMP_ColorGradient couleurVictoire;
         [SerializeField] private TMP_ColorGradient couleurMatchNul;
-
+        [SerializeField] private Button buttonRejouer;
 
         public Match Match { get => match; set => match = value; }
         public TMP_Text TextVictoire { get => textVictoire; set => textVictoire = value; }
@@ -31,6 +31,7 @@ namespace Mvc.Entities
         public TMP_ColorGradient CouleurDefaite { get => couleurDefaite; set => couleurDefaite = value; }
         public TMP_ColorGradient CouleurVictoire { get => couleurVictoire; set => couleurVictoire = value; }
         public TMP_ColorGradient CouleurMatchNul { get => couleurMatchNul; set => couleurMatchNul = value; }
+        public Button ButtonRejouer { get => buttonRejouer; set => buttonRejouer = value; }
 
         //Name_P1.GetComponent<TMPro.TMP_Text>().text
         public void boutonQuitter()

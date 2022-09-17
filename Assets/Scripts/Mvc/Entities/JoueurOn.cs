@@ -9,6 +9,7 @@ using Mvc.Core;
 using Mvc.Controllers;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 
 namespace Mvc.Entities
@@ -89,9 +90,7 @@ namespace Mvc.Entities
                         //match = ((Match)Fonctions.instancierObjet(GameObject.Find("matchEnligne")).GetComponent<MatchEnLigne>());
                         PlayerPrefs.SetString("idVainqueur", PhotonNetwork.PlayerList[1].NickName);
                         Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueCompteur1.gameObject);
-                        Vector3 positionTemp = match.OutilsJoueur.PlaqueNom1.rectTransform.position;
-                        match.OutilsJoueur.PlaqueNom1.rectTransform.position = match.OutilsJoueur.PlaqueNom2.rectTransform.position + new Vector3(0, -3, 0);
-                        match.OutilsJoueur.PlaqueNom2.rectTransform.position = positionTemp;
+                        match.OutilsJoueur.initialiseOutilsCote2();
                     }
 
                     surnom = PlayerPrefs.GetString("surnom");
@@ -248,6 +247,63 @@ namespace Mvc.Entities
             ((MatchEnLigne)match).Abandon = true;
             ((MatchEnLigne)match).abandonMatch(numPosition);
         }
+        [PunRPC]
+        public void envoyerMessage(int indexMsg, int joueur)
+        {
+            StartCoroutine(match.OutilsJoueur.afficherMessage(((MatchEnLigne)match).ChatMenu.ListeBoutonMessage[indexMsg].GetComponentInChildren<TMPro.TMP_Text>().text, joueur));
+        }
+        [PunRPC]
+        public void envoyerEmoji(int indexEmoji, int joueur)
+        {
+            StartCoroutine(match.OutilsJoueur.afficherEmoji(((MatchEnLigne)match).ChatMenu.ListeBoutonEmoji[indexEmoji].GetComponentInChildren<Image>(), joueur));
+        }
+        [PunRPC]
+        public void joueurEstPret(int joueur)
+        {
+            //if(((MatchEnLigne)match).jou)
+            if (joueur == 1)
+            {
+                match.Joueur1EstPret = true;
+                Debug.Log("Joueur1 est pret");
+            }
+            else
+            {
+                match.Joueur2EstPret = true;
+                Debug.Log("Joueur2 est pret");
+            }
+            if (match.Joueur1EstPret && match.Joueur2EstPret)
+            {
+                match.ScoreMatch.afficherScoreMatch();
+                Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.AttenteJoueur);
+            }
+        }
+        [PunRPC]
+        public void joueurVeutRejouer(int joueur)
+        {
+            string msg = "Je veux rejouer";
+            if (joueur == 1)
+            {
+                match.Joueur1VeutRejouer = true;
+                Debug.Log("Joueur1 veut rejouer");
+                StartCoroutine(match.OutilsJoueur.afficherMessage(msg, 1, true));
+            }
+            else
+            {
+                match.Joueur2VeutRejouer = true;
+                Debug.Log("Joueur2 veut rejouer");
+                StartCoroutine(match.OutilsJoueur.afficherMessage(msg, 2, true));
+            }
+            if (match.Joueur1VeutRejouer && match.Joueur2VeutRejouer)
+            {
+                if (match.Joueur1 && match.Joueur2)
+                {
+                    Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueChat1);
+                    Fonctions.desactiverObjet(match.OutilsJoueur.PlaqueChat2);
+                    match.ScoreMatch.afficherScoreMatch();
+                    match.FinMatchMenu.boutonRejouer();
+                }
+            }
+        }
         public void recupereJoueur(string id)
         {
             statutDatabase = StatutDatabase.Debut;
@@ -320,6 +376,7 @@ namespace Mvc.Entities
                 Fonctions.changerTexte(match.OutilsJoueur.TextPlaqueNom2, PlayerPrefs.GetString("surnom"));
                 Fonctions.activerObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.PlaqueNom1.gameObject);
             }
+            Debug.Log("Recup Data");
             PlayerPrefs.SetString("surnomAdversaire", songoJoueurOnline.Surnom);
             copyJoueurOn();
             //Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.TextAttente.gameObject);
@@ -327,12 +384,8 @@ namespace Mvc.Entities
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.BoutonRetour.gameObject);
             Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.CodeMatch);
             Fonctions.activerAudioSourceDebutMatch();
-            yield return new WaitForSeconds(3);
-            match.ScoreMatch.afficherScoreMatch();
-            Fonctions.desactiverObjet(joueurOnController.SceneController.PhotonManager.AttenteMenu.AttenteJoueur);
             ((MatchEnLigne)match).debuterMatch();
-
-
+            yield return new WaitForSeconds(0);
         }
 
 
