@@ -45,8 +45,13 @@ namespace Mvc.Controllers
             //PlayerPrefs.SetString("surnom","Glenneriss"); //return;
             connexionInternet = Fonctions.instancierObjet(connexionInternetPrefab).GetComponent<ConnexionInternet>();
 
+            initialiseVolume();
+            initialiseCouleur();
+            initialise();
+
             if (Fonctions.sceneActuelle("SceneMenuPrincipal"))
             {
+                
                 if (PlayerPrefs.HasKey("etatConnexionCompte") && PlayerPrefs.HasKey("surnom") && PlayerPrefs.HasKey("idConnexionCompte"))
                 {
                     if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
@@ -155,7 +160,7 @@ namespace Mvc.Controllers
         public void boutonSetting()
         {
             nomScene = "SceneSetting";
-            //Fonctions.changerDeScene(nomScene);
+            Fonctions.changerDeScene(nomScene);
         }
         public void boutonRules()
         {
@@ -210,5 +215,46 @@ namespace Mvc.Controllers
             matchHorsLigneController.instancierLeMatch();
         }
 
+        private void initialiseVolume()
+        {
+            if (!PlayerPrefs.HasKey("volumeAudioPion"))
+            {
+                PlayerPrefs.SetFloat("volumeAudioPion", 1);
+                PlayerPrefs.SetFloat("volumeAudioBouton", 1);
+                PlayerPrefs.SetFloat("volumeAudioAutres", 1);
+            }
+            else
+            {
+                Fonctions.changerVolumeAudios();
+            }
+        }
+        private void initialiseCouleur()
+        {
+            if (!PlayerPrefs.HasKey("couleurPion"))
+            {
+                PlayerPrefs.SetFloat("couleurPion", 0);
+            }
+            if (!PlayerPrefs.HasKey("couleurTable"))
+            {
+                PlayerPrefs.SetInt("couleurTable", 0);
+            }
+        }
+        private void initialise()
+        {
+            if (PlayerPrefs.HasKey("surnom"))
+            {
+                if (textNomUtilisateur!=null)
+                {
+                    Fonctions.changerTexte(textNomUtilisateur, PlayerPrefs.GetString("surnom"));
+                }
+            }
+            if (PlayerPrefs.HasKey("idConnexionCompte"))
+            {
+                if (PlayerPrefs.GetInt("idConnexionCompte") == 1)
+                {
+                    Fonctions.desactiverObjet(BoutonConnexionFacebook);
+                }
+            }
+        }
     }
 }

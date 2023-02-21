@@ -45,6 +45,11 @@ namespace Mvc.Entities
             swipe.enabled = false;
             match.jouerTable(caseDepart);
         }
+        public void jouerMatch(int idCaseDepart)
+        {
+            swipe.enabled = false;
+            match.jouerTable(idCaseDepart);
+        }
         public void victoireJoueur()
         {
             nombreVictoire += 1;

@@ -125,7 +125,7 @@ namespace Mvc.Core
             GameObject.Find("sceneController").GetComponent<SceneController>().chargement.SetActive(false);
         }
 
-        public static void afficherMsgScene(string msg, string typeMsg, float delai = 3)
+        public static void afficherMsgScene(string msg="", string typeMsg="primaire", float delai = 3)
         {
             //FF2828
             SceneController sceneController = GameObject.Find("sceneController").GetComponent<SceneController>();
@@ -182,6 +182,41 @@ namespace Mvc.Core
         public static void activerAudioSourceDefaite()
         {
             GameObject.Find("AudioSourceDefaite").GetComponent<AudioSource>().Play();
+        }
+        public static void activerAudioDeplacementPion(AudioClip son)
+        {
+            GameObject.Find("AudioDeplacementPion").GetComponent<AudioSource>().PlayOneShot(son);
+        }
+        public static void activerAudioRamassagePion()
+        {
+            GameObject.Find("AudioRamassagePion").GetComponent<AudioSource>().Play();
+        }
+        public static void changerVolumeAudios()
+        {
+            if (GameObject.Find("AudioSourceBouton"))
+            {
+                GameObject.Find("AudioSourceBouton").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volumeAudioBouton");
+            }
+            if (GameObject.Find("AudioSourceDefaite"))
+            {
+                GameObject.Find("AudioSourceDefaite").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volumeAudioAutres");
+            }
+            if (GameObject.Find("AudioSourceVictoire"))
+            {
+                GameObject.Find("AudioSourceVictoire").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volumeAudioAutres");
+            }
+            if (GameObject.Find("AudioSourceDebutMatch"))
+            {
+                GameObject.Find("AudioSourceDebutMatch").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volumeAudioAutres");
+            }
+            if (GameObject.Find("AudioRamassagePion"))
+            {
+                GameObject.Find("AudioRamassagePion").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volumeAudioPion");
+            }
+            if (GameObject.Find("AudioDeplacementPion"))
+            {
+                GameObject.Find("AudioDeplacementPion").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volumeAudioPion");
+            }
         }
     }
 }

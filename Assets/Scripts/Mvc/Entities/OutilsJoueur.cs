@@ -99,7 +99,7 @@ namespace Mvc.Entities
                 Fonctions.desactiverObjet(backgroundEmoji1.gameObject);
                 Fonctions.activerObjet(plaqueChat1);
                 Fonctions.activerObjet(backgroundMessage1.gameObject);
-                backgroundMessage1.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 12, backgroundMessage1.rectTransform.sizeDelta.y);
+                backgroundMessage1.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 15, backgroundMessage1.rectTransform.sizeDelta.y);
                 Fonctions.changerTexte(textMessage1, msg);
                 yield return new WaitForSeconds(3);
                 if (!affichePermanent)
@@ -116,7 +116,7 @@ namespace Mvc.Entities
                 Fonctions.desactiverObjet(backgroundEmoji2.gameObject);
                 Fonctions.activerObjet(plaqueChat2);
                 Fonctions.activerObjet(backgroundMessage2.gameObject);
-                backgroundMessage2.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 12, backgroundMessage2.rectTransform.sizeDelta.y);
+                backgroundMessage2.rectTransform.sizeDelta = new Vector2(100 + msg.Length * 15, backgroundMessage2.rectTransform.sizeDelta.y);
                 Fonctions.changerTexte(textMessage2, msg);
                 yield return new WaitForSeconds(3);
                 if (!affichePermanent)

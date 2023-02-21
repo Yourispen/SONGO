@@ -13,6 +13,7 @@ namespace Mvc.Entities
         [SerializeField] private int id = 0;
         [SerializeField] private Case caseActuelle;
         [SerializeField] private int typePion;
+        [SerializeField] private AudioClip son;
 
         public int Id { get => id; set => id = value; }
         public Material Couleur { get => couleur; set => couleur = value; }
@@ -38,6 +39,7 @@ namespace Mvc.Entities
             this.transform.position = cases.transform.position + ajoutPosition;
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             cases.ajouterPion(this);
+            //Fonctions.activerAudioDeplacementPion();
         }
         public void deplacerPionCaisse(Caisse caisse)
         {
@@ -46,9 +48,18 @@ namespace Mvc.Entities
         }
         void OnCollisionEnter(Collision collisionInfo)
         {
-            if(collisionInfo.gameObject.name.CompareTo("Sol")==0){
+            if (collisionInfo.gameObject.name.CompareTo("Sol") == 0)
+            {
                 this.transform.position = caseActuelle.transform.position;
             }
+            else
+            {
+            }
+
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            Fonctions.activerAudioDeplacementPion(son);
         }
 
     }

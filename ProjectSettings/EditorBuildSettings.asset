@@ -15,20 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneShop.unity
     guid: 3f35a378c5874644db6cd5fb2e7197c3
   - enabled: 0
-    path: Assets/Scenes/SceneSetting.unity
-    guid: ebd4f0d3cd57c9045a119c2ee9061ee1
-  - enabled: 0
     path: Assets/Scenes/Rules.unity
     guid: 23bb5904eb86a144ca528161d1534039
   - enabled: 0
     path: Assets/Scenes/Credits.unity
     guid: 571bc91874cb41a44b00c8dccb6e3b5a
-  - enabled: 0
-    path: Assets/Scenes/SceneOffline.unity
-    guid: 703dcb739774eef4c88deb4c84852eb4
-  - enabled: 0
-    path: Assets/Scenes/SceneOnline.unity
-    guid: ddae84f6549aa4840b7e96dbe8530437
   - enabled: 1
     path: Assets/Scenes/SceneMatch1vs1.unity
     guid: de3ef281a74a6814bba33355d253f5a8
@@ -44,11 +35,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SceneTutorial.unity
     guid: dcbef3ff5aacc7f4f80a96a9ee183725
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneTable.unity
     guid: 295391292e52de2449f7fd59f3fa278f
-  - enabled: 0
-    path: Assets/Scenes/Pieces.unity
+  - enabled: 1
+    path: Assets/Scenes/ScenePion.unity
     guid: 05292530ca75eb24d95edd5f05f99733
   - enabled: 0
     path: Assets/Scenes/Results.unity
@@ -56,6 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneMatchEntrainement.unity
     guid: d5c423cde153d7843b0c6cf61dc4bd84
+  - enabled: 1
+    path: Assets/Scenes/SceneSetting.unity
+    guid: 82b6348521b5b9948af45e4a4e7fbdec
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 153d9c8f19b74e94d90921693bd97fa9,
       type: 2}

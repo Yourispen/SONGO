@@ -80,15 +80,18 @@ namespace Mvc.Core
                         if (tempsActuel >= tempsDepart + 0.3f)
                         {
                             //Debug.Log("Maintient");
-                            if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                            if (toucheJouer)
                             {
-                                StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, PlayerPrefs.GetInt("numPositionMatchEnCours") == 1 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
+                                if (Fonctions.sceneActuelle("SceneMatchEnLigne"))
+                                {
+                                    StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, PlayerPrefs.GetInt("numPositionMatchEnCours") == 1 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
+                                }
+                                else
+                                {
+                                    StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, joueur.gameObject.name.CompareTo("joueur1") == 0 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
+                                }
+                                compteurPion += 1;
                             }
-                            else
-                            {
-                                StartCoroutine(caseTouche.compterLesPionsCase(compteurPion, joueur.gameObject.name.CompareTo("joueur1") == 0 ? joueur.Match.OutilsJoueur.TextPlaqueCompteur1 : joueur.Match.OutilsJoueur.TextPlaqueCompteur2));
-                            }
-                            compteurPion += 1;
                         }
                     }
                     else if (touch.phase == TouchPhase.Moved)
@@ -174,15 +177,17 @@ namespace Mvc.Core
                     }
                 }
 
-                if (Input.GetKeyDown("q"))
+                if (Input.GetKeyDown("a"))
                 {
                     Debug.Log("J'ai joué");
-                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 0);
+                    //((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 0);
+                    joueur.jouerMatch(0);
                 }
                 if (Input.GetKeyDown("w"))
                 {
                     Debug.Log("J'ai joué");
-                    ((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 7);
+                    //((JoueurOn)joueur).PhotonView.RPC("jouerMatch", RpcTarget.AllBuffered, 7);
+                    joueur.jouerMatch(7);
                 }
             }
         }

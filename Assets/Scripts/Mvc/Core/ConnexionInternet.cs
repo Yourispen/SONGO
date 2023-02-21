@@ -25,7 +25,7 @@ public class ConnexionInternet : MonoBehaviour
     IEnumerator testConnexionInternet()
     {
         //Debug.LogError("Test de connexion");
-        UnityWebRequest request = new("http://www.bing.com");
+        UnityWebRequest request = new("http://www.google.com");
         request.timeout = 5;
         yield return request.SendWebRequest();
         if (request.error == null)

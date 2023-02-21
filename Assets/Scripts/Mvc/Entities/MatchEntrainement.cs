@@ -8,7 +8,7 @@ namespace Mvc.Entities
 {
     public class MatchEntrainement : MatchHorsLigne
     {
-
+        [SerializeField] private IA iA;
         private void Start()
         {
             typeDuMatch = TypeMatch.Entrainement;

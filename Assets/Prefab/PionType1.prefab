@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd71291c91c8cce499cb663b5db9970e, type: 2}
+  - {fileID: 2100000, guid: 977d8a6011c8b2448b09849bcbc613b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,7 +132,17 @@ MonoBehaviour:
   msgFailed: 
   couleur: {fileID: 0}
   listeCouleurs:
-  - {fileID: 2100000, guid: cd71291c91c8cce499cb663b5db9970e, type: 2}
+  - {fileID: 2100000, guid: 977d8a6011c8b2448b09849bcbc613b5, type: 2}
+  - {fileID: 2100000, guid: 4f1b9dbb1b1c93849bd8558e4131ad54, type: 2}
+  - {fileID: 2100000, guid: 15ea6f88cbcf3714a9313fb3c70c2bbc, type: 2}
+  - {fileID: 2100000, guid: bec12e791acbeaa4b9bb9aac98260449, type: 2}
+  - {fileID: 2100000, guid: 829ce00beddd93a4e902494509e0e5f8, type: 2}
+  - {fileID: 2100000, guid: 2eb2133ed88afc6498124d152c22d5e3, type: 2}
+  - {fileID: 2100000, guid: a63096550039fb44db3caedcec086ecd, type: 2}
+  - {fileID: 2100000, guid: 7013de3df33b45c4aaf0a2963e3ac8ac, type: 2}
+  - {fileID: 2100000, guid: b2ae2d4943767754e95542aa388f3c18, type: 2}
+  - {fileID: 2100000, guid: 191fe19683275f745ad412c56bd0f389, type: 2}
   id: 0
   caseActuelle: {fileID: 0}
   typePion: 1
+  son: {fileID: 8300000, guid: 3bea85b353e23a34880521792a539527, type: 3}

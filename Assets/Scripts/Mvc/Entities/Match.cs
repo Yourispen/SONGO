@@ -206,6 +206,18 @@ namespace Mvc.Entities
                 tableMatch.parcourirLaTable(caseDepart);
             }
         }
+        public void jouerTable(int idCaseDepart)
+        {
+            if (etatDuMatch == EtatMatch.Debut || etatDuMatch == EtatMatch.Fin || idCaseDepart == 14 || idCaseDepart == 15)
+            {
+                Debug.Log("je rejoue le coup");
+                rejouerCoup(tableMatch.ListeCases[idCaseDepart]);
+            }
+            else
+            {
+                tableMatch.parcourirLaTable(tableMatch.ListeCases[idCaseDepart]);
+            }
+        }
         public abstract void rejouerCoup(Case caseDepart);
         public abstract void finDuMatch();
         public void rejouerMatch()
@@ -213,6 +225,7 @@ namespace Mvc.Entities
             matchRejoue = true;
             Fonctions.activerObjet(pauseMenu.BoutonPausePrefab);
             Fonctions.desactiverObjet(finMatchMenu.MenuFinMatch);
+            Fonctions.activerObjet(finMatchMenu.ButtonRejouer.gameObject);
             joueur1.NumPosition = joueur1.NumPosition == 1 ? 2 : 1;
             joueur2.NumPosition = joueur2.NumPosition == 1 ? 2 : 1;
             joueur1VeutRejouer = false;

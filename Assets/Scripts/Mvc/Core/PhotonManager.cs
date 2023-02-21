@@ -107,6 +107,11 @@ namespace Mvc.Core
             Debug.Log("Connexion à internet...");
         }
 
+        void OnFailedToConnect()
+        {
+            Debug.Log("Je n'ai pas pu me connecter à internet...");
+        }
+
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.Log(PhotonNetwork.LocalPlayer.NickName + " a quitté le photon...");

@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2395908135760413323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2395908135760413325}
+  - component: {fileID: 2395908135760413324}
+  m_Layer: 0
+  m_Name: pionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2395908135760413325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395908135760413323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 640, y: 360, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2395908135760413324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395908135760413323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d7fbb168b36ed4bb26fe2e1e61fa5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeCouleurs:
+  - {fileID: 2100000, guid: 977d8a6011c8b2448b09849bcbc613b5, type: 2}
+  - {fileID: 2100000, guid: 4f1b9dbb1b1c93849bd8558e4131ad54, type: 2}
+  - {fileID: 2100000, guid: 15ea6f88cbcf3714a9313fb3c70c2bbc, type: 2}
+  - {fileID: 2100000, guid: bec12e791acbeaa4b9bb9aac98260449, type: 2}
+  - {fileID: 2100000, guid: 829ce00beddd93a4e902494509e0e5f8, type: 2}
+  - {fileID: 2100000, guid: 2eb2133ed88afc6498124d152c22d5e3, type: 2}
+  - {fileID: 2100000, guid: a63096550039fb44db3caedcec086ecd, type: 2}
+  - {fileID: 2100000, guid: 7013de3df33b45c4aaf0a2963e3ac8ac, type: 2}
+  - {fileID: 2100000, guid: b2ae2d4943767754e95542aa388f3c18, type: 2}
+  - {fileID: 2100000, guid: 191fe19683275f745ad412c56bd0f389, type: 2}
+  pionPrincipal: {fileID: 0}
+  pion1: {fileID: 0}
+  pion2: {fileID: 0}
+  pion3: {fileID: 0}

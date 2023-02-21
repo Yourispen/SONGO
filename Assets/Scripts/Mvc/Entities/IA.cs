@@ -7,56 +7,83 @@ namespace Mvc.Entities
     public class IA : MonoBehaviour
     {
         [Header("Table")]
-        [SerializeField] private List<int> listeCases = new List<int>();
 
-        [Header("Match")]
-        [SerializeField] protected ResultatMatch resultatDuMatch;
-        [SerializeField] protected EtatMatch etatDuMatch;
+        [SerializeField] private List<int> listeCases = new List<int>(16);
+
+        [SerializeField] private int idCase;
+
+        void Start()
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                listeCases[i] = 5;
+            }
+            jouer();
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown("q"))
+            {
+                parcourirLaTable(listeCases, idCase);
+            }
+        }
 
         public void jouer(Table table)
         {
             initialiseCases(table);
         }
+        public void jouer()
+        {
+            List<int> copyListeCases = listeCases;
+            Debug.Log(copyListeCases.Count);
+            for (int i = 0; i < 16; i++)
+            {
+                Debug.Log("case " + (i + 1) + " : " + copyListeCases[i]);
+            }
+        }
 
         #region Table
-        public int parcourirLaTable(int caseDepart)
+        public List<int> parcourirLaTable(List<int> listeCases, int caseDepart)
         {
+            EtatMatch etatDuMatch = EtatMatch.EnCours;
             int idCase = caseDepart;
             if (listeCases[idCase] == 0)
             {
                 Debug.Log("Interdit 1");
                 return jeuInterdit(caseDepart);
             }
-            else if ((idCase == 6 || idCase == 13) && listeCases[idCase] < 2 && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
+            else if ((idCase == 6 || idCase == 13) && listeCases[idCase] < 2 && peutTransmettrePion(listeCases, idCase) && sommeDesCasesAdversaire(listeCases, idCase) == 0)
             {
                 Debug.Log("Interdit 2");
                 return jeuInterdit(caseDepart);
             }
-            else if (((idCase < 6 && listeCases[idCase] - 6 + idCase <= 0) || (idCase > 6 && idCase < 13 && listeCases[idCase] - 13 + idCase <= 0)) && peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
+            else if (((idCase < 6 && listeCases[idCase] - 6 + idCase <= 0) || (idCase > 6 && idCase < 13 && listeCases[idCase] - 13 + idCase <= 0)) && peutTransmettrePion(listeCases, idCase) && sommeDesCasesAdversaire(listeCases, idCase) == 0)
             {
                 Debug.Log("Interdit 3");
                 return jeuInterdit(caseDepart);
             }
-            else if ((idCase == 6 || idCase == 13) && listeCases[idCase] == 1 && sommeDesCasesJoueur(idCase) > 1)
+            else if ((idCase == 6 || idCase == 13) && listeCases[idCase] == 1 && sommeDesCasesJoueur(listeCases, idCase) > 1)
             {
                 Debug.Log("Interdit 4");
                 return jeuInterdit(caseDepart);
             }
-            else if (!peutTransmettrePion(idCase) && sommeDesCasesAdversaire(idCase) == 0)
+            else if (!peutTransmettrePion(listeCases, idCase) && sommeDesCasesAdversaire(listeCases, idCase) == 0)
             {
+                ResultatMatch resultatDuMatch = ResultatMatch.MatchNul;
                 if (idCase < 7)
                     resultatDuMatch = ResultatMatch.V1;
                 else if (idCase >= 7 && idCase < 14)
                     resultatDuMatch = ResultatMatch.V2;
-                
-                return 0;
+
+                return new List<int> { caseDepart, caseDepart, 0, (int)EtatMatch.Fin, (int)resultatDuMatch };
             }
             else
             {
-                return deplacerLesPionsCase(idCase);
+                return deplacerLesPionsCase(listeCases, idCase);
             }
         }
-        public int mangerLesPions(int idCaseDepart, int idCaseArrivee)
+        public List<int> mangerLesPions(int idCaseDepart, int idCaseArrivee)
         {
             int nombrePion = 0;
             if (listeCases[idCaseArrivee] <= 1 || listeCases[idCaseArrivee] > 4 || idCaseArrivee == 14 || idCaseArrivee == 15)
@@ -71,9 +98,9 @@ namespace Mvc.Entities
                 {
                     nombrePion = 0;
                 }
-                else if ((idCaseArrivee == 6 || idCaseArrivee == 13) && peutMangerToutesCasesAdversaire(idCaseDepart))
+                else if ((idCaseArrivee == 6 || idCaseArrivee == 13) && peutMangerToutesCasesAdversaire(listeCases, idCaseDepart))
                 {
-                    return nombrePion = 0;
+                    nombrePion = 0;
                 }
                 else
                 {
@@ -91,9 +118,10 @@ namespace Mvc.Entities
                     }
                 }
             }
-            return nombrePion;
+            return new List<int> { idCaseDepart, idCaseArrivee, nombrePion, (int)EtatMatch.EnCours, (int)ResultatMatch.MatchNul };
+            ;
         }
-        private int sommeDesCasesAdversaire(int idCase)
+        private int sommeDesCasesAdversaire(List<int> listeCases, int idCase)
         {
             int somme = 0;
             if (idCase < 7)
@@ -112,7 +140,7 @@ namespace Mvc.Entities
             }
             return somme;
         }
-        private int sommeDesCasesJoueur(int idCase)
+        private int sommeDesCasesJoueur(List<int> listeCases, int idCase)
         {
             int somme = 0;
             if (idCase >= 7)
@@ -133,7 +161,7 @@ namespace Mvc.Entities
             }
             return somme;
         }
-        private bool peutTransmettrePion(int idCase)
+        private bool peutTransmettrePion(List<int> listeCases, int idCase)
         {
             int nbPion = 1;
             if (idCase < 7)
@@ -167,7 +195,7 @@ namespace Mvc.Entities
             return false;
         }
 
-        private bool peutMangerToutesCasesAdversaire(int idCase)
+        private bool peutMangerToutesCasesAdversaire(List<int> listeCases, int idCase)
         {
             if (idCase < 7)
             {
@@ -191,9 +219,9 @@ namespace Mvc.Entities
             }
             return true;
         }
-        public int jeuInterdit(int idCaseDepart)
+        public List<int> jeuInterdit(int idCaseDepart)
         {
-            return -1;
+            return new List<int>();
             //match.rejouerCoup(caseDepart);
         }
 
@@ -211,7 +239,7 @@ namespace Mvc.Entities
         #endregion Match
 
         #region Case
-        public int deplacerLesPionsCase(int id)
+        public List<int> deplacerLesPionsCase(List<int> listeCases, int id)
         {
             int idCaseSuivante = id + 1;
             if (listeCases[id] == 1)
@@ -269,8 +297,43 @@ namespace Mvc.Entities
 
         #endregion Case
 
-        #region Pion
+        #region IA
 
-        #endregion Pion
+        public int analyse(List<int> listeCases)
+        {
+            for (int idCase = 0; idCase < 7; idCase++)
+            {
+                if (listeCases[idCase] - 6 + idCase > 0)
+                {
+
+                }
+            }
+            return 0;
+        }
+        public void menaceSimple()
+        {
+
+        }
+        public int menaceDouble()
+        {
+            return 0;
+        }
+        public int eviterMenace()
+        {
+            return 0;
+        }
+        public int bloquerMenace()
+        {
+            return 0;
+        }
+        public int contrerMenace()
+        {
+            return 0;
+        }
+        public int limiterMenace()
+        {
+            return 0;
+        }
+        #endregion IA
     }
 }

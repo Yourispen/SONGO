@@ -154,6 +154,7 @@ namespace Mvc.Entities
                         string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
+                    Fonctions.afficherMsgScene("", "primaire", 0);
                     matchEnLigneController.ajouter();
                 }
                 else
@@ -168,6 +169,7 @@ namespace Mvc.Entities
                         string msg = " Vous avez abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
+                    Fonctions.afficherMsgScene("", "primaire", 0);
 
                 }
 
@@ -190,6 +192,7 @@ namespace Mvc.Entities
                         string msg = PlayerPrefs.GetString("surnomAdversaire") + " a abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
+                    Fonctions.afficherMsgScene("", "primaire", 0);
                     matchEnLigneController.ajouter();
                 }
                 else
@@ -204,6 +207,8 @@ namespace Mvc.Entities
                         string msg = " Vous avez abandonné.";
                         Fonctions.changerTexte(finMatchMenu.TextVictoireMini, msg);
                     }
+                    Fonctions.afficherMsgScene("", "primaire", 0);
+
 
                 }
 

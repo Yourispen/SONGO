@@ -8,6 +8,7 @@ namespace Mvc.Controllers
     {
         [SerializeField] private GameObject matchHorslignePrefab;
         [SerializeField] private GameObject matchEntrainementPrefab;
+        [SerializeField] private GameObject match1vsIAPrefab;
         [SerializeField] private MatchHorsLigne matchHorsligne;
         [SerializeField] private SceneController sceneController;
 
@@ -25,6 +26,12 @@ namespace Mvc.Controllers
             else if (Fonctions.sceneActuelle("SceneMatchEntrainement"))
             {
                 matchHorsligne = Fonctions.instancierObjet(matchEntrainementPrefab).GetComponent<MatchEntrainement>();
+                matchHorsligne.MatchHorsLigneController = this;
+                ((MatchEntrainement)matchHorsligne).debuterMatch();
+            }
+            else if (Fonctions.sceneActuelle("SceneMatch1vsIA"))
+            {
+                matchHorsligne = Fonctions.instancierObjet(match1vsIAPrefab).GetComponent<MatchEntrainement>();
                 matchHorsligne.MatchHorsLigneController = this;
                 ((MatchEntrainement)matchHorsligne).debuterMatch();
             }

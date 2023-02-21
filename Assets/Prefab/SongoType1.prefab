@@ -2435,6 +2435,11 @@ MonoBehaviour:
   libelle: 
   listeCouleurs:
   - {fileID: 2100000, guid: b38cc8b7122b4394f9b66b70aef5930d, type: 2}
+  - {fileID: 2100000, guid: 4a54cfdf4667e1847bf4b608415ef7f1, type: 2}
+  - {fileID: 2100000, guid: da6495ed0e812524c9d1e1f1e7b89f4c, type: 2}
+  - {fileID: 2100000, guid: 052e6a5e22793a64aa4362124841cca2, type: 2}
+  - {fileID: 2100000, guid: 7d1a57ebd08ab9d42b718bbbb6bd259e, type: 2}
+  - {fileID: 2100000, guid: 9c773af9c3a6cdb479cb11cf6edbff79, type: 2}
   couleur: {fileID: 0}
   statut: 0
   listeCases:

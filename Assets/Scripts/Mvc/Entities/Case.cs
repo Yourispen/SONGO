@@ -54,10 +54,11 @@ namespace Mvc.Entities
                     idCaseSuivante = id == 6 ? 14 : 15;
                 }
                 listePions[0].deplacerPionCase(Table.ListeCases[idCaseSuivante], ajoutPosition);
+                yield return new WaitForSeconds(tempsDepotCase);
             }
             else
             {
-
+                Fonctions.activerAudioRamassagePion();
                 foreach (var pion in listePions)
                 {
                     pion.deplacerPionCaisse(Table.Caisse);
@@ -102,8 +103,8 @@ namespace Mvc.Entities
                     idCaseSuivante += 1;
                     yield return new WaitForSeconds(tempsDepotCase);
                 }
-                yield return new WaitForSeconds(tempsAttente);
             }
+            yield return new WaitForSeconds(tempsAttente);
             listePions.Clear();
             StartCoroutine(table.mangerLesPions(this, Table.ListeCases[idCaseSuivante - 1]));
         }
